@@ -581,36 +581,29 @@ Tab4:AddSection({"》 ESP"})
 
 Tab4:AddSection({"》 RGB Player"})
 
-local isNameActive = false
+local nameColor = false
 
 Tab4:AddToggle({
-    Name = "Nome RGB",
+    Name = "Name RGB",
     Default = false,
     Callback = function(value)
-        isNameActive = value
+        nameColor = value
     end
 })
 	
-local vibrantColors = {
+local Colors = {
     Color3.fromRGB(0, 0, 0), -- Black
     Color3.fromRGB(255, 255, 255), -- White
     Color3.fromRGB(255, 0, 0), -- Red
     Color3.fromRGB(0, 255, 0), -- Green
-    Color3.fromRGB(0, 170, 255), -- Blue
-    Color3.fromRGB(255, 255, 0), -- Yellow
-    Color3.fromRGB(255, 105, 180), -- Pink
-    Color3.fromRGB(128, 0, 128) -- Purple
+    Color3.fromRGB(0, 0, 255) -- Blue
 }
 
 spawn(function()
     while true do
-        if isNameActive then
-            local randomColor = vibrantColors[math.random(#vibrantColors)]
-            local args = {
-                [1] = "PickingRPNameColor",
-                [2] = randomColor
-            }
-            game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eColo1r"):FireServer(unpack(args))
+        if nameColor then
+            local randomColor = Colors[math.random(#vibrantColors)]
+            game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eColo1r"):FireServer("1RPNam1eColo1r", {"PickingRPNameColor", randomColor})
         end
         wait(0.7)
     end
