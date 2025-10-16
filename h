@@ -5,8 +5,8 @@ local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitFor
 
 local Lib = loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/l"))()
 local Window = Lib:MakeWindow({
-    Title = "Hexagon Hub 🃏 | " .. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
-    SubTitle = "by Roun95 • " .. identifyexecutor(),
+    Title = "Hexagon Hub 🃏 | Brookhaven RP",
+    SubTitle = "by Roun95",
     SaveFolder = "HexData"
 })
 
@@ -602,9 +602,13 @@ spawn(function()
     while true do
         if nameColor then
             local randomColor = putColors[math.random(#putColors)]
-            ReplicatedStorage.RE:FindFirstChild("1RPNam1eColo1r"):FireServer({"PickingRPNameColor", randomColor})
+            local args = {
+                [1] = "PickingRPNameColor",
+                [2] = randomColor
+            }
+            game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eColo1r"):FireServer(unpack(args))
         end
-        wait(1)
+        wait(0.7)
     end
 end)
 --------------------------------------------------
