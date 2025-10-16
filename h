@@ -676,7 +676,85 @@ Tab5:AddButton({
 --------------------------------------------------
 			-- === Tab 9: Scripts === --
 --------------------------------------------------
+Tab9:AddToggle({
+    Name = "ESP ALL",
+    Default = false,
+    Callback = function(Enabled)
+        local function CreateESP(Player)
+            if not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart") then return end
 
+            local Character = Player.Character
+            local HRP = Character.HumanoidRootPart
+
+            -- Cria uma BillboardGui para o ESP
+            local ESP = Instance.new("BillboardGui")
+            ESP.Name = "ESP_" .. Player.Name
+            ESP.Adornee = HRP
+            ESP.Size = UDim2.new(0, 100, 0, 50)
+            ESP.StudsOffset = Vector3.new(0, 2.5, 0)
+            ESP.AlwaysOnTop = true
+            ESP.Parent = HRP
+
+            -- Nome do jogador (Vermelho)
+            local NameLabel = Instance.new("TextLabel")
+            NameLabel.Name = "NameLabel"
+            NameLabel.Text = Player.Name .. " | " .. Player.AccountAge .. " dias"
+            NameLabel.TextColor3 = Color3.new(1, 0, 0) -- Vermelho
+            NameLabel.BackgroundTransparency = 1
+            NameLabel.Size = UDim2.new(1, 0, 0, 20)
+            NameLabel.Parent = ESP
+
+            -- Distância em studs (Vermelho)
+            local DistanceLabel = Instance.new("TextLabel")
+            DistanceLabel.Name = "DistanceLabel"
+            DistanceLabel.TextColor3 = Color3.new(1, 0, 0) -- Vermelho
+            DistanceLabel.BackgroundTransparency = 1
+            DistanceLabel.Size = UDim2.new(1, 0, 0, 20)
+            DistanceLabel.Position = UDim2.new(0, 0, 0, 40)
+            DistanceLabel.Parent = ESP
+
+            game:GetService("RunService").Heartbeat:Connect(function()
+                if not HRP or not ESP.Parent then return end
+                local LocalPlayer = game:GetService("Players").LocalPlayer
+                if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    local Distance = (HRP.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                    DistanceLabel.Text = string.format("%.1f studs", Distance)
+                end
+            end)
+        end
+
+        for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
+            if Player ~= game:GetService("Players").LocalPlayer and Player.Character then
+                local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
+                if HRP then
+                    local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
+                    if OldESP then
+                        OldESP:Destroy()
+                    end
+                end
+            end
+        end
+
+        if Enabled then
+            for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
+                if Player ~= game:GetService("Players").LocalPlayer then
+                    Player.CharacterAdded:Connect(function()
+                        CreateESP(Player)
+                    end)
+                    if Player.Character then
+                        CreateESP(Player)
+                    end
+                end
+            end
+
+            game:GetService("Players").PlayerAdded:Connect(function(Player)
+                Player.CharacterAdded:Connect(function()
+                    CreateESP(Player)
+                end)
+            end)
+        end
+    end
+})
 --------------------------------------------------
 			-- === Tab 10: Teleportes === --
 --------------------------------------------------
