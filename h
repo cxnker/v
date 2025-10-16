@@ -5,7 +5,7 @@ local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitFor
 
 local Lib = loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/l"))()
 local Window = Lib:MakeWindow({
-    Title = "Hexagon Hub | Brookhaven RP 🃏 ",
+    Title = "Hexagon Hub | Brookhaven RP 🃏 " .. identifyexecutor(),
     SubTitle = "by Roun95",
     SaveFolder = "HexData"
 })
@@ -29,7 +29,7 @@ local Tab11 = Window:MakeTab({"Graphics", "wind"})
 --------------------------------------------------
 			-- === Tab 1: Info === --
 --------------------------------------------------
-Tab1:AddSection({"》 Based on v1.3"})
+Tab1:AddSection({"》 Version 1.0"})
 Tab1:AddParagraph({"• Executor", identifyexecutor()})
 --------------------------------------------------
 			-- === Tab 2: Player === --
