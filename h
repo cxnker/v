@@ -602,11 +602,7 @@ spawn(function()
     while true do
         if nameColor then
             local randomColor = putColors[math.random(#putColors)]
-            local args = {
-                [1] = "PickingRPNameColor",
-                [2] = randomColor
-            }
-            game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eColo1r"):FireServer(unpack(args))
+            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", randomColor)
         end
         wait(0.7)
     end
