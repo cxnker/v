@@ -5,7 +5,7 @@ local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitFor
 
 local Lib = loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/l"))()
 local Window = Lib:MakeWindow({
-    Title = "Hexagon Hub 🃏 | " .. game.PlaceId.Name .. "Executor:" .. identifyexecutor(),
+    Title = "Hexagon Hub 🃏 | " .. game.PlaceId.Name,
     SubTitle = "by Roun95",
     SaveFolder = "HexData"
 })
