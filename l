@@ -594,7 +594,7 @@ function redzlib:MakeWindow(Configs)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-		BackgroundTransparency = 0.09,
+		BackgroundTransparency = 0.1,
 		Name = "Hub"
 	}), "Main")
 	Make("Gradient", MainFrame, {
