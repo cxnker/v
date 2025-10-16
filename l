@@ -14,11 +14,11 @@ local redzlib = {
 			["Color Hub 1"] = ColorSequence.new({
 				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
 				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 0)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(200, 191, 231))
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(200, 200, 200))
 			}),
 			["Color Hub 2"] = Color3.fromRGB(0, 0, 0),
 			["Color Stroke"] = Color3.fromRGB(20, 20, 20),
-			["Color Theme"] = Color3.fromRGB(200, 191, 231),
+			["Color Theme"] = Color3.fromRGB(200, 200, 200),
 			["Color Text"] = Color3.fromRGB(180, 180, 180),
 			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
 		}
@@ -27,7 +27,7 @@ local redzlib = {
 		Version = "1.1.0"
 	},
 	Save = {
-		UISize = {550, 380},
+		UISize = {450, 350},
 		TabSize = 160,
 		Theme = "Custom"
 	},
@@ -784,7 +784,7 @@ function redzlib:MakeWindow(Configs)
 	end
 	function Window:AddMinimizeButton(Configs)
 		local Button = MakeDrag(Create("ImageButton", ScreenGui, {
-			Size = UDim2.fromOffset(45, 45),
+			Size = UDim2.fromOffset(40, 40),
 			Position = UDim2.fromScale(0.2, 0.15),
 			BackgroundTransparency = 1,
 			BackgroundColor3 = Theme["Color Hub 2"],
