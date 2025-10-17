@@ -40,17 +40,14 @@ local redzlib = {
 	Tabs = {},
 	Icons = (function()
 		return {
+			["bomb"] = "rbxassetid://10709781460",
 			["brush"] = "rbxassetid://10709782758",
-			["car"] = "rbxassetid://10709789810",
-			["home"] = "rbxassetid://10723407389",
 			["info"] = "rbxassetid://10723415903",
 			["mappin"] = "rbxassetid://10734886004",
-			["music"] = "rbxassetid://10734905958",
 			["scroll"] = "rbxassetid://10734943448",
 			["shirt"] = "rbxassetid://10734952036",
-			["skull"] = "rbxassetid://10734962068",
-			["user"] = "rbxassetid://10747373176",
-			["wind"] = "rbxassetid://10747382750"
+			["star"] = "rbxassetid://10734966248",
+			["user"] = "rbxassetid://10747373176"
 		}
 	end)()
 }
