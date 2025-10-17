@@ -653,7 +653,7 @@ Tab4:AddToggle({
         nameColor = value
     end
 })
-
+local rgbSpeed = 1
 local putColors = {
     Color3.fromRGB(0, 0, 0), -- Black
     Color3.fromRGB(255, 255, 255), -- White
@@ -671,9 +671,9 @@ spawn(function()
     while true do
         if nameColor then
             -- local randomColor = putColors[math.random(#putColors)]
-            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", getRainbowColor)
+            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", getRainbowColor(rgbSpeed))
         end
-        wait(0.5)
+        -- wait(0.5)
     end
 end)
 --------------------------------------------------
