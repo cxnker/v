@@ -578,6 +578,43 @@ Tab3:AddButton({
 --------------------------------------------------
 Tab4:AddSection({"》 ESP"})
 
+Tab4:AddDropdown({
+    Name = "Select color",
+    Default = "RGB",
+    Options = {
+        "RGB", "Black", "White", "Red",
+        "Green", "Blue", "Yellow", "Pink", "Purple"
+    },
+    Callback = function(value)
+        selectedColor = value
+    end
+})
+
+local function getESPColor()
+    if selectedColor == "RGB" then
+        local h = (tick() % 5) / 5
+        return Color3.fromHSV(h, 1, 1)
+    elseif selectedColor == "Black" then
+        return Color3.fromRGB(0, 0, 0)
+    elseif selectedColor == "White" then
+        return Color3.fromRGB(255, 255, 255)
+    elseif selectedColor == "Red" then
+        return Color3.fromRGB(255, 0, 0)
+    elseif selectedColor == "Green" then
+        return Color3.fromRGB(0, 255, 0)
+    elseif selectedColor == "Blue" then
+        return Color3.fromRGB(0, 170, 255)
+    elseif selectedColor == "Yellow" then
+        return Color3.fromRGB(255, 255, 0)
+    elseif selectedColor == "Pink" then
+        return Color3.fromRGB(255, 105, 180)
+    elseif selectedColor == "Purple" then
+        return Color3.fromRGB(128, 0, 128)
+    end
+    return Color3.new(1, 1, 1)
+end
+
+	
 Tab4:AddToggle({
     Name = "ESP",
     Default = false,
@@ -601,7 +638,7 @@ Tab4:AddToggle({
             local NameLabel = Instance.new("TextLabel")
             NameLabel.Name = "NameLabel"
             NameLabel.Text = Player.Name
-            NameLabel.TextColor3 = Color3.new(1, 0, 0) -- Vermelho
+            NameLabel.TextColor3 = getESPColor()
             NameLabel.BackgroundTransparency = 1
             NameLabel.Size = UDim2.new(1, 0, 0, 20)
             NameLabel.Parent = ESP
@@ -609,7 +646,7 @@ Tab4:AddToggle({
             -- Distância em studs (Vermelho)
             local DistanceLabel = Instance.new("TextLabel")
             DistanceLabel.Name = "DistanceLabel"
-            DistanceLabel.TextColor3 = Color3.new(1, 0, 0) -- Vermelho
+            DistanceLabel.TextColor3 = getESPColor()
             DistanceLabel.BackgroundTransparency = 1
             DistanceLabel.Size = UDim2.new(1, 0, 0, 20)
             DistanceLabel.Position = UDim2.new(0, 0, 0, 40)
