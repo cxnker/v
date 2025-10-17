@@ -599,7 +599,7 @@ Tab4:AddToggle({
             local NameLabel = Instance.new("TextLabel")
             NameLabel.Name = "NameLabel"
             NameLabel.Text = Player.Name
-            NameLabel.TextColor3 = Color3.fromRGB(1, 1, 1)
+            NameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
             NameLabel.BackgroundTransparency = 1
             NameLabel.Size = UDim2.new(1, 0, 0, 20)
             NameLabel.Parent = ESP
@@ -653,7 +653,25 @@ Tab4:AddToggle({
         nameColor = value
     end
 })
+
+local rgbSpeed = 1
+
+Tab4:AddSlider({
+    Name = "Adjust RGB Speed",
+    Min = 1,
+    Max = 9,
+    Increase = 1,
+    Default = 2,
+    Callback = function(Value)
+        rgbSpeed = Value
+    end
+})
 	
+local function getRainbowColor(speedMultiplier)
+    local h = (tick() * speedMultiplier % 5) / 5
+    return Color3.fromHSV(h, 1, 1)
+end
+-- [
 local putColors = {
     Color3.fromRGB(0, 0, 0), -- Black
     Color3.fromRGB(255, 255, 255), -- White
@@ -661,14 +679,14 @@ local putColors = {
     Color3.fromRGB(0, 255, 0), -- Green
     Color3.fromRGB(0, 0, 255) -- Blue
 }
-
+] --
 spawn(function()
     while true do
         if nameColor then
-            local randomColor = putColors[math.random(#putColors)]
-            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", randomColor)
+            -- local randomColor = putColors[math.random(#putColors)]
+            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", getRainbowColor(rgbSpeed))
         end
-        wait(0.7)
+        wait(0.5)
     end
 end)
 --------------------------------------------------
