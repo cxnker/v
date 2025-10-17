@@ -701,8 +701,9 @@ Tab9:AddToggle({
             NameLabel.Size = UDim2.new(1, 0, 1, 0)
             NameLabel.Parent = ESP
 
+        -- Limpa ESPs antigos
         for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
-            if Player ~= Players.LocalPlayer and Player.Character then
+            if Player ~= game:GetService("Players").LocalPlayer and Player.Character then
                 local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
                 if HRP then
                     local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
@@ -712,10 +713,12 @@ Tab9:AddToggle({
                 end
             end
         end
-
+	
+        -- Ativa/Desativa ESP para todos os jogadores
         if Enabled then
-            for _, Player in pairs(Players:GetPlayers()) do
-                if Player ~= Players.LocalPlayer then
+            -- Adiciona ESP para jogadores existentes
+            for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
+                if Player ~= game:GetService("Players").LocalPlayer then
                     Player.CharacterAdded:Connect(function()
                         CreateESP(Player)
                     end)
@@ -725,7 +728,8 @@ Tab9:AddToggle({
                 end
             end
 
-            Players.PlayerAdded:Connect(function(Player)
+            -- Adiciona ESP para novos jogadores
+            game:GetService("Players").PlayerAdded:Connect(function(Player)
                 Player.CharacterAdded:Connect(function()
                     CreateESP(Player)
                 end)
