@@ -161,7 +161,7 @@ Tab2:AddButton({
 --------------------------------------------------
 			-- === Tab 3: Avatar === --
 --------------------------------------------------
-Tab3:AddSection({"》 Copy avatar"})
+Tab3:AddSection({"》 Copy Avatar"})
 local Remotes = ReplicatedStorage.Remotes
 local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
@@ -298,7 +298,7 @@ for _, btn in ipairs(clothes) do
     })
 end
 
-Tab3:AddSection({"》 Character editor"})
+Tab3:AddSection({"》 Character Editor"})
 Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
 
 Tab3:AddButton({
@@ -551,66 +551,6 @@ Tab5:AddButton({
 			-- === Tab 6: Troll === --
 --------------------------------------------------
 Tab6:AddSection({"》 Troll Options"})
-	
-Tab6:AddToggle({
-    Name = "ESP Players",
-    Default = false,
-    Callback = function(Enabled)
-        local function CreateESP(Player)
-            if not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart") then return end
-
-            local Character = Player.Character
-            local HRP = Character.HumanoidRootPart
-
-            local ESP = Instance.new("BillboardGui")
-            ESP.Name = "ESP_" .. Player.Name
-            ESP.Adornee = HRP
-            ESP.Size = UDim2.new(0, 100, 0, 50)
-            ESP.StudsOffset = Vector3.new(0, 2.5, 0)
-            ESP.AlwaysOnTop = true
-            ESP.Parent = HRP
-
-            local NameLabel = Instance.new("TextLabel")
-            NameLabel.Name = "NameLabel"
-			NameLabel.BackgroundTransparency = 1
-			NameLabel.Text = Player.Name
-			NameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
-	        NameLabel.Size = UDim2.new(1, 0, 0, 20)
-            NameLabel.Parent = ESP
-        end
-
-        for _, Player in pairs(Players:GetPlayers()) do
-            if Player ~= LocalPlayer and Player.Character then
-                local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
-                if HRP then
-                    local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
-                    if OldESP then
-                        OldESP:Destroy()
-                    end
-                end
-            end
-        end
-
-        if Enabled then
-            for _, Player in pairs(Players:GetPlayers()) do
-                if Player ~= LocalPlayer then
-                    Player.CharacterAdded:Connect(function()
-                        CreateESP(Player)
-                    end)
-                    if Player.Character then
-                        CreateESP(Player)
-                    end
-                end
-            end
-
-            Players.PlayerAdded:Connect(function(Player)
-                Player.CharacterAdded:Connect(function()
-                    CreateESP(Player)
-                end)
-            end)
-        end
-    end
-})
 
 local selectedPlayerName = nil
 local headsitActive = false
@@ -701,6 +641,67 @@ Tab6:AddButton({"Enable Headsit", function()
     end
 end
 })
+
+Tab6:AddToggle({
+    Name = "ESP Players",
+    Default = false,
+    Callback = function(Enabled)
+        local function CreateESP(Player)
+            if not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart") then return end
+
+            local Character = Player.Character
+            local HRP = Character.HumanoidRootPart
+
+            local ESP = Instance.new("BillboardGui")
+            ESP.Name = "ESP_" .. Player.Name
+            ESP.Adornee = HRP
+            ESP.Size = UDim2.new(0, 100, 0, 50)
+            ESP.StudsOffset = Vector3.new(0, 2.5, 0)
+            ESP.AlwaysOnTop = true
+            ESP.Parent = HRP
+
+            local NameLabel = Instance.new("TextLabel")
+            NameLabel.Name = "NameLabel"
+			NameLabel.BackgroundTransparency = 1
+			NameLabel.Text = Player.Name
+			NameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+	        NameLabel.Size = UDim2.new(1, 0, 0, 20)
+            NameLabel.Parent = ESP
+        end
+
+        for _, Player in pairs(Players:GetPlayers()) do
+            if Player ~= LocalPlayer and Player.Character then
+                local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
+                if HRP then
+                    local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
+                    if OldESP then
+                        OldESP:Destroy()
+                    end
+                end
+            end
+        end
+
+        if Enabled then
+            for _, Player in pairs(Players:GetPlayers()) do
+                if Player ~= LocalPlayer then
+                    Player.CharacterAdded:Connect(function()
+                        CreateESP(Player)
+                    end)
+                    if Player.Character then
+                        CreateESP(Player)
+                    end
+                end
+            end
+
+            Players.PlayerAdded:Connect(function(Player)
+                Player.CharacterAdded:Connect(function()
+                    CreateESP(Player)
+                end)
+            end)
+        end
+    end
+})
+
 --------------------------------------------------
 			-- === Tab 7: Scripts === --
 --------------------------------------------------
