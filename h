@@ -577,43 +577,6 @@ Tab3:AddButton({
 			-- === Tab 4: RGB === --
 --------------------------------------------------
 Tab4:AddSection({"》 ESP"})
-
-Tab4:AddDropdown({
-    Name = "Select color",
-    Default = "RGB",
-    Options = {
-        "RGB", "Black", "White", "Red",
-        "Green", "Blue", "Yellow", "Pink", "Purple"
-    },
-    Callback = function(value)
-        selectedColor = value
-    end
-})
-
-local function getESPColor()
-    if selectedColor == "RGB" then
-        local h = (tick() % 5) / 5
-        return Color3.fromHSV(h, 1, 1)
-    elseif selectedColor == "Black" then
-        return Color3.fromRGB(0, 0, 0)
-    elseif selectedColor == "White" then
-        return Color3.fromRGB(255, 255, 255)
-    elseif selectedColor == "Red" then
-        return Color3.fromRGB(255, 0, 0)
-    elseif selectedColor == "Green" then
-        return Color3.fromRGB(0, 255, 0)
-    elseif selectedColor == "Blue" then
-        return Color3.fromRGB(0, 170, 255)
-    elseif selectedColor == "Yellow" then
-        return Color3.fromRGB(255, 255, 0)
-    elseif selectedColor == "Pink" then
-        return Color3.fromRGB(255, 105, 180)
-    elseif selectedColor == "Purple" then
-        return Color3.fromRGB(128, 0, 128)
-    end
-    return Color3.new(1, 1, 1)
-end
-
 	
 Tab4:AddToggle({
     Name = "ESP",
@@ -625,7 +588,6 @@ Tab4:AddToggle({
             local Character = Player.Character
             local HRP = Character.HumanoidRootPart
 
-            -- Cria uma BillboardGui para o ESP
             local ESP = Instance.new("BillboardGui")
             ESP.Name = "ESP_" .. Player.Name
             ESP.Adornee = HRP
@@ -634,33 +596,13 @@ Tab4:AddToggle({
             ESP.AlwaysOnTop = true
             ESP.Parent = HRP
 
-            -- Nome do jogador (Vermelho)
             local NameLabel = Instance.new("TextLabel")
             NameLabel.Name = "NameLabel"
             NameLabel.Text = Player.Name
-            NameLabel.TextColor3 = getESPColor()
+            NameLabel.TextColor3 = Color3.fromRGB(1, 1, 1)
             NameLabel.BackgroundTransparency = 1
             NameLabel.Size = UDim2.new(1, 0, 0, 20)
             NameLabel.Parent = ESP
-
-            -- Distância em studs (Vermelho)
-            local DistanceLabel = Instance.new("TextLabel")
-            DistanceLabel.Name = "DistanceLabel"
-            DistanceLabel.TextColor3 = getESPColor()
-            DistanceLabel.BackgroundTransparency = 1
-            DistanceLabel.Size = UDim2.new(1, 0, 0, 20)
-            DistanceLabel.Position = UDim2.new(0, 0, 0, 40)
-            DistanceLabel.Parent = ESP
-
-            -- Atualiza a distância em tempo real
-            game:GetService("RunService").Heartbeat:Connect(function()
-                if not HRP or not ESP.Parent then return end
-                local LocalPlayer = game:GetService("Players").LocalPlayer
-                if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    local Distance = (HRP.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                    DistanceLabel.Text = string.format("%.1f studs", Distance)
-                end
-            end)
         end
 
         -- Limpa ESPs antigos
@@ -723,8 +665,8 @@ local putColors = {
 spawn(function()
     while true do
         if nameColor then
-            -- local randomColor = putColors[math.random(#putColors)]
-            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", getESPColor())
+            local randomColor = putColors[math.random(#putColors)]
+            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", randomColor)
         end
         wait(0.7)
     end
