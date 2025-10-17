@@ -404,20 +404,6 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "Invisible Works",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		15312911732, -- Torso
-		14532583477, -- Right Arm
-		14532583469, -- Left Arm
-		14532583517, -- Right Leg
-		14532583483, -- Left Leg
-		134082579, -- Head
-	})
-	end
-})
-
-Tab3:AddButton({
     Name = "Invisible",
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
@@ -598,16 +584,15 @@ Tab4:AddToggle({
 
             local NameLabel = Instance.new("TextLabel")
             NameLabel.Name = "NameLabel"
-            NameLabel.Text = Player.Name
-            NameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
-            NameLabel.BackgroundTransparency = 1
-            NameLabel.Size = UDim2.new(1, 0, 0, 20)
+			NameLabel.BackgroundTransparency = 1
+			NameLabel.Text = Player.Name
+			NameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+	        NameLabel.Size = UDim2.new(1, 0, 0, 20)
             NameLabel.Parent = ESP
         end
 
-        -- Limpa ESPs antigos
-        for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
-            if Player ~= game:GetService("Players").LocalPlayer and Player.Character then
+        for _, Player in pairs(Players:GetPlayers()) do
+            if Player ~= LocalPlayer and Player.Character then
                 local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
                 if HRP then
                     local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
@@ -618,11 +603,10 @@ Tab4:AddToggle({
             end
         end
 
-        -- Ativa/Desativa ESP para todos os jogadores
         if Enabled then
             -- Adiciona ESP para jogadores existentes
-            for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
-                if Player ~= game:GetService("Players").LocalPlayer then
+            for _, Player in pairs(Players:GetPlayers()) do
+                if Player ~= LocalPlayer then
                     Player.CharacterAdded:Connect(function()
                         CreateESP(Player)
                     end)
@@ -632,8 +616,7 @@ Tab4:AddToggle({
                 end
             end
 
-            -- Adiciona ESP para novos jogadores
-            game:GetService("Players").PlayerAdded:Connect(function(Player)
+            Players.PlayerAdded:Connect(function(Player)
                 Player.CharacterAdded:Connect(function()
                     CreateESP(Player)
                 end)
@@ -655,11 +638,8 @@ Tab4:AddToggle({
 })
 
 local putColors = {
-    Color3.fromRGB(0, 0, 0), -- Black
-    Color3.fromRGB(255, 255, 255), -- White
-    Color3.fromRGB(255, 0, 0), -- Red
-    Color3.fromRGB(0, 255, 0), -- Green
-    Color3.fromRGB(0, 0, 255) -- Blue
+    Color3.fromRGB(0, 0, 0),
+    Color3.fromRGB(255, 255, 255)
 }
 	
 spawn(function()
@@ -668,7 +648,7 @@ spawn(function()
             local randomColor = putColors[math.random(#putColors)]
             ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", randomColor)
         end
-        wait(0.5)
+        wait(0.3)
     end
 end)
 --------------------------------------------------
