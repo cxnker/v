@@ -40,95 +40,6 @@ Tab1:AddSection({"》 Version 1.0"})
 			-- === Tab 2: Player === --
 --------------------------------------------------
 Tab2:AddSection({"》 Player Character"})
-local selectedPlayerName = nil
-local headsitActive = false
-local function headsitOnPlayer(targetPlayer)
-    if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then
-        warn("Character has no Head")
-        return false
-    end
-    local targetHead = targetPlayer.Character.Head
-    local localRoot = Character:FindFirstChild("HumanoidRootPart")
-    if not localRoot then
-        warn("Character has no HumanoidRootPart")
-        return false
-    end
-    localRoot.CFrame = targetHead.CFrame * CFrame.new(0, 2.2, 0)
-    for _, v in pairs(localRoot:GetChildren()) do
-        if v:IsA("WeldConstraint") then
-            v:Destroy()
-        end
-    end
-    local weld = Instance.new("WeldConstraint")
-    weld.Part0 = localRoot
-    weld.Part1 = targetHead
-    weld.Parent = localRoot
-    if Humanoid then
-        Humanoid.Sit = true
-    end
-    print("Headsit activated on " .. targetPlayer.Name)
-    return true
-end
-
-local function removeHeadsit()
-    local localRoot = Character:FindFirstChild("HumanoidRootPart")
-    if localRoot then
-        for _, v in pairs(localRoot:GetChildren()) do
-            if v:IsA("WeldConstraint") then
-                v:Destroy()
-            end
-        end
-    end
-    if Humanoid then
-        Humanoid.Sit = false
-    end
-    print("Headsit disabled")
-end
-
-local function findPlayerByPartialName(partial)
-    partial = partial:lower()
-    for _, player in pairs(Players:GetPlayers()) do
-        if player ~= localPlayer and player.Name:lower():sub(1, #partial) == partial then
-            return player
-        end
-    end
-    return nil
-end
-
-local function headsitNotify(player)
-	newNotification("Player selected", player.Name .. " selected", Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100))
-end
-
-Tab2:AddTextBox({
-    Name = "Headsit Player",
-    Description = "Enter part of the player name",
-    PlaceholderText = "ej: Rou → Roun95",
-    Callback = function(Value)
-    local foundPlayer = findPlayerByPartialName(Value)
-        if foundPlayer then
-            selectedPlayerName = foundPlayer.Name
-            headsitNotify(foundPlayer)
-        else
-            warn("No player found with that name")
-        end
-    end
-})
-
-Tab2:AddButton({"Enable Headsit", function()
-    if not selectedPlayerName then
-        return
-    end
-    if not headsitActive then
-        local target = Players:FindFirstChild(selectedPlayerName)
-        if target and headsitOnPlayer(target) then
-			headsitActive = true
-        end
-    else
-        removeHeadsit()
-		headsitActive = false
-    end
-end
-})
 
 Tab2:AddSlider({
     Name = "Speed",
@@ -595,7 +506,7 @@ end)
 Tab5:AddSection({"》 House"})
 
 Tab5:AddButton({
-    Name = "Unbanned from all houses",
+    Name = "Unban all houses",
     Callback = function()
         local successCount = 0
         local failCount = 0
@@ -639,7 +550,7 @@ Tab5:AddButton({
 --------------------------------------------------
 			-- === Tab 6: Troll === --
 --------------------------------------------------
-Tab6:AddSection({"》 ESP"})
+Tab6:AddSection({"》 Troll Options"})
 	
 Tab6:AddToggle({
     Name = "ESP Players",
@@ -700,6 +611,96 @@ Tab6:AddToggle({
         end
     end
 })
+
+local selectedPlayerName = nil
+local headsitActive = false
+local function headsitOnPlayer(targetPlayer)
+    if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then
+        warn("Character has no Head")
+        return false
+    end
+    local targetHead = targetPlayer.Character.Head
+    local localRoot = Character:FindFirstChild("HumanoidRootPart")
+    if not localRoot then
+        warn("Character has no HumanoidRootPart")
+        return false
+    end
+    localRoot.CFrame = targetHead.CFrame * CFrame.new(0, 2.2, 0)
+    for _, v in pairs(localRoot:GetChildren()) do
+        if v:IsA("WeldConstraint") then
+            v:Destroy()
+        end
+    end
+    local weld = Instance.new("WeldConstraint")
+    weld.Part0 = localRoot
+    weld.Part1 = targetHead
+    weld.Parent = localRoot
+    if Humanoid then
+        Humanoid.Sit = true
+    end
+    print("Headsit activated on " .. targetPlayer.Name)
+    return true
+end
+
+local function removeHeadsit()
+    local localRoot = Character:FindFirstChild("HumanoidRootPart")
+    if localRoot then
+        for _, v in pairs(localRoot:GetChildren()) do
+            if v:IsA("WeldConstraint") then
+                v:Destroy()
+            end
+        end
+    end
+    if Humanoid then
+        Humanoid.Sit = false
+    end
+    print("Headsit disabled")
+end
+
+local function findPlayerByPartialName(partial)
+    partial = partial:lower()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= localPlayer and player.Name:lower():sub(1, #partial) == partial then
+            return player
+        end
+    end
+    return nil
+end
+
+local function headsitNotify(player)
+	newNotification("Player selected", player.Name .. " selected", Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100))
+end
+
+Tab6:AddTextBox({
+    Name = "Headsit Player",
+    Description = "Enter part of the player name",
+    PlaceholderText = "ex: Rou → Roun95",
+    Callback = function(Value)
+    local foundPlayer = findPlayerByPartialName(Value)
+        if foundPlayer then
+            selectedPlayerName = foundPlayer.Name
+            headsitNotify(foundPlayer)
+        else
+            warn("No player found with that name")
+        end
+    end
+})
+
+Tab6:AddButton({"Enable Headsit", function()
+    if not selectedPlayerName then
+        return
+    end
+    if not headsitActive then
+        local target = Players:FindFirstChild(selectedPlayerName)
+        if target and headsitOnPlayer(target) then
+			headsitActive = true
+        end
+    else
+        removeHeadsit()
+		headsitActive = false
+    end
+end
+})
 --------------------------------------------------
 			-- === Tab 7: Scripts === --
 --------------------------------------------------
@@ -707,6 +708,8 @@ Tab6:AddToggle({
 --------------------------------------------------
 			-- === Tab 8: Teleportes === --
 --------------------------------------------------
+Tab8:AddSection({"》 Brookhaven Sites"})
+
 local sites = {
     {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
     {"Start", CFrame.new(-26.17, 3.48, -0.93)},
@@ -723,6 +726,3 @@ for _, tp in ipairs(sites) do
         end
     })
 end
---------------------------------------------------
-			-- === Tab 11: Graphics === --
---------------------------------------------------
