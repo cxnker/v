@@ -547,6 +547,121 @@ Tab5:AddButton({
         end
     end
 })
+
+Tab5:AddSection({"》 Spawm Premium Cars"})
+
+Tab5:AddButton({
+    Name = "Hummer",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Hummer"}))
+    end
+})
+Tab5:AddButton({
+    Name = "Roadster",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Roadster"}))
+    end
+})
+Tab5:AddButton({
+    Name = "Bugatti",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Bugatti"}))
+    end
+})
+Tab5:AddButton({
+    Name = "CyberTruck",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="CyberTruck"}))
+    end
+})
+Tab5:AddButton({
+    Name = "CopLamborgini",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="CopLamborgini"}))
+    end
+})
+Tab5:AddButton({
+    Name = "Buggy",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Buggy"}))
+    end
+})
+Tab5:AddButton({
+    Name = "GoKartVPass",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="GoKartVPass"}))
+    end
+})
+Tab5:AddButton({
+    Name = "BatMobile",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="BatMobile"}))
+    end
+})
+Tab5:AddButton({
+    Name = "Formula1",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Formula1"}))
+    end
+})
+Tab5:AddButton({
+    Name = "SuperCar",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="SuperCar"}))
+    end
+})
+Tab5:AddButton({
+    Name = "HummerLimo",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="HummerLimo"}))
+    end
+})
+Tab5:AddButton({
+    Name = "Ferrari",
+    Callback = function()
+        ReplicatedStorage.RE["1Ca1r"]:FireServer(table.unpack({[1]="PickingCar", [2]="Ferrari"}))
+    end
+})
+
+Tab5:AddSection({"》 Spawm Premium Cars"})
+
+local WheelLoop = false
+
+Tab5:AddToggle({
+    Name = "Auto Wheel Decal",
+    Default = false,
+    Callback = function(Value)
+        WheelLoop = Value
+        if WheelLoop then
+            spawn(function()
+                while WheelLoop do
+                    pcall(function()
+                        ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("SetWheelDecal"):InvokeServer()
+                    end)
+                    wait(0.5)
+                end
+            end)
+        end
+    end
+})
+
+local SuspensionLoop = false
+
+Tab5:AddToggle({
+    Name = "Suspension Loop",
+    Default = false,
+    Callback = function(v)
+        SuspensionLoop = v
+        if SuspensionLoop then
+            spawn(function()
+                while SuspensionLoop do
+                    ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("SetNextSuspensionHeight"):InvokeServer()
+                    wait(0.2)
+                end
+            end)
+        end
+    end
+})
 --------------------------------------------------
 			-- === Tab 6: Troll === --
 --------------------------------------------------
@@ -702,6 +817,570 @@ Tab6:AddToggle({
     end
 })
 
+Tab6:AddSection({"》 Admin Options"})
+
+Tab6:AddButton({
+    Name = "[Click] Admin Fling (Tool)",
+    Callback = function()
+        local jogadores = game:GetService("Players")
+        local rep = game:GetService("ReplicatedStorage")
+        local mundo = game:GetService("Workspace")
+        local entrada = game:GetService("UserInputService")
+        local cam = mundo.CurrentCamera
+        local eu = jogadores.LocalPlayer
+
+        local NOME_FERRAMENTA = "Admin Fling"
+        local ferramentaEquipada = false
+
+        local mochila = eu:WaitForChild("Backpack")
+
+        for _, ferramentaExistente in pairs(mochila:GetChildren()) do
+            if ferramentaExistente:IsA("Tool") and ferramentaExistente.Name:lower():find("fling") then
+                ferramentaExistente.Name = "Admin Fling"
+            end
+        end
+
+        if not mochila:FindFirstChild(NOME_FERRAMENTA) then
+            local ferramenta = Instance.new("Tool")
+            ferramenta.Name = NOME_FERRAMENTA
+            ferramenta.RequiresHandle = true
+            ferramenta.CanBeDropped = false
+
+            local handle = Instance.new("Part")
+            handle.Name = "Handle"
+            handle.Size = Vector3.new(1, 1, 1)
+            handle.Transparency = 1
+            handle.Parent = ferramenta
+
+            local decal = Instance.new("Decal")
+            decal.Texture = "rbxassetid://775552544"
+            decal.Face = Enum.NormalId.Front
+            decal.Parent = handle
+
+            ferramenta.Equipped:Connect(function()
+                ferramentaEquipada = true
+            end)
+
+            ferramenta.Unequipped:Connect(function()
+                ferramentaEquipada = false
+            end)
+
+            ferramenta.Parent = mochila
+        end
+
+        local function FlingBall(target)
+            local player = jogadores.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoid = character:WaitForChild("Humanoid")
+            local hrp = character:WaitForChild("HumanoidRootPart")
+            local backpack = player:WaitForChild("Backpack")
+            local ServerBalls = mundo:WaitForChild("WorkspaceCom"):WaitForChild("001_SoccerBalls")
+
+            local function GetBall()
+                if not backpack:FindFirstChild("SoccerBall") and not character:FindFirstChild("SoccerBall") then
+                    rep.RE:FindFirstChild("1Too1l"):InvokeServer("PickingTools", "SoccerBall")
+                end
+                repeat task.wait() until backpack:FindFirstChild("SoccerBall") or character:FindFirstChild("SoccerBall")
+                local ballTool = backpack:FindFirstChild("SoccerBall")
+                if ballTool then ballTool.Parent = character end
+                repeat task.wait() until ServerBalls:FindFirstChild("Soccer" .. player.Name)
+                return ServerBalls:FindFirstChild("Soccer" .. player.Name)
+            end
+
+            local Ball = ServerBalls:FindFirstChild("Soccer" .. player.Name) or GetBall()
+            Ball.CanCollide = false
+            Ball.Massless = true
+            Ball.Transparency = 1             -- BOLA INVISÍVEL
+            Ball.CustomPhysicalProperties = PhysicalProperties.new(0.0001, 0, 0)
+
+            if target ~= player then
+                local tchar = target.Character
+                if tchar and tchar:FindFirstChild("HumanoidRootPart") and tchar:FindFirstChild("Humanoid") then
+                    local troot = tchar.HumanoidRootPart
+                    local thum = tchar.Humanoid
+                    if Ball:FindFirstChildWhichIsA("BodyVelocity") then
+                        Ball:FindFirstChildWhichIsA("BodyVelocity"):Destroy()
+                    end
+                    local bv = Instance.new("BodyVelocity")
+                    bv.Name = "FlingPower"
+                    bv.Velocity = Vector3.new(9e8, 9e8, 9e8)
+                    bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                    bv.P = 9e900
+                    bv.Parent = Ball
+                    mundo.CurrentCamera.CameraSubject = thum
+
+                    repeat
+                        if troot.Velocity.Magnitude > 0 then
+                            local pos = troot.Position + (troot.Velocity / 1.5)
+                            Ball.CFrame = CFrame.new(pos)
+                            Ball.Orientation += Vector3.new(45, 60, 30)
+                        else
+                            for _, v in pairs(tchar:GetChildren()) do
+                                if v:IsA("BasePart") and v.CanCollide and not v.Anchored then
+                                    Ball.CFrame = v.CFrame
+                                    task.wait(1/6000)
+                                end
+                            end
+                        end
+                        task.wait(1/6000)
+                    until troot.Velocity.Magnitude > 1000 or thum.Health <= 0 or not tchar:IsDescendantOf(mundo) or target.Parent ~= jogadores
+
+                    mundo.CurrentCamera.CameraSubject = humanoid
+                end
+            end
+        end
+
+        entrada.TouchTap:Connect(function(toques, processado)
+            if not ferramentaEquipada or processado then return end
+            local pos = toques[1]
+            local raio = cam:ScreenPointToRay(pos.X, pos.Y)
+            local hit = mundo:Raycast(raio.Origin, raio.Direction * 1000)
+            if hit and hit.Instance then
+                local modelo = hit.Instance:FindFirstAncestorOfClass("Model")
+                local jogador = jogadores:GetPlayerFromCharacter(modelo)
+                if jogador and jogador ~= eu then
+                    FlingBall(jogador)
+                end
+            end
+        end)
+    end
+})
+
+Tab6:AddButton({
+    Name = "[Click] Admin Bug (Tool)",
+    Callback = function()
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+local buggedPlayers = {}
+local bugConnections = {}
+local Remote = ReplicatedStorage.RE:FindFirstChild("1Gu1n")
+
+local tool = Instance.new("Tool")
+tool.Name = "Admin Bug"
+tool.RequiresHandle = true
+tool.CanBeDropped = true
+
+local handle = Instance.new("Part")
+handle.Name = "Handle"
+handle.Size = Vector3.new(0.1, 0.1, 0.1)
+handle.Massless = true
+handle.Anchored = false
+handle.CanCollide = false
+handle.Transparency = 0.5
+handle.Color = Color3.fromRGB(255, 0, 0)
+local mesh = Instance.new("SpecialMesh", handle)
+mesh.MeshType = Enum.MeshType.Sphere
+mesh.Scale = Vector3.new(0.05, 0.05, 0.05)
+handle.Parent = tool
+
+local function bugPlayer(targetPlayer)
+    if not Remote then
+        createNotification("⚠️ Warn", "Remote not found")
+        return
+    end
+    
+    if not targetPlayer or not targetPlayer.Character then
+        createNotification("⚠️ Warn", "Invalid player")
+        return
+    end
+    
+    local playerName = targetPlayer.Name
+    
+    if buggedPlayers[playerName] then
+        if bugConnections[playerName] then
+            bugConnections[playerName]:Disconnect()
+            bugConnections[playerName] = nil
+        end
+        buggedPlayers[playerName] = nil
+        createNotification("🔓 Unapplied Bug", playerName .. " debugged player")
+        return
+    end
+    
+    buggedPlayers[playerName] = true
+    createNotification("🔨 Bug Applied", playerName .. " was bugged")
+    
+    bugConnections[playerName] = RunService.Stepped:Connect(function()
+        local target = Players:FindFirstChild(playerName)
+        if not target or not target.Character or not target.Character:FindFirstChild("HumanoidRootPart") then
+            if bugConnections[playerName] then
+                bugConnections[playerName]:Disconnect()
+                bugConnections[playerName] = nil
+            end
+            buggedPlayers[playerName] = nil
+            return
+        end
+
+        local crazyVector = Vector3.new(
+            math.random(1e25, 1e25),
+            math.random(1e25, 1e25),
+            math.random(1e25, 1e25)
+        )
+
+        local args = {
+            [1] = target.Character.HumanoidRootPart,
+            [2] = target.Character.HumanoidRootPart,
+            [3] = crazyVector,
+            [4] = target.Character.HumanoidRootPart.Position,
+            [5] = LocalPlayer.Backpack:FindFirstChild("Assault") and LocalPlayer.Backpack.Assault.GunScript_Local:FindFirstChild("MuzzleEffect"),
+            [6] = LocalPlayer.Backpack:FindFirstChild("Assault") and LocalPlayer.Backpack.Assault.GunScript_Local:FindFirstChild("HitEffect"),
+            [7] = 3000,
+            [8] = 3000,
+            [9] = { [1] = false },
+            [10] = {
+                [1] = 10000,
+                [2] = Vector3.new(3000, 3000, 3000),
+                [3] = BrickColor.new(29),
+                [4] = 0.05,
+                [5] = Enum.Material.SmoothPlastic,
+                [6] = 0.05
+            },
+            [11] = true,
+            [12] = false
+        }
+
+        Remote:FireServer(unpack(args))
+    end)
+end
+
+local function getPlayerFromMouse(mouse)
+    local target = mouse.Target
+    if not target then return nil end
+    local character = target.Parent
+    while character and not character:FindFirstChild("Humanoid") do
+        character = character.Parent
+    end
+    if character and character:FindFirstChild("Humanoid") then
+        return Players:GetPlayerFromCharacter(character)
+    end
+    return nil
+end
+
+tool.Equipped:Connect(function(mouse)
+    local character = tool.Parent
+    if character and character:FindFirstChild("Humanoid") and character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+
+        mouse.Button1Down:Connect(function()
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            local animator = humanoid and humanoid:FindFirstChildOfClass("Animator")
+            if animator then
+                local anim = Instance.new("Animation")
+                anim.AnimationId = "rbxassetid://2410679501"
+                local track = animator:LoadAnimation(anim)
+                track:Play()
+            end
+            
+            local targetPlayer = getPlayerFromMouse(mouse)
+            if targetPlayer and targetPlayer ~= LocalPlayer then
+                bugPlayer(targetPlayer)
+            else
+                createNotification("⚠️ Warn", "Click on a player to apply/remove bug")
+            end
+        end)
+        
+        createNotification("📤 Admin Bug equipped", "Click on a player to apply/remove bug")
+    end
+end)
+
+tool.Unequipped:Connect(function()
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+    createNotification("​📥 ​Admin Bug saved", "Unequipped tool")
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+    local playerName = player.Name
+    if bugConnections[playerName] then
+        bugConnections[playerName]:Disconnect()
+        bugConnections[playerName] = nil
+    end
+    buggedPlayers[playerName] = nil
+end)
+
+LocalPlayer.Chatted:Connect(function(message)
+    if message:lower() == "/stopallbugs" then
+        for _, connection in pairs(bugConnections) do
+            if connection then connection:Disconnect() end
+        end
+        bugConnections = {}
+        buggedPlayers = {}
+        createNotification("🛑 All bugs removed", "All players were debugged")
+    elseif message:lower() == "/buggedlist" then
+        local count = 0
+        for _ in pairs(buggedPlayers) do count = count + 1 end
+        createNotification("📋 Player Bug list", count > 0 and (count.." players bugged") or "No bugged players were found")
+    end
+end)
+
+tool.Parent = LocalPlayer.Backpack
+createNotification("✅ Admin Bug enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
+    end
+})
+
+Tab6:AddButton({
+    Name = "[Click] Kill Couch (Tool)",
+    Callback = function()
+
+local jogadores = game:GetService("Players")
+local rep = game:GetService("ReplicatedStorage")
+local loop = game:GetService("RunService")
+local mundo = game:GetService("Workspace")
+local entrada = game:GetService("UserInputService")
+
+local eu = jogadores.LocalPlayer
+local cam = mundo.CurrentCamera
+
+local NOME_FERRAMENTA = "Kill Couch"
+local ferramentaEquipada = false
+local nomeAlvo = nil
+local loopTP = nil
+local sofaEquipado = false
+local base = nil
+local posInicial = nil
+local raiz = nil
+
+local mochila = eu:WaitForChild("Backpack")
+if not mochila:FindFirstChild(NOME_FERRAMENTA) then
+	local ferramenta = Instance.new("Tool")
+	ferramenta.Name = NOME_FERRAMENTA
+	ferramenta.RequiresHandle = false
+	ferramenta.CanBeDropped = false
+
+	ferramenta.Equipped:Connect(function()
+		ferramentaEquipada = true
+	end)
+
+	ferramenta.Unequipped:Connect(function()
+		ferramentaEquipada = false
+		nomeAlvo = nil
+		limparSofa()
+	end)
+
+	ferramenta.Parent = mochila
+end
+
+function limparSofa()
+	if loopTP then
+		loopTP:Disconnect()
+		loopTP = nil
+	end
+
+	if sofaEquipado then
+		local boneco = eu.Character
+		if boneco then
+			local sofa = boneco:FindFirstChild("Couch")
+			if sofa then
+				sofa.Parent = eu.Backpack
+				sofaEquipado = false
+			end
+		end
+	end
+
+	if base then
+		base:Destroy()
+		base = nil
+	end
+
+	if getgenv().AntiSit then
+		getgenv().AntiSit:Set(false)
+	end
+
+	local humano = eu.Character and eu.Character:FindFirstChildOfClass("Humanoid")
+	if humano then
+		humano:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
+		humano:ChangeState(Enum.HumanoidStateType.GettingUp)
+	end
+
+	if posInicial and raiz then
+		raiz.CFrame = posInicial
+		posInicial = nil
+	end
+end
+
+function pegarSofa()
+	local boneco = eu.Character
+	if not boneco then return end
+	local mochila = eu.Backpack
+
+	if not mochila:FindFirstChild("Couch") and not boneco:FindFirstChild("Couch") then
+		local args = { "PickingTools", "Couch" }
+		rep.RE["1Too1l"]:InvokeServer(unpack(args))
+		task.wait(0.1)
+	end
+
+	local sofa = mochila:FindFirstChild("Couch") or boneco:FindFirstChild("Couch")
+	if sofa then
+		sofa.Parent = boneco
+		sofaEquipado = true
+	end
+end
+
+function posAleatoriaAbaixo(boneco)
+	local rp = boneco:FindFirstChild("HumanoidRootPart")
+	if not rp then return Vector3.new() end
+	local offset = Vector3.new(math.random(-2, 2), -5.1, math.random(-2, 2))
+	return rp.Position + offset
+end
+
+function tpAbaixo(alvo)
+	if not alvo or not alvo.Character or not alvo.Character:FindFirstChild("HumanoidRootPart") then return end
+
+	local meuBoneco = eu.Character
+	local minhaRaiz = meuBoneco and meuBoneco:FindFirstChild("HumanoidRootPart")
+	local humano = meuBoneco and meuBoneco:FindFirstChildOfClass("Humanoid")
+
+	if not minhaRaiz or not humano then return end
+
+	humano:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
+
+	if not base then
+		base = Instance.new("Part")
+		base.Size = Vector3.new(10, 1, 10)
+		base.Anchored = true
+		base.CanCollide = true
+		base.Transparency = 0.5
+		base.Parent = mundo
+	end
+
+	local destino = posAleatoriaAbaixo(alvo.Character)
+	base.Position = destino
+	minhaRaiz.CFrame = CFrame.new(destino)
+
+	humano:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
+end
+
+function arremessarComSofa(alvo)
+	if not alvo then return end
+	nomeAlvo = alvo.Name
+	local boneco = eu.Character
+	if not boneco then return end
+
+	posInicial = boneco:FindFirstChild("HumanoidRootPart") and boneco.HumanoidRootPart.CFrame
+	raiz = boneco:FindFirstChild("HumanoidRootPart")
+	pegarSofa()
+
+	loopTP = loop.Heartbeat:Connect(function()
+		local alvoAtual = jogadores:FindFirstChild(nomeAlvo)
+		if not alvoAtual or not alvoAtual.Character or not alvoAtual.Character:FindFirstChild("Humanoid") then
+			limparSofa()
+			return
+		end
+		if getgenv().AntiSit then
+			getgenv().AntiSit:Set(true)
+		end
+		tpAbaixo(alvoAtual)
+	end)
+
+	task.spawn(function()
+		local alvoAtual = jogadores:FindFirstChild(nomeAlvo)
+		while alvoAtual and alvoAtual.Character and alvoAtual.Character:FindFirstChild("Humanoid") do
+			task.wait(0.05)
+			if alvoAtual.Character.Humanoid.SeatPart then
+				local buraco = CFrame.new(265.46, -450.83, -59.93)
+				alvoAtual.Character.HumanoidRootPart.CFrame = buraco
+				eu.Character.HumanoidRootPart.CFrame = buraco
+				task.wait(0.4)
+				limparSofa()
+				task.wait(0.2)
+				if posInicial then
+					eu.Character.HumanoidRootPart.CFrame = posInicial
+				end
+				break
+			end
+		end
+	end)
+end
+
+entrada.TouchTap:Connect(function(toques, processado)
+	if not ferramentaEquipada or processado then return end
+	local pos = toques[1]
+	local raio = cam:ScreenPointToRay(pos.X, pos.Y)
+	local hit = mundo:Raycast(raio.Origin, raio.Direction * 1000)
+	if hit and hit.Instance then
+		local modelo = hit.Instance:FindFirstAncestorOfClass("Model")
+		local jogador = jogadores:GetPlayerFromCharacter(modelo)
+		if jogador and jogador ~= eu then
+			arremessarComSofa(jogador)
+		end
+	end
+end)
+end
+})
+
+Tab6:AddButton({
+    Name = "Annoy server",
+    Callback = function()
+        local RE = ReplicatedStorage:WaitForChild("RE")
+        local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
+        local ToolEvent = RE:FindFirstChild("1Too1l")
+        local FireEvent = RE:FindFirstChild("1Gu1n")
+
+        local function clearAllTools()
+            if ClearEvent then
+                ClearEvent:FireServer("ClearAllTools")
+            end
+        end
+        local function getAssault()
+            if ToolEvent then
+                ToolEvent:InvokeServer("PickingTools", "Assault")
+            end
+        end
+        local function hasAssault()
+            return LocalPlayer.Backpack:FindFirstChild("Assault") ~= nil
+        end
+        local function fireAtPart(targetPart)
+            local gunScript = LocalPlayer.Backpack:FindFirstChild("Assault")
+                and LocalPlayer.Backpack.Assault:FindFirstChild("GunScript_Local")
+            if not gunScript or not targetPart then return end
+            local args = {
+                targetPart,
+                targetPart,
+                Vector3.new(9e16, 9e16, 9e16),
+                targetPart.Position,
+                gunScript:FindFirstChild("MuzzleEffect"),
+                gunScript:FindFirstChild("HitEffect"),
+                0,
+                0,
+                { false },
+                {
+                    25,
+                    Vector3.new(1000, 1000, 1000),
+                    BrickColor.new(29),
+                    0.25,
+                    Enum.Material.SmoothPlastic,
+                    0.25
+                },
+                true,
+                false
+            }
+            FireEvent:FireServer(unpack(args))
+        end
+        local function fireAtAllPlayers(times)
+            for i = 1, times do
+                for _, player in ipairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                        fireAtPart(player.Character.HumanoidRootPart)
+                        task.wait(0.1)
+                    end
+                end
+            end
+        end
+        task.spawn(function()
+            while true do
+                clearAllTools()
+                getAssault()
+                repeat
+                    task.wait(0.2)
+                until hasAssault()
+                fireAtAllPlayers(3)
+                task.wait(1)
+            end
+        end)
+    end
+})
 --------------------------------------------------
 			-- === Tab 7: Scripts === --
 --------------------------------------------------
