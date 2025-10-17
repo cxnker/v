@@ -18,14 +18,19 @@ Window:AddMinimizeButton({
 local Tab1 = Window:MakeTab({"Info", "info"})
 local Tab2 = Window:MakeTab({"Player", "user"})
 local Tab3 = Window:MakeTab({"Avatar", "shirt"})
-local Tab4 = Window:MakeTab({"RGB", "brush"})
-local Tab5 = Window:MakeTab({"House", "home"})
-local Tab6 = Window:MakeTab({"Car", "car"})
-local Tab7 = Window:MakeTab({"Music", "music"})
-local Tab8 = Window:MakeTab({"Troll", "skull"})
-local Tab9 = Window:MakeTab({"Scripts", "scroll"})
-local Tab10 = Window:MakeTab({"Teleportes", "mappin"})
-local Tab11 = Window:MakeTab({"Graphics", "wind"})
+local Tab4 = Window:MakeTab({"Customize", "brush"})
+local Tab5 = Window:MakeTab({"Car & House", "car"})
+local Tab6 = Window:MakeTab({"Troll", "skull"})
+local Tab7 = Window:MakeTab({"Scripts", "scroll"})
+local Tab8 = Window:MakeTab({"Teleportes", "mappin"})
+
+local function newNotification(title, message, duration)
+    StarterGui:SetCore("SendNotification",{
+        Title = title,
+        Text = message,
+        Duration = duration or 5
+    })
+end
 --------------------------------------------------
 			-- === Tab 1: Info === --
 --------------------------------------------------
@@ -559,12 +564,14 @@ Tab3:AddButton({
 	})
 	end
 })
-	
-Tab3:AddSection({"》 Customize"})
+--------------------------------------------------
+			-- === Tab 4: Customize === --
+--------------------------------------------------
+Tab4:AddSection({"》 Customize"})
 
 local nameColor = false
 
-Tab3:AddToggle({
+Tab4:AddToggle({
     Name = "Name RGB",
     Default = false,
     Callback = function(value)
@@ -587,24 +594,58 @@ spawn(function()
     end
 end)
 --------------------------------------------------
-			-- === Tab 4: RGB === --
+			-- === Tab 5: Car & House === --
 --------------------------------------------------
---------------------------------------------------
-			-- === Tab 5: House === --
---------------------------------------------------
+Tab5:AddSection({"》 House"})
 
+Tab5:AddButton({
+    Name = "Unbanned from all houses",
+    Callback = function()
+        local successCount = 0
+        local failCount = 0
+        for i = 1, 37 do
+            local bannedBlockName = "BannedBlock" .. i
+            local bannedBlock = Workspace:FindFirstChild(bannedBlockName, true)
+            if bannedBlock then
+                local success, _ = pcall(function()
+                    bannedBlock:Destroy()
+                end)
+                if success then
+                    successCount = successCount + 1
+                else
+                    failCount = failCount + 1
+                end
+            end
+        end
+        for _, house in pairs(Workspace:GetDescendants()) do
+            if house.Name:match("BannedBlock") then
+                local success, _ = pcall(function()
+                    house:Destroy()
+                end)
+                if success then
+                    successCount = successCount + 1
+                else
+                    failCount = failCount + 1
+                end
+            end
+        end
+        if successCount > 0 then
+			newNotification("Success", "Unbanned from " .. successCount .. " houses")
+        end
+        if failCount > 0 then
+			newNotification("Failed", "Not unbanned from " .. failCount .. " houses")
+        end
+        if successCount == 0 and failCount == 0 then
+			newNotification("Warn", "Not banned houses find")
+        end
+    end
+})
 --------------------------------------------------
-			-- === Tab 6: Car === --
+			-- === Tab 6: Troll === --
 --------------------------------------------------
---------------------------------------------------
-			-- === Tab 7: Music === --
---------------------------------------------------
---------------------------------------------------
-			-- === Tab 8: Troll === --
---------------------------------------------------
-Tab8:AddSection({"》 ESP"})
+Tab6:AddSection({"》 ESP"})
 	
-Tab8:AddToggle({
+Tab6:AddToggle({
     Name = "ESP Players",
     Default = false,
     Callback = function(Enabled)
@@ -663,69 +704,12 @@ Tab8:AddToggle({
         end
     end
 })
-
-Tab8:AddSection({"》 House"})
-
-Tab8:AddButton({
-    Name = "Unbanned from all houses",
-    Callback = function()
-        local successCount = 0
-        local failCount = 0
-        for i = 1, 37 do
-            local bannedBlockName = "BannedBlock" .. i
-            local bannedBlock = Workspace:FindFirstChild(bannedBlockName, true)
-            if bannedBlock then
-                local success, _ = pcall(function()
-                    bannedBlock:Destroy()
-                end)
-                if success then
-                    successCount = successCount + 1
-                else
-                    failCount = failCount + 1
-                end
-            end
-        end
-        for _, house in pairs(Workspace:GetDescendants()) do
-            if house.Name:match("BannedBlock") then
-                local success, _ = pcall(function()
-                    house:Destroy()
-                end)
-                if success then
-                    successCount = successCount + 1
-                else
-                    failCount = failCount + 1
-                end
-            end
-        end
-        if successCount > 0 then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Success",
-                Text = "Unbanned from " .. successCount .. " houses",
-                Duration = 5
-            })
-        end
-        if failCount > 0 then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Failed",
-                Text = "Not unbanned from " .. failCount .. " houses",
-                Duration = 5
-            })
-        end
-        if successCount == 0 and failCount == 0 then
-            StarterGui:SetCore("SendNotification", {
-                Title = "Warn",
-                Text = "Not banned houses find",
-                Duration = 5
-            })
-        end
-    end
-})
 --------------------------------------------------
-			-- === Tab 9: Scripts === --
+			-- === Tab 7: Scripts === --
 --------------------------------------------------
 
 --------------------------------------------------
-			-- === Tab 10: Teleportes === --
+			-- === Tab 8: Teleportes === --
 --------------------------------------------------
 local sites = {
     {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
@@ -736,7 +720,7 @@ local sites = {
     {"Farm", CFrame.new(-766.41, 2.92, -61.10)}
 }
 for _, tp in ipairs(sites) do
-    Tab10:AddButton({
+    Tab8:AddButton({
         tp[1],
         function()
             RootPart.CFrame = tp[2]
