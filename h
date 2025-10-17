@@ -559,14 +559,12 @@ Tab3:AddButton({
 	})
 	end
 })
---------------------------------------------------
-			-- === Tab 4: RGB === --
---------------------------------------------------
-Tab4:AddSection({"》 RGB Player"})
+	
+Tab3:AddSection({"》 Customize"})
 
 local nameColor = false
 
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "Name RGB",
     Default = false,
     Callback = function(value)
@@ -589,9 +587,86 @@ spawn(function()
     end
 end)
 --------------------------------------------------
+			-- === Tab 4: RGB === --
+--------------------------------------------------
+--------------------------------------------------
 			-- === Tab 5: House === --
 --------------------------------------------------
-Tab5:AddButton({
+
+--------------------------------------------------
+			-- === Tab 6: Car === --
+--------------------------------------------------
+--------------------------------------------------
+			-- === Tab 7: Music === --
+--------------------------------------------------
+--------------------------------------------------
+			-- === Tab 8: Troll === --
+--------------------------------------------------
+Tab8:AddSection({"》 ESP"})
+	
+Tab8:AddToggle({
+    Name = "ESP Players",
+    Default = false,
+    Callback = function(Enabled)
+        local function CreateESP(Player)
+            if not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart") then return end
+
+            local Character = Player.Character
+            local HRP = Character.HumanoidRootPart
+
+            local ESP = Instance.new("BillboardGui")
+            ESP.Name = "ESP_" .. Player.Name
+            ESP.Adornee = HRP
+            ESP.Size = UDim2.new(0, 100, 0, 50)
+            ESP.StudsOffset = Vector3.new(0, 2.5, 0)
+            ESP.AlwaysOnTop = true
+            ESP.Parent = HRP
+
+            local NameLabel = Instance.new("TextLabel")
+            NameLabel.Name = "NameLabel"
+			NameLabel.BackgroundTransparency = 1
+			NameLabel.Text = Player.Name
+			NameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+	        NameLabel.Size = UDim2.new(1, 0, 0, 20)
+            NameLabel.Parent = ESP
+        end
+
+        for _, Player in pairs(Players:GetPlayers()) do
+            if Player ~= LocalPlayer and Player.Character then
+                local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
+                if HRP then
+                    local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
+                    if OldESP then
+                        OldESP:Destroy()
+                    end
+                end
+            end
+        end
+
+        if Enabled then
+            for _, Player in pairs(Players:GetPlayers()) do
+                if Player ~= LocalPlayer then
+                    Player.CharacterAdded:Connect(function()
+                        CreateESP(Player)
+                    end)
+                    if Player.Character then
+                        CreateESP(Player)
+                    end
+                end
+            end
+
+            Players.PlayerAdded:Connect(function(Player)
+                Player.CharacterAdded:Connect(function()
+                    CreateESP(Player)
+                end)
+            end)
+        end
+    end
+})
+
+Tab8:AddSection({"》 House"})
+
+Tab8:AddButton({
     Name = "Unbanned from all houses",
     Callback = function()
         local successCount = 0
@@ -642,77 +717,6 @@ Tab5:AddButton({
                 Text = "Not banned houses find",
                 Duration = 5
             })
-        end
-    end
-})
---------------------------------------------------
-			-- === Tab 6: Car === --
---------------------------------------------------
---------------------------------------------------
-			-- === Tab 7: Music === --
---------------------------------------------------
---------------------------------------------------
-			-- === Tab 8: Troll === --
---------------------------------------------------
-Tab8:AddSection({"》 ESP"})
-	
-Tab8:AddToggle({
-    Name = "ESP",
-    Default = false,
-    Callback = function(Enabled)
-        local function CreateESP(Player)
-            if not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart") then return end
-
-            local Character = Player.Character
-            local HRP = Character.HumanoidRootPart
-
-            local ESP = Instance.new("BillboardGui")
-            ESP.Name = "ESP_" .. Player.Name
-            ESP.Adornee = HRP
-            ESP.Size = UDim2.new(0, 100, 0, 50)
-            ESP.StudsOffset = Vector3.new(0, 2.5, 0)
-            ESP.AlwaysOnTop = true
-            ESP.Parent = HRP
-
-            local NameLabel = Instance.new("TextLabel")
-            NameLabel.Name = "NameLabel"
-			NameLabel.BackgroundTransparency = 1
-			NameLabel.Text = Player.Name
-			NameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
-	        NameLabel.Size = UDim2.new(1, 0, 0, 20)
-            NameLabel.Parent = ESP
-        end
-
-        for _, Player in pairs(Players:GetPlayers()) do
-            if Player ~= LocalPlayer and Player.Character then
-                local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
-                if HRP then
-                    local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
-                    if OldESP then
-                        OldESP:Destroy()
-                    end
-                end
-            end
-        end
-
-        if Enabled then
-            -- Adiciona ESP para jogadores existentes
-            for _, Player in pairs(Players:GetPlayers()) do
-                if Player ~= LocalPlayer then
-                    Player.CharacterAdded:Connect(function()
-                        CreateESP(Player)
-                    end)
-                    if Player.Character then
-                        CreateESP(Player)
-                    end
-                end
-            end
-
-            Players.PlayerAdded:Connect(function(Player)
-                Player.CharacterAdded:Connect(function()
-                    CreateESP(Player)
-                end)
-            end)
         end
     end
 })
