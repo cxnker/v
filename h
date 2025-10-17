@@ -19,15 +19,16 @@ local Tab1 = Window:MakeTab({"Info", "info"})
 local Tab2 = Window:MakeTab({"Player", "user"})
 local Tab3 = Window:MakeTab({"Avatar", "shirt"})
 local Tab4 = Window:MakeTab({"Customize", "brush"})
-local Tab5 = Window:MakeTab({"Car & House", "car"})
+local Tab5 = Window:MakeTab({"Car/House", "car"})
 local Tab6 = Window:MakeTab({"Troll", "skull"})
 local Tab7 = Window:MakeTab({"Scripts", "scroll"})
 local Tab8 = Window:MakeTab({"Teleportes", "mappin"})
 
-local function newNotification(title, message, duration)
+local function newNotification(title, message, icon, duration)
     StarterGui:SetCore("SendNotification",{
         Title = title,
         Text = message,
+		Icon = icon or "",
         Duration = duration or 5
     })
 end
@@ -94,13 +95,8 @@ local function findPlayerByPartialName(partial)
     return nil
 end
 
-local function notifyPlayerSelected(player)
-	StarterGui:SetCore("SendNotification", {
-        Title = "Player selected",
-        Text = player.Name .. " selected",
-        Icon = Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100),
-        Duration = 5
-    })
+local function headsitNotify(player)
+	newNotification("Player selected", player.Name .. " selected", Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100))
 end
 
 Tab2:AddTextBox({
@@ -111,7 +107,7 @@ Tab2:AddTextBox({
     local foundPlayer = findPlayerByPartialName(Value)
         if foundPlayer then
             selectedPlayerName = foundPlayer.Name
-            notifyPlayerSelected(foundPlayer)
+            headsitNotify(foundPlayer)
         else
             warn("No player found with that name")
         end
@@ -594,7 +590,7 @@ spawn(function()
     end
 end)
 --------------------------------------------------
-			-- === Tab 5: Car & House === --
+			-- === Tab 5: Car/House === --
 --------------------------------------------------
 Tab5:AddSection({"》 House"})
 
