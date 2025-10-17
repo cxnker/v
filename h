@@ -723,8 +723,8 @@ local putColors = {
 spawn(function()
     while true do
         if nameColor then
-            local randomColor = putColors[math.random(#putColors)]
-            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", randomColor)
+            -- local randomColor = putColors[math.random(#putColors)]
+            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", getESPColor())
         end
         wait(0.7)
     end
