@@ -654,24 +654,6 @@ Tab4:AddToggle({
     end
 })
 
-local rgbSpeed = 1
-
-Tab4:AddSlider({
-    Name = "Adjust RGB Speed",
-    Min = 1,
-    Max = 9,
-    Increase = 1,
-    Default = 2,
-    Callback = function(Value)
-        rgbSpeed = Value
-    end
-})
-	
-local function getRainbowColor(speedMultiplier)
-    local h = (tick() * speedMultiplier % 5) / 5
-    return Color3.fromHSV(h, 1, 1)
-end
--- [
 local putColors = {
     Color3.fromRGB(0, 0, 0), -- Black
     Color3.fromRGB(255, 255, 255), -- White
@@ -679,12 +661,17 @@ local putColors = {
     Color3.fromRGB(0, 255, 0), -- Green
     Color3.fromRGB(0, 0, 255) -- Blue
 }
-] --
+
+local function getRainbowColor(speedMultiply)
+    local h = (tick() * speedMultiply % 5) / 5
+    return Color3.fromHSV(h, 1, 1)
+end
+
 spawn(function()
     while true do
         if nameColor then
             -- local randomColor = putColors[math.random(#putColors)]
-            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", getRainbowColor(rgbSpeed))
+            ReplicatedStorage.RE["1RPNam1eColo1r"]:FireServer("PickingRPNameColor", getRainbowColor)
         end
         wait(0.5)
     end
