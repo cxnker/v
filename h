@@ -1060,7 +1060,7 @@ Tab6:AddButton({
 })
 
 Tab6:AddButton({
-    Name = "[Click] Admin Bug (Tool)",
+    Name = "[Click] Admin Sword (Tool)",
     Callback = function()
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -1072,7 +1072,7 @@ local bugConnections = {}
 local Remote = ReplicatedStorage.RE:FindFirstChild("1Gu1n")
 
 local tool = Instance.new("Tool")
-tool.Name = "Admin Bug"
+tool.Name = "Admin Sword"
 tool.RequiresHandle = true
 tool.CanBeDropped = true
 
@@ -1091,12 +1091,12 @@ handle.Parent = tool
 
 local function bugPlayer(targetPlayer)
     if not Remote then
-        createNotification("⚠️ Warn", "Remote not found")
+        newNotification("⚠️ Warn", "Remote not found")
         return
     end
     
     if not targetPlayer or not targetPlayer.Character then
-        createNotification("⚠️ Warn", "Invalid player")
+        newNotification("⚠️ Warn", "Invalid player")
         return
     end
     
@@ -1108,12 +1108,12 @@ local function bugPlayer(targetPlayer)
             bugConnections[playerName] = nil
         end
         buggedPlayers[playerName] = nil
-        createNotification("🔓 Unapplied Bug", playerName .. " debugged player")
+        newNotification("🔓 Unapplied Bug", playerName .. " debugged player")
         return
     end
     
     buggedPlayers[playerName] = true
-    createNotification("🔨 Bug Applied", playerName .. " was bugged")
+    newNotification("🔨 Bug Applied", playerName .. " was bugged")
     
     bugConnections[playerName] = RunService.Stepped:Connect(function()
         local target = Players:FindFirstChild(playerName)
@@ -1191,17 +1191,17 @@ tool.Equipped:Connect(function(mouse)
             if targetPlayer and targetPlayer ~= LocalPlayer then
                 bugPlayer(targetPlayer)
             else
-                createNotification("⚠️ Warn", "Click on a player to apply/remove bug")
+                newNotification("⚠️ Warn", "Click on a player to apply/remove bug")
             end
         end)
         
-        createNotification("📤 Admin Bug equipped", "Click on a player to apply/remove bug")
+        newNotification("📤 Admin Sword equipped", "Click on a player to apply/remove bug")
     end
 end)
 
 tool.Unequipped:Connect(function()
     game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
-    createNotification("​📥 ​Admin Bug saved", "Unequipped tool")
+    newNotification("​📥 ​Admin Sword saved", "Unequipped tool")
 end)
 
 Players.PlayerRemoving:Connect(function(player)
@@ -1220,16 +1220,16 @@ LocalPlayer.Chatted:Connect(function(message)
         end
         bugConnections = {}
         buggedPlayers = {}
-        createNotification("🛑 All bugs removed", "All players were debugged")
+        newNotification("🛑 All bugs removed", "All players were debugged")
     elseif message:lower() == "/buggedlist" then
         local count = 0
         for _ in pairs(buggedPlayers) do count = count + 1 end
-        createNotification("📋 Player Bug list", count > 0 and (count.." players bugged") or "No bugged players were found")
+        newNotification("📋 Player list", count > 0 and (count.." players bugged") or "No bugged players were found")
     end
 end)
 
 tool.Parent = LocalPlayer.Backpack
-createNotification("✅ Admin Bug enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
+newNotification("✅ Admin Sword enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
     end
 })
 
