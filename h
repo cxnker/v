@@ -1494,6 +1494,93 @@ Tab6:AddButton({
         end)
     end
 })
+
+Tab6:AddSection({"》 Troll Music Server"})
+
+local audios = {
+    {Name = "Gemido ultra rápido", ID = 128863565301778},
+    {Name = "dodichan onnn", ID = 134640594695384},
+    {Name = "amongus", ID = 6651571134},
+    {Name = "Sus", ID = 6701126635},
+    {Name = "SUS", ID = 7153419575},
+    {Name = "Sonic.Exe", ID = 2496367477},
+    {Name = "Mandrake Detected", ID = 9068077052},
+    {Name = "OH MY GOD", ID = 73349649774476},
+    {Name = "CHINABOY", ID = 84403553163931}
+}
+
+local audioNames = {}
+for _, audio in ipairs(audios) do
+    table.insert(audioNames, audio.Name)
+end
+
+Tab6:AddDropdown({
+    Name = "Select audio",
+    Options = audioNames,
+    Default = audioNames[1],
+    Callback = function(value)
+        for _, audio in ipairs(audios) do
+            if audio.Name == value then
+                audioID = audio.ID
+                break
+            end
+        end
+    end
+})
+
+local function fireServer(eventName, args)
+    local event = ReplicatedStorage:FindFirstChild("RE") and ReplicatedStorage.RE:FindFirstChild(eventName)
+    if event then
+        pcall(function()
+            event:FireServer(unpack(args))
+        end)
+    end
+end
+
+local audioLoop = false
+
+local function loopAudio()
+    while audioLoop do
+        if audioID then
+			local args = { Workspace, audioID, 1 }
+            ReplicatedStorage.RE:FindFirstChild("1Gu1nSound1s"):FireServer(unpack(args))
+            local sound = Instance.new("Sound", Workspace)
+            sound.SoundId = "rbxassetid://" .. audioID
+            sound:Play()
+        end
+        task.wait(1)
+    end
+end
+
+local function playAudio()
+    local args = { Workspace, audioID, 1 }
+		ReplicatedStorage.RE:FindFirstChild("1Gu1nSound1s"):FireServer(unpack(args))
+        local sound = Instance.new("Sound", Workspace)
+        sound.SoundId = "rbxassetid://" .. audioID
+        sound:Play()
+        task.wait(3)
+        sound:Destroy()
+end
+
+Tab6:AddButton({
+    Name = "Play audio",
+    Callback = function()
+	    if audioID then
+    	    playAudio(audioID)
+    	end
+    end
+})
+
+Tab6:AddToggle({
+    Name = "Loop audio",
+    Default = false,
+    Callback = function(value)
+        audioLoop = value
+        if audioLoop then
+            task.spawn(loopAudio)
+        end
+    end
+})
 --------------------------------------------------
 			-- === Tab 7: Scripts === --
 --------------------------------------------------
