@@ -9,8 +9,3 @@ local success, _ = pcall(function()
 		TS:TeleportToPlaceInstance(game.PlaceId, game.JobId, Players.LocalPlayer)
 	end
 end)
-StarterGui:SetCore("SendNotification", {
-	Title = success and "Success" or "Failed",
-	Text = success and "Rejoined now" or "Rejoin failed",
-	Duration = 5
-})
