@@ -1,0 +1,16 @@
+local success, _ = pcall(function()
+	Players = game:GetService("Players")
+	TS = game:GetService("TeleportService")
+	if #Players:GetPlayers() <= 1 then
+		Players.LocalPlayer:kick("Rejoining...")
+	wait()
+		TS:Teleport(game.PlaceId, Players.LocalPlayer)
+	else
+		TS:TeleportToPlaceInstance(game.PlaceId, game.JobId, Players.LocalPlayer)
+	end
+end)
+StarterGui:SetCore("SendNotification", {
+	Title = success and "Success" or "Failed",
+	Text = success and "Rejoined now" or "Rejoin failed",
+	Duration = 5
+})
