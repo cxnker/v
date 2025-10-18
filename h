@@ -151,13 +151,6 @@ RunService.Stepped:Connect(function()
 			end
 		end
 	end)
-
-Tab2:AddButton({
-    Name = "Fly GUI",
-    Callback = function()
-        loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
-	end
-})
 --------------------------------------------------
 			-- === Tab 3: Avatar === --
 --------------------------------------------------
@@ -302,20 +295,6 @@ Tab3:AddSection({"》 Character Editor"})
 Tab3:AddParagraph({"Adjust the proportions of your avatar for a better result"})
 
 Tab3:AddButton({
-    Name = "ROBLOX-Girl-Torso and Skelly Right Leg/Headless",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-    	[1] = 48474356,
-    	[2] = 0,
-		[3] = 0,
-		[4] = 14547141130,
-	 	[5] = 0,
-		[6] = 134082579,
-	})
-    end
-})
-
-Tab3:AddButton({
     Name = "Invisible",
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
@@ -400,20 +379,6 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "[M] Girl Body and Headless/Korblox",
-    Callback = function()
-	ChangeCharacterBody:InvokeServer({
-		[1] = 114206707267907,
-		[2] = 18839824209,
-		[3] = 18839824132,
-		[4] = 139607718,
-		[5] = 118303475394830,
-		[6] = 134082579,
-	})
-	end
-})
-
-Tab3:AddButton({
     Name = "[M] Boy Body and Headless",
     Callback = function()
         local args = {
@@ -445,13 +410,13 @@ Tab3:AddButton({
 })
 
 Tab3:AddButton({
-    Name = "(Classic-Female-v2-Torso) and Headless/Korblox",
+    Name = "(Classic-Female-v2-Torso) and Headless",
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
 		[1] = 4637265517,
 		[2] = 0,
 		[3] = 0,
-		[4] = 139607718,
+		[4] = 0,
 		[5] = 0,
 		[6] = 134082579,
 	})
@@ -470,6 +435,154 @@ Tab3:AddButton({
 		[6] = 134082579,
 	})
 	end
+})
+
+Tab3:AddButton({
+    Name = "Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = 0,
+		[5] = 0,
+		[6] = 134082579,
+	})
+	end
+})
+
+Tab3:AddButton({
+    Name = "ROBLOX-Girl-Torso and Skelly Right Leg/Headless",
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+    	[1] = 48474356,
+    	[2] = 0,
+		[3] = 0,
+		[4] = 14547141130,
+	 	[5] = 0,
+		[6] = 134082579,
+	})
+    end
+})
+Tab3:AddSection({"》 Animations"})
+
+Tab3:AddButton({
+    Name = "(adidas-Community-Animation-Pack) Animation",
+    Callback = function()
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(123695349157584)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(93993406355955)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(106810508343012)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(106537993816942)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(126354114956642)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(124765145869332)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(115715495289805)
+task.wait(0.3)
+	end
+})
+
+Tab3:AddSection({"》 Custom Body Parts (Experimental)"})
+Tab3:AddParagraph({"Enter the ID of the item you want to use"})
+
+Tab3:AddTextBox({
+    Name = "Torso",
+    Description = "Enter Torso ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value1)
+	ChangeCharacterBody:InvokeServer({
+		[1] = value1,
+		[2] = 0,
+		[3] = 0,
+		[4] = 0,
+		[5] = 0,
+		[6] = 134082579,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Right Arm",
+    Description = "Enter Right Arm ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value2)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = value2,
+		[3] = 0,
+		[4] = 0,
+		[5] = 0,
+		[6] = 134082579,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Left Arm",
+    Description = "Enter Left Arm ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value3)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = value3,
+		[4] = 0,
+		[5] = 0,
+		[6] = 134082579,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Right Leg",
+    Description = "Enter Right Leg ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value4)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = value4,
+		[5] = 0,
+		[6] = 134082579,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Left Leg",
+    Description = "Enter Left Leg ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value5)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = 0,
+		[5] = value5,
+		[6] = 134082579,
+	})
+    end
+})
+
+Tab3:AddTextBox({
+    Name = "Head",
+    Description = "Enter Head ID",
+    PlaceholderText = "Victory Hub",
+    Callback = function(value6)
+	ChangeCharacterBody:InvokeServer({
+		[1] = 0,
+		[2] = 0,
+		[3] = 0,
+		[4] = 0,
+		[5] = 0,
+		[6] = value6,
+	})
+    end
 })
 --------------------------------------------------
 			-- === Tab 4: Customize === --
@@ -623,7 +736,7 @@ Tab5:AddButton({
     end
 })
 
-Tab5:AddSection({"》 Spawm Premium Cars"})
+Tab5:AddSection({"》 Car Customize"})
 
 local WheelLoop = false
 
@@ -1384,7 +1497,25 @@ Tab6:AddButton({
 --------------------------------------------------
 			-- === Tab 7: Scripts === --
 --------------------------------------------------
+Tab7:AddButton({
+    Name = "Fly GUI",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
+	end
+})
+Tab7:AddButton({
+    Name = "Silly Emotes",
+    Callback = function()
+		loadstring(game:HttpGet("https://github.com/Gazer-Ha/Gaze-stuff/raw/main/Silly%20emote"))()
+	end
+})
 
+Tab7:AddButton({
+    Name = "AFEM Emotes/Animations",
+    Callback = function()
+		loadstring(game:HttpGet("https://yarhm.mhi.im/scr?channel=afemmax"))()
+	end
+})
 --------------------------------------------------
 			-- === Tab 8: Teleportes === --
 --------------------------------------------------
