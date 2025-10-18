@@ -1494,6 +1494,24 @@ Tab6:AddButton({
         end)
     end
 })
+Tab6:AddButton({
+    Name = "JerkOff",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/jerk"))()
+	end
+})
+Tab6:AddButton({
+    Name = "BringParts",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/bringparts"))()
+	end
+})
+Tab6:AddButton({
+    Name = "Telekinesis",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/telekinesis"))()
+	end
+})
 
 Tab6:AddSection({"》 Troll Music Server"})
 
@@ -1585,6 +1603,47 @@ Tab6:AddToggle({
 			-- === Tab 7: Scripts === --
 --------------------------------------------------
 Tab7:AddButton({
+    Name = "Rejoin server",
+    Callback = function()
+		loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/rejoin"))()
+    	StarterGui:SetCore("SendNotification", {
+        	Title = success and "Success" or "Failed",
+        	Text = success and "Rejoined now" or "Rejoin failed",
+        	Duration = 5
+    	})
+    end
+})
+Tab7:AddButton({
+    Name = "BoostFPS",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/boostfps"))()
+	end
+})
+Tab7:AddButton({
+    Name = "Shaders",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/shaders"))()
+	end
+})
+Tab7:AddButton({
+    Name = "ShiftLock",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/shiftlock"))()
+	end
+})
+Tab7:AddButton({
+    Name = "Virtual Keyboard",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vkeyboard"))()
+	end
+})
+Tab7:AddButton({
+    Name = "VFly GUI",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
+	end
+})
+Tab7:AddButton({
     Name = "Fly GUI",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
@@ -1596,7 +1655,6 @@ Tab7:AddButton({
 		loadstring(game:HttpGet("https://github.com/Gazer-Ha/Gaze-stuff/raw/main/Silly%20emote"))()
 	end
 })
-
 Tab7:AddButton({
     Name = "AFEM Emotes/Animations",
     Callback = function()
