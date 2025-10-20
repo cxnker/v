@@ -449,9 +449,9 @@ AdminTab:Button({
     end
 })
 
-Tab6:AddButton({
-    Name = "Destroy server",
-    Callback = function()
+AdminTab:Button({
+    Title = "Destroy Server",
+	Callback = function()   
         local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
         local ToolEvent = RE:FindFirstChild("1Too1l")
         local FireEvent = RE:FindFirstChild("1Gu1n")
@@ -555,3 +555,4 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
