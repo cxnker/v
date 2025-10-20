@@ -579,113 +579,7 @@ AdminTab:Button({
     end
 })
 
-AdminTab:Button({
-    Title = "Fling Ball",
-    Desc = "TYPE: Tool",
-local toolName = "Fling Ball"
-local toolEquipped = false
 
-local pInv = LocalPlayer:WaitForChild("pInv")
-
-if not pInv:FindFirstChild(toolName) then
-    local tool = Instance.new("Tool")
-    tool.Name = toolName
-    tool.RequiresHandle = true
-    tool.CanBeDropped = false
-
-    local handle = Instance.new("Part")
-    handle.Name = "Handle"
-    handle.Size = Vector3.new(1, 1, 1)
-    handle.Transparency = 1
-    handle.Parent = tool
-
-    local decal = Instance.new("Decal")
-    decal.Texture = "rbxassetid://775552544"
-    decal.Face = Enum.NormalId.Front
-    decal.Parent = handle
-
-    tool.Equipped:Connect(function()
-        toolEquipped = true
-    end)
-
-    tool.Unequipped:Connect(function()
-        toolEquipped = false
-    end)
-
-    tool.Parent = pInv
-end
-
-local function FlingBall(target)
-    local ServerBalls = Workspace:WaitForChild("WorkspaceCom"):WaitForChild("001_SoccerBalls")
-
-    local function GetBall()
-        if not pInv:FindFirstChild("SoccerBall") and not Character:FindFirstChild("SoccerBall") then
-            ReplicatedStorage.RE:FindFirstChild("1Too1l"):InvokeServer("PickingTools", "SoccerBall")
-        end
-        repeat task.wait() until pInv:FindFirstChild("SoccerBall") or Character:FindFirstChild("SoccerBall")
-        local ballTool = pInv:FindFirstChild("SoccerBall")
-        if ballTool then ballTool.Parent = Character end
-        repeat task.wait() until ServerBalls:FindFirstChild("Soccer" .. LocalPlayer.Name)
-        return ServerBalls:FindFirstChild("Soccer" .. LocalPlayer.Name)
-    end
-
-    local Ball = ServerBalls:FindFirstChild("Soccer" .. LocalPlayer.Name) or GetBall()
-    Ball.CanCollide = false
-    Ball.Massless = true
-    Ball.Transparency = 1
-    Ball.CustomPhysicalProperties = PhysicalProperties.new(0.0001, 0, 0)
-
-    if target ~= LocalPlayer then
-        local tchar = target.Character
-        if tchar and tchar:FindFirstChild("HumanoidRootPart") and tchar:FindFirstChild("Humanoid") then
-            local troot = tchar.HumanoidRootPart
-            local thum = tchar.Humanoid
-            if Ball:FindFirstChildWhichIsA("BodyVelocity") then
-                Ball:FindFirstChildWhichIsA("BodyVelocity"):Destroy()
-            end
-            local bv = Instance.new("BodyVelocity")
-            bv.Velocity = Vector3.new(9e8, 9e8, 9e8)
-            bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-            bv.P = 9e900
-            bv.Parent = Ball
-            Workspace.CurrentCamera.CameraSubject = thum
-
-            repeat
-                if troot.Velocity.Magnitude > 0 then
-                    local pos = troot.Position + (troot.Velocity / 1.5)
-                    Ball.CFrame = CFrame.new(pos)
-                    Ball.Orientation += Vector3.new(45, 60, 30)
-                else
-                    for _, v in pairs(tchar:GetChildren()) do
-                        if v:IsA("BasePart") and v.CanCollide and not v.Anchored then
-                            Ball.CFrame = v.CFrame
-                            task.wait(1/6000)
-                        end
-                    end
-                end
-                task.wait(1/6000)
-            until troot.Velocity.Magnitude > 1000 or thum.Health <= 0 or not tchar:IsDescendantOf(Workspace) or target.Parent ~= Players
-
-            Workspace.CurrentCamera.CameraSubject = Humanoid
-        end
-    end
-end
-
-UIS.TouchTap:Connect(function(position, processed)
-    if not toolEquipped or processed then return end
-    local pos = position[1]
-    local point = Workspace.CurrentCamera:ScreenPointToRay(pos.X, pos.Y)
-    local hit = Workspace:Raycast(point.Origin, point.Direction * 1000)
-    if hit and hit.Instance then
-        local model = hit.Instance:FindFirstAncestorOfClass("Model")
-        local plr = Players:GetPlayerFromCharacter(model)
-        if plr and plr ~= LocalPlayer then
-            FlingBall(plr)
-        end
-    end
-end)
-    end
-})
 
 AdminTab:Button({
     Title = "Kill Couch",
@@ -978,6 +872,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
