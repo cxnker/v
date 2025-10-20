@@ -155,7 +155,6 @@ AvatarTab:Button({
             local LHumanoid = LChar and LChar:FindFirstChildOfClass("Humanoid")
             local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
             if LHumanoid and THumanoid then
-
                 local LDesc = LHumanoid:GetAppliedDescription()
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
@@ -188,7 +187,6 @@ AvatarTab:Button({
                 }
                 ChangeCharacterBody:InvokeServer(unpack(argsBody))
                 task.wait(0.5)
-
                 if tonumber(PDesc.Shirt) then
                     Wear:InvokeServer(tonumber(PDesc.Shirt))
                     task.wait(0.3)
@@ -210,10 +208,6 @@ AvatarTab:Button({
                 local SkinColor = TPlayer.Character:FindFirstChild("Body Colors")
                 if SkinColor then
                     Remotes.ChangeBodyColor:FireServer(tostring(SkinColor.HeadColor))
-                    task.wait(0.3)
-                end
-                if tonumber(PDesc.IdleAnimation) then
-                    Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
                     task.wait(0.3)
                 end
             end
@@ -671,6 +665,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
