@@ -105,6 +105,120 @@ PlayerTab:Section({Title = "Player", Icon = "user"})
 local Remotes = ReplicatedStorage.Remotes
 local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
+local PlayerValue
+local Target = nil
+
+local function GetPlayerNames()
+    local playerNames = {}
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player.Name ~= LocalPlayer.Name then
+            table.insert(playerNames, player.Name)
+        end
+    end
+    return playerNames
+end
+
+local updateList = AvatarTab:Dropdown({
+    Title = "Update list",
+    Values = GetPlayerNames(),
+    Value = "",
+    Callback = function(playername)
+        PlayerValue = playername
+        Target = playername
+    end
+})
+
+local function updatePlayers()
+    updateList:Set(GetPlayerNames())
+end
+
+updatePlayers()
+
+AvatarTab:Button({"Update list", function()
+    updatePlayers()
+end})
+
+Players.PlayerAdded:Connect(updatePlayers)
+Players.PlayerRemoving:Connect(updatePlayers)
+
+AvatarTab:Button({
+    Title = "Copy avatar",
+    Callback = function()
+        if not Target then return end
+
+        local LChar = LocalPlayer.Character
+        local TPlayer = Players:FindFirstChild(Target)
+
+        if TPlayer and TPlayer.Character then
+            local LHumanoid = LChar and LChar:FindFirstChildOfClass("Humanoid")
+            local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
+            if LHumanoid and THumanoid then
+
+                local LDesc = LHumanoid:GetAppliedDescription()
+                for _, acc in ipairs(LDesc:GetAccessories(true)) do
+                    if acc.AssetId and tonumber(acc.AssetId) then
+                        Wear:InvokeServer(tonumber(acc.AssetId))
+                        task.wait(0.2)
+                    end
+                end
+                if tonumber(LDesc.Shirt) then
+                    Wear:InvokeServer(tonumber(LDesc.Shirt))
+                    task.wait(0.2)
+                end
+                if tonumber(LDesc.Pants) then
+                    Wear:InvokeServer(tonumber(LDesc.Pants))
+                    task.wait(0.2)
+                end
+                if tonumber(LDesc.Face) then
+                    Wear:InvokeServer(tonumber(LDesc.Face))
+                    task.wait(0.2)
+                end
+                local PDesc = THumanoid:GetAppliedDescription()
+                local argsBody = {
+                    [1] = {
+                        [1] = PDesc.Torso,
+                        [2] = PDesc.RightArm,
+                        [3] = PDesc.LeftArm,
+                        [4] = PDesc.RightLeg,
+                        [5] = PDesc.LeftLeg,
+                        [6] = PDesc.Head
+                    }
+                }
+                ChangeCharacterBody:InvokeServer(unpack(argsBody))
+                task.wait(0.5)
+
+                if tonumber(PDesc.Shirt) then
+                    Wear:InvokeServer(tonumber(PDesc.Shirt))
+                    task.wait(0.3)
+                end
+                if tonumber(PDesc.Pants) then
+                    Wear:InvokeServer(tonumber(PDesc.Pants))
+                    task.wait(0.3)
+                end
+                if tonumber(PDesc.Face) then
+                    Wear:InvokeServer(tonumber(PDesc.Face))
+                    task.wait(0.3)
+                end
+                for _, v in ipairs(PDesc:GetAccessories(true)) do
+                    if v.AssetId and tonumber(v.AssetId) then
+                        Wear:InvokeServer(tonumber(v.AssetId))
+                        task.wait(0.3)
+                    end
+                end
+                local SkinColor = TPlayer.Character:FindFirstChild("Body Colors")
+                if SkinColor then
+                    Remotes.ChangeBodyColor:FireServer(tostring(SkinColor.HeadColor))
+                    task.wait(0.3)
+                end
+                if tonumber(PDesc.IdleAnimation) then
+                    Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
+                    task.wait(0.3)
+                end
+            end
+        end
+    end
+})
+
 AvatarTab:Section({Title = "3D Clothes", Icon = "tag"})
 
 local function equipClothes(clothesID, clothesName)
@@ -555,4 +669,5 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
