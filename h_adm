@@ -121,6 +121,7 @@ end
 local updateList = AvatarTab:Dropdown({
     Title = "Update list",
     Values = GetPlayerNames(),
+    Value = "",
     Callback = function(playername)
         PlayerValue = playername
         Target = playername
@@ -130,8 +131,6 @@ local updateList = AvatarTab:Dropdown({
 local function updatePlayers()
     updateList:Set(GetPlayerNames())
 end
-
-updatePlayers()
 
 AvatarTab:Button({
     Title = "Update list",
@@ -217,7 +216,7 @@ AvatarTab:Button({
                 end
             end
         end
-    end
+	end
 })
 
 AvatarTab:Section({Title = "3D Clothes", Icon = "tag"})
@@ -670,6 +669,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
