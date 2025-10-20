@@ -132,6 +132,8 @@ local function updatePlayers()
     updateList:Set(GetPlayerNames())
 end
 
+updatePlayers()
+
 AvatarTab:Button({
     Title = "Update list",
     Callback = function()
@@ -669,6 +671,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
