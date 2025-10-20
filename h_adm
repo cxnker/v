@@ -293,7 +293,7 @@ AvatarTab:Button({
 ProfileTab:Section({Title = "Names", Icon = "pencil"})
 
 local names = {
-    {"ＨＥＸＡＧＯＮ ＨＵＢ::", " ＨＥＸＡＧＯＮ ＨＵＢ "},
+    {"ＨＥＸＡＧＯＮ ＨＵＢ::", " ＨＥＸＡＧＯＮ ＨＵＢ:: "},
     {"ＪＯＫＥＲ", " ＪＯＫＥＲ "},
     {"ＡＤＭＩＮ", " ＡＤＭＩＮ "},
     {"ＤＥＶ", " ＤＥＶ "},
@@ -372,32 +372,8 @@ TrollTab:Button({
 ScriptsTab:Section({Title = "Scripts", Icon = "scroll"})
 
 ScriptsTab:Button({
-    Title = "Fly Gui V3",
-	Desc = "UNIVERSAL",
-    Callback = function()
-        loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
-	end
-})
-
-ScriptsTab:Button({
-    Title = "VFly Gui",
-	Desc = "UNIVERSAL",
-    Callback = function()
-        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
-	end
-})
-
-ScriptsTab:Button({
-    Title = "VFly Gui",
-	Desc = "UNIVERSAL",
-    Callback = function()
-        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
-	end
-})
-
-ScriptsTab:Button({
     Title = "FPS Booster",
-	Desc = "UNIVERSAL",
+	Desc = "GAME: Universal",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/boostfps"))()
 	end
@@ -408,6 +384,22 @@ ScriptsTab:Button({
 	Desc = "GAME: Brookhaven 🏡RP",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/shaders"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "Fly Gui V3",
+	Desc = "GAME: Universal",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "VFly Gui",
+	Desc = "GAME: Universal",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
 	end
 })
 
@@ -686,6 +678,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
