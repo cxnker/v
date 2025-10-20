@@ -133,7 +133,9 @@ end
 
 updatePlayers()
 
-AvatarTab:Button({"Update list", function()
+AvatarTab:Button({
+    Title = "Update list",
+    Callback = function()
     updatePlayers()
 end})
 
@@ -668,6 +670,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
