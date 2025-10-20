@@ -1,0 +1,485 @@
+local Players, RunService, ReplicatedStorage, StarterGui = game:GetService("Players"), game:GetService("RunService"), game:GetService("ReplicatedStorage"), game:GetService("StarterGui")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
+
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Window = WindUI:CreateWindow({
+    Title = "Hexagon Client 🃏",
+    Icon = "rbxassetid://103422693243379",
+    Author = "by Nova · v1.0.0",
+    Size = UDim2.fromOffset(600, 480),
+    Transparent = true,
+    Theme = "Dark",
+    Resizable = true,
+})
+
+WindUI:Notify({
+    Title = "Welcome to Hexagon Client",
+    Content = "Created by @Roun95",
+    Duration = 10,
+    Icon = "rbxassetid://103422693243379",
+})
+
+local function newNotification(title, message, icon, duration)
+    StarterGui:SetCore("SendNotification",{
+        Title = title,
+        Text = message,
+		Icon = icon or "",
+        Duration = duration or 5
+    })
+end
+
+local InfoTab = Window:Tab({
+    Title = "Info",
+    Icon = "info",
+    Locked = false,
+})
+local PlayerTab = Window:Tab({
+    Title = "Player",
+    Icon = "user",
+    Locked = false,
+})
+local AvatarTab = Window:Tab({
+    Title = "Avatar",
+    Icon = "tag",
+    Locked = false,
+})
+local ProfileTab = Window:Tab({
+    Title = "Profile",
+    Icon = "pencil",
+    Locked = false,
+})
+local MusicTab = Window:Tab({
+    Title = "Music",
+    Icon = "music",
+    Locked = false,
+})
+local TrollTab = Window:Tab({
+    Title = "Troll",
+    Icon = "ghost",
+    Locked = false,
+})
+local ScriptsTab = Window:Tab({
+    Title = "Scripts",
+    Icon = "scroll",
+    Locked = false,
+})
+local AdminTab = Window:Tab({
+    Title = "Admin",
+    Icon = "crown",
+    Locked = false,
+})
+local VipTab = Window:Tab({
+    Title = "VIP",
+    Icon = "sparkles",
+    Locked = false,
+})
+local TeleportTab = Window:Tab({
+    Title = "Teleport",
+    Icon = "pin",
+    Locked = false,
+})
+local ProtectionTab = Window:Tab({
+    Title = "Protection",
+    Icon = "shield",
+    Locked = false,
+})
+-- ==============================
+-- INFO
+-- ==============================
+
+-- ==============================
+-- PLAYER
+-- ==============================
+
+-- ==============================
+-- AVATAR
+-- ==============================
+
+local Remotes = ReplicatedStorage.Remotes
+local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
+
+AvatarTab:Section({Title = "3D Clothes", Icon = "tag"})
+
+local function equipClothes(clothesID, clothesName)
+    local args = { clothesID }
+    local success = pcall(function()
+        return Wear:InvokeServer(unpack(args))
+    end)
+    if success then
+        print("Clothes " .. clothesName .. " Equipped with success")
+    else
+        print("Failed to equip " .. clothesName)
+    end
+end
+
+AvatarTab:Button({
+    Title = "Black Arm Bandages 1.0",
+    Desc = "TYPE: Shirt",
+    Locked = false,
+    Callback = function()
+        equipClothes(11458078735, "Black-Arm-Bandages-1-0")
+    end
+})
+
+AvatarTab:Button({
+    Title = "Black Oversized Warmers",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(10789914680, "Black-Oversized-Warmers")
+    end
+})
+
+AvatarTab:Button({
+    Title = "Black Oversized Off Shoulder Hoodie",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(18396592827, "Black-Oversized-Off-Shoulder-Hoodie")
+    end
+})
+
+AvatarTab:Button({
+    Title = "White Oversized Off Shoulder Hoodie",
+    Desc = "TYPE: Sweater",
+    Locked = false,
+    Callback = function()
+        equipClothes(18396754379, "White-Oversized-Off-Shoulder-Hoodie")
+    end
+})
+
+AvatarTab:Button({
+    Title = "Left Leg Spikes",
+    Desc = "TYPE: Pants",
+    Locked = false,
+    Callback = function()
+        equipClothes(10814325667, "Left-Leg-Spikes")
+    end
+})
+
+AvatarTab:Section({Title = "Character Editor", Icon = "tag"})
+
+AvatarTab:Button({
+    Title = "(Mini-Plushie) and Headless",
+    Desc = "TYPE: Body",
+    Locked = false,
+    Callback = function()
+	ChangeCharacterBody:InvokeServer({
+		[1] = 112722466960512, -- Torso
+		[2] = 76079756909323, -- Right Arm
+		[3] = 82598238110471, -- Left Arm
+		[4] = 107431241133468, -- Right Leg
+		[5] = 103380121023771, -- Left Leg
+		[6] = 134082579, -- Head
+	})
+	end
+})
+
+-- ==============================
+-- PROFILE
+-- ==============================
+
+ProfileTab:Section({Title = "Names", Icon = "pencil"})
+
+local names = {
+    {"ＨＥＸＡＧＯＮ ＨＵＢ::", " ＨＥＸＡＧＯＮ ＨＵＢ "},
+    {"ＪＯＫＥＲ", " ＪＯＫＥＲ "},
+    {"ＡＤＭＩＮ", " ＡＤＭＩＮ "},
+    {"ＤＥＶ", " ＤＥＶ "},
+    {"ＣＯ０ＬＫＩＤ", " ＣＯ０ＬＫＩＤ "},
+    {"ＴＵＢＥＲＳ９３", " ＴＵＢＥＲＳ９３ "},
+}
+
+for _, nm in ipairs(names) do
+    ProfileTab:Button({
+        Title = "Name: " .. nm[1],
+        Callback = function()
+            ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", nm[2])
+        end
+    })
+end
+
+-- ==============================
+-- MUSIC
+-- ==============================
+
+-- ==============================
+-- TROLL
+-- ==============================
+
+TrollTab:Section({Title = "House", Icon = "ghost"})
+
+TrollTab:Button({
+    Title = "Unban all houses",
+    Callback = function()
+        local successCount = 0
+        local failCount = 0
+        for i = 1, 37 do
+            local bannedBlockName = "BannedBlock" .. i
+            local bannedBlock = Workspace:FindFirstChild(bannedBlockName, true)
+            if bannedBlock then
+                local success, _ = pcall(function()
+                    bannedBlock:Destroy()
+                end)
+                if success then
+                    successCount = successCount + 1
+                else
+                    failCount = failCount + 1
+                end
+            end
+        end
+        for _, house in pairs(Workspace:GetDescendants()) do
+            if house.Name:match("BannedBlock") then
+                local success, _ = pcall(function()
+                    house:Destroy()
+                end)
+                if success then
+                    successCount = successCount + 1
+                else
+                    failCount = failCount + 1
+                end
+            end
+        end
+        if successCount > 0 then
+			newNotification("Success", "Unbanned from " .. successCount .. " houses")
+        end
+        if failCount > 0 then
+			newNotification("Failed", "Not unbanned from " .. failCount .. " houses")
+        end
+        if successCount == 0 and failCount == 0 then
+			newNotification("Warn", "Not banned houses find")
+        end
+    end
+})
+
+-- ==============================
+-- SCRIPTS
+-- ==============================
+
+ScriptsTab:Section({Title = "Scripts", Icon = "scroll"})
+
+ScriptsTab:Button({
+    Title = "Fly Gui V3 (Universal)",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
+	end
+})
+
+-- ==============================
+-- ADMIN
+-- ==============================
+
+AdminTab:Section({Title = "Admin", Icon = "crown"})
+
+AdminTab:Button({
+    Title = "[Click] Admin Sword (Tool)",
+	Callback = function()
+        local Players = game:GetService("Players")
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        local RunService = game:GetService("RunService")
+        local LocalPlayer = Players.LocalPlayer
+        
+        local buggedPlayers = {}
+        local bugConnections = {}
+        local Remote = ReplicatedStorage.RE:FindFirstChild("1Gu1n")
+        
+        local tool = Instance.new("Tool")
+        tool.Name = "Admin Sword"
+        tool.RequiresHandle = true
+        tool.CanBeDropped = true
+        
+        local handle = Instance.new("Part")
+        handle.Name = "Handle"
+        handle.Size = Vector3.new(0.1, 0.1, 0.1)
+        handle.Massless = true
+        handle.Anchored = false
+        handle.CanCollide = false
+        handle.Transparency = 0.5
+        handle.Color = Color3.fromRGB(255, 0, 0)
+        local mesh = Instance.new("SpecialMesh", handle)
+        mesh.MeshType = Enum.MeshType.Sphere
+        mesh.Scale = Vector3.new(0.05, 0.05, 0.05)
+        handle.Parent = tool
+        
+        local function bugPlayer(targetPlayer)
+            if not Remote then
+                newNotification("⚠️ Warn", "Remote not found")
+                return
+            end
+            
+            if not targetPlayer or not targetPlayer.Character then
+                newNotification("⚠️ Warn", "Invalid player")
+                return
+            end
+            
+            local playerName = targetPlayer.Name
+            
+            if buggedPlayers[playerName] then
+                if bugConnections[playerName] then
+                    bugConnections[playerName]:Disconnect()
+                    bugConnections[playerName] = nil
+                end
+                buggedPlayers[playerName] = nil
+                newNotification("🔓 Unapplied Bug", playerName .. " debugged player")
+                return
+            end
+            
+            buggedPlayers[playerName] = true
+            newNotification("🔨 Bug Applied", playerName .. " was bugged")
+            
+            bugConnections[playerName] = RunService.Stepped:Connect(function()
+                local target = Players:FindFirstChild(playerName)
+                if not target or not target.Character or not target.Character:FindFirstChild("HumanoidRootPart") then
+                    if bugConnections[playerName] then
+                        bugConnections[playerName]:Disconnect()
+                        bugConnections[playerName] = nil
+                    end
+                    buggedPlayers[playerName] = nil
+                    return
+                end
+        
+                local crazyVector = Vector3.new(
+                    math.random(1e25, 1e25),
+                    math.random(1e25, 1e25),
+                    math.random(1e25, 1e25)
+                )
+        
+                local args = {
+                    [1] = target.Character.HumanoidRootPart,
+                    [2] = target.Character.HumanoidRootPart,
+                    [3] = crazyVector,
+                    [4] = target.Character.HumanoidRootPart.Position,
+                    [5] = LocalPlayer.Backpack:FindFirstChild("Assault") and LocalPlayer.Backpack.Assault.GunScript_Local:FindFirstChild("MuzzleEffect"),
+                    [6] = LocalPlayer.Backpack:FindFirstChild("Assault") and LocalPlayer.Backpack.Assault.GunScript_Local:FindFirstChild("HitEffect"),
+                    [7] = 3000,
+                    [8] = 3000,
+                    [9] = { [1] = false },
+                    [10] = {
+                        [1] = 10000,
+                        [2] = Vector3.new(3000, 3000, 3000),
+                        [3] = BrickColor.new(29),
+                        [4] = 0.05,
+                        [5] = Enum.Material.SmoothPlastic,
+                        [6] = 0.05
+                    },
+                    [11] = true,
+                    [12] = false
+                }
+        
+                Remote:FireServer(unpack(args))
+            end)
+        end
+        
+        local function getPlayerFromMouse(mouse)
+            local target = mouse.Target
+            if not target then return nil end
+            local character = target.Parent
+            while character and not character:FindFirstChild("Humanoid") do
+                character = character.Parent
+            end
+            if character and character:FindFirstChild("Humanoid") then
+                return Players:GetPlayerFromCharacter(character)
+            end
+            return nil
+        end
+        
+        tool.Equipped:Connect(function(mouse)
+            local character = tool.Parent
+            if character and character:FindFirstChild("Humanoid") and character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+        
+            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+        
+                mouse.Button1Down:Connect(function()
+                    local humanoid = character:FindFirstChildOfClass("Humanoid")
+                    local animator = humanoid and humanoid:FindFirstChildOfClass("Animator")
+                    if animator then
+                        local anim = Instance.new("Animation")
+                        anim.AnimationId = "rbxassetid://2410679501"
+                        local track = animator:LoadAnimation(anim)
+                        track:Play()
+                    end
+                    
+                    local targetPlayer = getPlayerFromMouse(mouse)
+                    if targetPlayer and targetPlayer ~= LocalPlayer then
+                        bugPlayer(targetPlayer)
+                    else
+                        newNotification("⚠️ Warn", "Click on a player to apply/remove bug")
+                    end
+                end)
+                
+                newNotification("📤 Admin Sword equipped", "Click on a player to apply/remove bug")
+            end
+        end)
+        
+        tool.Unequipped:Connect(function()
+            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+            newNotification("​📥 ​Admin Sword saved", "Unequipped tool")
+        end)
+        
+        Players.PlayerRemoving:Connect(function(player)
+            local playerName = player.Name
+            if bugConnections[playerName] then
+                bugConnections[playerName]:Disconnect()
+                bugConnections[playerName] = nil
+            end
+            buggedPlayers[playerName] = nil
+        end)
+        
+        LocalPlayer.Chatted:Connect(function(message)
+            if message:lower() == "/stopallbugs" then
+                for _, connection in pairs(bugConnections) do
+                    if connection then connection:Disconnect() end
+                end
+                bugConnections = {}
+                buggedPlayers = {}
+                newNotification("🛑 All bugs removed", "All players were debugged")
+            elseif message:lower() == "/buggedlist" then
+                local count = 0
+                for _ in pairs(buggedPlayers) do count = count + 1 end
+                newNotification("📋 Player list", count > 0 and (count.." players bugged") or "No bugged players were found")
+            end
+        end)
+        
+        tool.Parent = LocalPlayer.Backpack
+        newNotification("✅ Admin Sword enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
+    end
+})
+
+-- ==============================
+-- VIP
+-- ==============================
+
+VipTab:Section({Title = "VIP", Icon = "sparkles"})
+
+-- ==============================
+-- TELEPORTS
+-- ==============================
+
+TeleportTab:Section({Title = "Teleports", Icon = "pin"})
+
+local sites = {
+    {"Hill", CFrame.new(-348.64, 65.94, -458.08)},
+    {"Start", CFrame.new(-26.17, 3.48, -0.93)},
+    {"Hotel", CFrame.new(159.10, 3.32, 164.97)},
+    {"Beach", CFrame.new(55.69, 2.94, -1403.60)},
+    {"Beach2", CFrame.new(42.39, 2.94, 1336.14)},
+    {"Farm", CFrame.new(-766.41, 2.92, -61.10)}
+}
+
+for _, tp in pairs(sites) do
+    TeleportTab:Button({
+        Title = tp[1],
+        Callback = function()
+            RootPart.CFrame = tp[2]
+        end
+    })
+end
+
+-- ==============================
+-- PROTECTION
+-- ==============================
+
+
+
