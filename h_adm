@@ -579,7 +579,7 @@ AdminTab:Button({
 })
 
 AdminTab:Button({
-    Title = "Admin Sword (Tool)",
+    Title = "Kill Couch (Tool)",
 	Callback = function()
 local toolName = "Kill Couch"
 local toolEquipped = false
@@ -599,6 +599,7 @@ if not pInv:FindFirstChild(toolName) then
 	tool.CanBeDropped = false
 
 	tool.Equipped:Connect(function()
+		newNotification("✅ Kill Couch enable", "Added tool, Click on a player to kill")
 		toolEquipped = true
 	end)
 
@@ -834,6 +835,7 @@ AdminTab:Button({
                 task.wait(1)
             end
         end)
+		newNotification("✅ Success", "Server successfully destroyed")
     end
 })
 
@@ -866,6 +868,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
