@@ -86,7 +86,7 @@ PercentText.Text = "0%"
 PercentText.Parent = BarBackground
 
 -- Loading Animation
-local totalTime = 9999 -- Seconds
+local totalTime = 15 -- Seconds
 local steps = 100
 local delayPerStep = totalTime / steps
 
