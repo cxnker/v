@@ -2,6 +2,7 @@ local Players, RunService, ReplicatedStorage, StarterGui = game:GetService("Play
 local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
+local RE = ReplicatedStorage:WaitForChild("RE")
 
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 local Window = WindUI:CreateWindow({
@@ -89,9 +90,13 @@ local ProtectionTab = Window:Tab({
 -- INFO
 -- ==============================
 
+InfoTab:Section({Title = "Info", Icon = "info"})
+
 -- ==============================
 -- PLAYER
 -- ==============================
+
+PlayerTab:Section({Title = "Player", Icon = "user"})
 
 -- ==============================
 -- AVATAR
@@ -196,7 +201,7 @@ for _, nm in ipairs(names) do
     ProfileTab:Button({
         Title = "Name: " .. nm[1],
         Callback = function()
-            ReplicatedStorage.RE["1RPNam1eTex1t"]:FireServer("RolePlayName", nm[2])
+            RE["1RPNam1eTex1t"]:FireServer("RolePlayName", nm[2])
         end
     })
 end
@@ -204,6 +209,8 @@ end
 -- ==============================
 -- MUSIC
 -- ==============================
+
+MusicTab:Section({Title = "Music", Icon = "music"})
 
 -- ==============================
 -- TROLL
@@ -243,13 +250,13 @@ TrollTab:Button({
             end
         end
         if successCount > 0 then
-			newNotification("Success", "Unbanned from " .. successCount .. " houses")
+			newNotification("✅ Success", "Unbanned from " .. successCount .. " houses")
         end
         if failCount > 0 then
-			newNotification("Failed", "Not unbanned from " .. failCount .. " houses")
+			newNotification("❌ Failed", "Not unbanned from " .. failCount .. " houses")
         end
         if successCount == 0 and failCount == 0 then
-			newNotification("Warn", "Not banned houses find")
+			newNotification("⚠️ Warn", "Not banned houses find")
         end
     end
 })
@@ -274,16 +281,11 @@ ScriptsTab:Button({
 AdminTab:Section({Title = "Admin", Icon = "crown"})
 
 AdminTab:Button({
-    Title = "[Click] Admin Sword (Tool)",
-	Callback = function()
-        local Players = game:GetService("Players")
-        local ReplicatedStorage = game:GetService("ReplicatedStorage")
-        local RunService = game:GetService("RunService")
-        local LocalPlayer = Players.LocalPlayer
-        
+    Title = "Admin Sword (Tool)",
+	Callback = function()        
         local buggedPlayers = {}
         local bugConnections = {}
-        local Remote = ReplicatedStorage.RE:FindFirstChild("1Gu1n")
+        local Remote = RE:FindFirstChild("1Gu1n")
         
         local tool = Instance.new("Tool")
         tool.Name = "Admin Sword"
@@ -389,7 +391,7 @@ AdminTab:Button({
             local character = tool.Parent
             if character and character:FindFirstChild("Humanoid") and character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
         
-            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
         
                 mouse.Button1Down:Connect(function()
                     local humanoid = character:FindFirstChildOfClass("Humanoid")
@@ -414,7 +416,7 @@ AdminTab:Button({
         end)
         
         tool.Unequipped:Connect(function()
-            game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
+            ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
             newNotification("​📥 ​Admin Sword saved", "Unequipped tool")
         end)
         
@@ -444,6 +446,77 @@ AdminTab:Button({
         
         tool.Parent = LocalPlayer.Backpack
         newNotification("✅ Admin Sword enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
+    end
+})
+
+Tab6:AddButton({
+    Name = "Destroy server",
+    Callback = function()
+        local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
+        local ToolEvent = RE:FindFirstChild("1Too1l")
+        local FireEvent = RE:FindFirstChild("1Gu1n")
+
+        local function clearAllTools()
+            if ClearEvent then
+                ClearEvent:FireServer("ClearAllTools")
+            end
+        end
+        local function getAssault()
+            if ToolEvent then
+                ToolEvent:InvokeServer("PickingTools", "Assault")
+            end
+        end
+        local function hasAssault()
+            return LocalPlayer.Backpack:FindFirstChild("Assault") ~= nil
+        end
+        local function fireAtPart(targetPart)
+            local gunScript = LocalPlayer.Backpack:FindFirstChild("Assault")
+                and LocalPlayer.Backpack.Assault:FindFirstChild("GunScript_Local")
+            if not gunScript or not targetPart then return end
+            local args = {
+                targetPart,
+                targetPart,
+                Vector3.new(9e16, 9e16, 9e16),
+                targetPart.Position,
+                gunScript:FindFirstChild("MuzzleEffect"),
+                gunScript:FindFirstChild("HitEffect"),
+                0,
+                0,
+                { false },
+                {
+                    25,
+                    Vector3.new(1000, 1000, 1000),
+                    BrickColor.new(29),
+                    0.25,
+                    Enum.Material.SmoothPlastic,
+                    0.25
+                },
+                true,
+                false
+            }
+            FireEvent:FireServer(unpack(args))
+        end
+        local function fireAtAllPlayers(times)
+            for i = 1, times do
+                for _, player in ipairs(Players:GetPlayers()) do
+                    if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                        fireAtPart(player.Character.HumanoidRootPart)
+                        task.wait(0.1)
+                    end
+                end
+            end
+        end
+        task.spawn(function()
+            while true do
+                clearAllTools()
+                getAssault()
+                repeat
+                    task.wait(0.2)
+                until hasAssault()
+                fireAtAllPlayers(3)
+                task.wait(1)
+            end
+        end)
     end
 })
 
@@ -481,5 +554,4 @@ end
 -- PROTECTION
 -- ==============================
 
-
-
+ProtectionTab:Section({Title = "Protection", Icon = "shield"})
