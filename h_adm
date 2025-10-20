@@ -579,6 +579,194 @@ AdminTab:Button({
 })
 
 AdminTab:Button({
+    Title = "Admin Sword (Tool)",
+	Callback = function()
+local toolName = "Kill Couch"
+local toolEquipped = false
+local aimName = nil
+local loopTP = nil
+local couchEquipped = false
+local base = nil
+local posStart = nil
+local posEnd = nil
+
+-- Add Tool
+local pInv = LocalPlayer:WaitForChild("Backpack")
+if not pInv:FindFirstChild(toolName) then
+	local tool = Instance.new("Tool")
+	tool.Name = toolName
+	tool.RequiresHandle = false
+	tool.CanBeDropped = false
+
+	tool.Equipped:Connect(function()
+		toolEquipped = true
+	end)
+
+	tool.Unequipped:Connect(function()
+		toolEquipped = false
+		aimName = nil
+		quitCouch()
+	end)
+
+	tool.Parent = pInv
+end
+
+-- Quit Couch
+function quitCouch()
+	if loopTP then
+		loopTP:Disconnect()
+		loopTP = nil
+	end
+
+	if couchEquipped then
+		local phole = LocalPlayer.Character
+		if phole then
+			local couch = phole:FindFirstChild("Couch")
+			if couch then
+				couch.Parent = LocalPlayer.Backpack
+				couchEquipped = false
+			end
+		end
+	end
+
+	if base then
+		base:Destroy()
+		base = nil
+	end
+
+	if getgenv().AntiSit then
+		getgenv().AntiSit:Set(false)
+	end
+
+	local phum = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+	if phum then
+		phum:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
+		phum:ChangeState(Enum.HumanoidStateType.GettingUp)
+	end
+
+	if posStart and posEnd then
+		posEnd.CFrame = posStart
+		posStart = nil
+	end
+end
+
+-- Get Couch
+function getCouch()
+	local phole = LocalPlayer.Character
+	if not phole then return end
+	local pInv = LocalPlayer.Backpack
+
+	if not pInv:FindFirstChild("Couch") and not phole:FindFirstChild("Couch") then
+		local args = { "PickingTools", "Couch" }
+		ReplicatedStorage.RE["1Too1l"]:InvokeServer(unpack(args))
+		task.wait(0.1)
+	end
+
+	local couch = pInv:FindFirstChild("Couch") or phole:FindFirstChild("Couch")
+	if couch then
+		couch.Parent = phole
+		couchEquipped = true
+	end
+end
+
+-- Kill Position
+function posKill(phole)
+	local rp = phole:FindFirstChild("HumanoidRootPart")
+	if not rp then return Vector3.new() end
+	local offset = Vector3.new(math.random(-2, 2), -5.1, math.random(-2, 2))
+	return rp.Position + offset
+end
+
+-- TP Kill Position
+function tpPos(aim)
+	if not aim or not aim.Character or not aim.Character:FindFirstChild("HumanoidRootPart") then return end
+
+	local mhole = LocalPlayer.Character
+	local hEnd = mhole and mhole:FindFirstChild("HumanoidRootPart")
+	local phum = mhole and mhole:FindFirstChildOfClass("Humanoid")
+
+	if not hEnd or not phum then return end
+
+	phum:SetStateEnabled(Enum.HumanoidStateType.Physics, false)
+
+	if not base then
+		base = Instance.new("Part")
+		base.Size = Vector3.new(10, 1, 10)
+		base.Anchored = true
+		base.CanCollide = true
+		base.Transparency = 0.5
+		base.Parent = Workspace
+    end
+    
+    -- Destiny
+	local des = posKill(aim.Character)
+	base.Position = des
+	hEnd.CFrame = CFrame.new(des)
+
+	phum:SetStateEnabled(Enum.HumanoidStateType.Physics, true)
+end
+
+-- Throw With Couch
+function throwCouch(aim)
+	if not aim then return end
+	aimName = aim.Name
+	local phole = LocalPlayer.Character
+	if not phole then return end
+
+	posStart = phole:FindFirstChild("HumanoidRootPart") and phole.HumanoidRootPart.CFrame
+	posEnd = phole:FindFirstChild("HumanoidRootPart")
+	getCouch()
+
+	loopTP = RunService.Heartbeat:Connect(function()
+		local cAim = Players:FindFirstChild(aimName)
+		if not cAim or not cAim.Character or not cAim.Character:FindFirstChild("Humanoid") then
+			quitCouch()
+			return
+		end
+		if getgenv().AntiSit then
+			getgenv().AntiSit:Set(true)
+		end
+		tpPos(cAim)
+	end)
+
+	task.spawn(function()
+		local cAim = Players:FindFirstChild(aimName)
+		while cAim and cAim.Character and cAim.Character:FindFirstChild("Humanoid") do
+			task.wait(0.05)
+			if cAim.Character.Humanoid.SeatPart then
+				local hole = CFrame.new(265.46, -450.83, -59.93)
+				cAim.Character.HumanoidRootPart.CFrame = hole
+				LocalPlayer.Character.HumanoidRootPart.CFrame = hole
+				task.wait(0.4)
+				quitCouch()
+				task.wait(0.2)
+				if posStart then
+					LocalPlayer.Character.HumanoidRootPart.CFrame = posStart
+				end
+				break
+			end
+		end
+	end)
+end
+
+-- Process Position
+game:GetService("UserInputService").TouchTap:Connect(function(position, processed)
+	if not toolEquipped or processed then return end
+	local pos = position[1]
+	local point = Workspace.CurrentCamera:ScreenPointToRay(pos.X, pos.Y)
+	local hit = Workspace:Raycast(point.Origin, point.Direction * 1000)
+	if hit and hit.Instance then
+		local model = hit.Instance:FindFirstAncestorOfClass("Model")
+		local plr = Players:GetPlayerFromCharacter(model)
+		if plr and plr ~= LocalPlayer then
+			throwCouch(plr)
+		end
+	end
+end)
+    end
+})
+
+AdminTab:Button({
     Title = "Destroy Server",
 	Callback = function()   
         local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
@@ -678,6 +866,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
