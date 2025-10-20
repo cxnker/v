@@ -1,4 +1,4 @@
-local Players, RunService, ReplicatedStorage, StarterGui = game:GetService("Players"), game:GetService("RunService"), game:GetService("ReplicatedStorage"), game:GetService("StarterGui")
+local Players, RunService, ReplicatedStorage, StarterGui, UIS = game:GetService("Players"), game:GetService("RunService"), game:GetService("ReplicatedStorage"), game:GetService("StarterGui"), game:GetService("UserInputService")
 local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
@@ -750,7 +750,7 @@ function throwCouch(aim)
 end
 
 -- Process Position
-game:GetService("UserInputService").TouchTap:Connect(function(position, processed)
+UIS.TouchTap:Connect(function(position, processed)
 	if not toolEquipped or processed then return end
 	local pos = position[1]
 	local point = Workspace.CurrentCamera:ScreenPointToRay(pos.X, pos.Y)
@@ -866,6 +866,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
