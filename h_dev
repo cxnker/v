@@ -30,14 +30,19 @@ bgCorner.Parent = Background
 
 -- Top Text
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(0, 100, 0, 25)
-Title.Position = UDim2.new(0.5, -50, 0.65, 0)
+Title.Size = UDim2.new(0, 125, 0, 25)
+Title.Position = UDim2.new(0.5, -65, 0.65, 0)
 Title.BackgroundTransparency = 1
 Title.Text = "Victory Hub 🌠 "
 Title.TextColor3 = Color3.fromRGB(180,180,180) -- Color
 Title.Font = Enum.Font.GothamBold
 Title.TextScaled = true
 Title.Parent = ScreenGui
+
+-- Top Text Stroke
+local TitleStroke = Instance.new("UIStroke")
+TitleStroke.Color = Color3.fromRGB(0,128,255)
+TitleStroke.Parent = Title
 
 -- Background Loading Bar
 local BarBackground = Instance.new("Frame")
@@ -69,7 +74,7 @@ progressCorner.Parent = ProgressBar
 local bgGradient = Instance.new("UIGradient")
 bgGradient.Color = ColorSequence.new({
 		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 128, 255)),
 		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 128, 255))
 	})
 bgGradient.Parent = ProgressBar
@@ -84,6 +89,11 @@ PercentText.Font = Enum.Font.GothamBold
 PercentText.TextScaled = true
 PercentText.Text = "0%"
 PercentText.Parent = BarBackground
+
+-- Text % Stroke
+local PercentStroke = Instance.new("UIStroke")
+PercentStroke.Color = Color3.fromRGB(0,128,255)
+PercentStroke.Parent = PercentText
 
 -- Loading Animation
 local totalTime = 19 -- Seconds
