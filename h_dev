@@ -28,14 +28,6 @@ local bgCorner = Instance.new("UICorner")
 bgCorner.CornerRadius = UDim.new(0.02,0)
 bgCorner.Parent = Background
 
-local bgGradient = Instance.new("UIGradient")
-bgGradient.Color = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 0)),
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 128, 255))
-	})
-bgGradient.Parent = Background
-
 -- Top Text
 local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(0, 100, 0, 25)
@@ -72,6 +64,15 @@ ProgressBar.Parent = BarBackground
 local progressCorner = Instance.new("UICorner")
 progressCorner.CornerRadius = UDim.new(0.5,0)
 progressCorner.Parent = ProgressBar
+
+-- Progress Gradient
+local bgGradient = Instance.new("UIGradient")
+bgGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 128, 255))
+	})
+bgGradient.Parent = ProgressBar
 
 -- Text %
 local PercentText = Instance.new("TextLabel")
