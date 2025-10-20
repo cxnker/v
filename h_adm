@@ -108,37 +108,35 @@ local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 local PlayerValue
 local Target = nil
 
-local function GetPlayerNames()
-    local playerNames = {}
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player.Name ~= LocalPlayer.Name then
-            table.insert(playerNames, player.Name)
-        end
-    end
-    return playerNames
+local playerNames = {}
+for _, player in pairs(Players:GetPlayers()) do
+    table.insert(playerNames, player.Name)
 end
 
 local updateList = AvatarTab:Dropdown({
-    Title = "Update list",
-    Values = GetPlayerNames(),
+    Title = "Select Player",
+    Values = playerNames,
+    Value = playerNames[1],
     Callback = function(playername)
         PlayerValue = playername
         Target = playername
     end
 })
 
-local function updatePlayers()
-    updateList:Set(GetPlayerNames())
-end
+Players.PlayerAdded:Connect(function(player)
+    table.insert(playerNames, player.Name)
+    updateList:Refresh(playerNames)
+end)
 
-AvatarTab:Button({
-    Title = "Update list",
-    Callback = function()
-    updatePlayers()
-end})
-
-Players.PlayerAdded:Connect(updatePlayers)
-Players.PlayerRemoving:Connect(updatePlayers)
+Players.PlayerRemoving:Connect(function(player)
+    for i, name in pairs(playerNames) do
+        if name == player.Name then
+            table.remove(playerNames, i)
+            break
+        end
+    end
+    updateList:Refresh(playerNames)
+end)
 
 AvatarTab:Button({
     Title = "Copy avatar",
@@ -662,6 +660,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
