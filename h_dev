@@ -3,6 +3,103 @@ local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 local Humanoid, RootPart = Character:WaitForChild("Humanoid"), Character:WaitForChild("HumanoidRootPart")
 
+
+
+
+-- Create GUI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "Loading"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.IgnoreGuiInset = true -- Ignore others gui
+
+-- Background
+local Background = Instance.new("ImageLabel")
+Background.Size = UDim2.new(1,0,1,0) -- Cover Screen
+Background.Position = UDim2.new(0,0,0,0)
+Background.Image = "rbxassetid://"
+Background.ScaleType = Enum.ScaleType.Crop
+Background.BackgroundTransparency = 0
+Background.BackgroundColor3 = Color3.fromRGB(0,0,0)
+Background.Parent = ScreenGui
+
+-- Rounded Borders
+local bgCorner = Instance.new("UICorner")
+bgCorner.CornerRadius = UDim.new(0.02,0)
+bgCorner.Parent = Background
+
+local bgGradient = Instance.new("UIGradient")
+bgGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 0)),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 128, 255))
+	})
+bgGradient.Parent = Background
+
+-- Top Text
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(0, 300, 0, 50)
+Title.Position = UDim2.new(0.5, -150, 0.2, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "Victory Hub 🌠 "
+Title.TextColor3 = Color3.fromRGB(180,180,180) -- Color
+Title.Font = Enum.Font.GothamBold
+Title.TextScaled = true
+Title.Parent = ScreenGui
+
+-- Background Loading Bar
+local BarBackground = Instance.new("Frame")
+BarBackground.Size = UDim2.new(0, 400, 0, 30)
+BarBackground.Position = UDim2.new(0.5, -200, 0.5, 0)
+BarBackground.BackgroundColor3 = Color3.fromRGB(20,20,20)
+BarBackground.BorderSizePixel = 0
+BarBackground.Parent = ScreenGui
+BarBackground.ClipsDescendants = true
+
+-- Background Rounded Borders
+local barBgCorner = Instance.new("UICorner")
+barBgCorner.CornerRadius = UDim.new(0.5,0)
+barBgCorner.Parent = BarBackground
+
+-- Progress Bar
+local ProgressBar = Instance.new("Frame")
+ProgressBar.Size = UDim2.new(0,0,1,0)
+ProgressBar.BackgroundColor3 = Color3.fromRGB(0,128,255)
+ProgressBar.BorderSizePixel = 0
+ProgressBar.Parent = BarBackground
+
+-- Progress Rounded Borders
+local progressCorner = Instance.new("UICorner")
+progressCorner.CornerRadius = UDim.new(0.5,0)
+progressCorner.Parent = ProgressBar
+
+-- Text %
+local PercentText = Instance.new("TextLabel")
+PercentText.Size = UDim2.new(1,0,1,0)
+PercentText.Position = UDim2.new(0,0,0,0)
+PercentText.BackgroundTransparency = 1
+PercentText.TextColor3 = Color3.fromRGB(180,180,180)
+PercentText.Font = Enum.Font.GothamBold
+PercentText.TextScaled = true
+PercentText.Text = "0%"
+PercentText.Parent = BarBackground
+
+-- Loading Animation
+local totalTime = 9999 -- Seconds
+local steps = 100
+local delayPerStep = totalTime / steps
+
+for i = 1, steps do
+    ProgressBar.Size = UDim2.new(i/steps,0,1,0)
+    PercentText.Text = i .. "%"
+    wait(delayPerStep)
+end
+-- Delete GUI in the end
+ScreenGui:Destroy()
+
+
+
+
 local Lib = loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/l"))()
 local Window = Lib:MakeWindow({
     Title = "Hexagon Hub 🃏 | Brookhaven 🏡RP",
