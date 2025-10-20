@@ -105,7 +105,7 @@ AvatarTab:Section({Title = "Copy Avatar", Icon = "tag"})
 local PlayerValue
 local Target = nil
 
-local function GetPlayerNames()
+local function getPlayerNames()
     local playerNames = {}
     for _, player in ipairs(Players:GetPlayers()) do
         if player.Name ~= LocalPlayer.Name then
@@ -117,7 +117,7 @@ end
 
 local updateList = AvatarTab:Dropdown({
     Title = "Select Player",
-    Values = GetPlayerNames(),
+    Values = getPlayerNames(),
     Callback = function(playername)
         PlayerValue = playername
         Target = playername
@@ -125,7 +125,7 @@ local updateList = AvatarTab:Dropdown({
 })
 
 local function updatePlayers()
-    updateList:Refresh(GetPlayerNames())
+    updateList:Refresh(getPlayerNames())
 end
 
 AvatarTab:Button({
@@ -678,6 +678,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
