@@ -271,7 +271,7 @@ AvatarTab:Button({
 AvatarTab:Section({Title = "Character Editor", Icon = "tag"})
 
 AvatarTab:Button({
-    Title = "(Mini-Plushie) and Headless",
+    Title = "(Mini Plushie) and Headless",
     Desc = "TYPE: Body",
     Locked = false,
     Callback = function()
@@ -372,9 +372,42 @@ TrollTab:Button({
 ScriptsTab:Section({Title = "Scripts", Icon = "scroll"})
 
 ScriptsTab:Button({
-    Title = "Fly Gui V3 (Universal)",
+    Title = "Fly Gui V3",
+	Desc = "UNIVERSAL",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "VFly Gui",
+	Desc = "UNIVERSAL",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "VFly Gui",
+	Desc = "UNIVERSAL",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "FPS Booster",
+	Desc = "UNIVERSAL",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/boostfps"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "RTX Shaders",
+	Desc = "GAME: Brookhaven 🏡RP",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/shaders"))()
 	end
 })
 
@@ -653,6 +686,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
