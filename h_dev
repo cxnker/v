@@ -38,8 +38,8 @@ bgGradient.Parent = Background
 
 -- Top Text
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(0, 300, 0, 50)
-Title.Position = UDim2.new(0.5, -150, 0.2, 0)
+Title.Size = UDim2.new(0, 100, 0, 25)
+Title.Position = UDim2.new(0.5, -50, 0.65, 0)
 Title.BackgroundTransparency = 1
 Title.Text = "Victory Hub 🌠 "
 Title.TextColor3 = Color3.fromRGB(180,180,180) -- Color
@@ -50,7 +50,7 @@ Title.Parent = ScreenGui
 -- Background Loading Bar
 local BarBackground = Instance.new("Frame")
 BarBackground.Size = UDim2.new(0, 400, 0, 30)
-BarBackground.Position = UDim2.new(0.5, -200, 0.5, 0)
+BarBackground.Position = UDim2.new(0.5, -200, 0.75, 0)
 BarBackground.BackgroundColor3 = Color3.fromRGB(20,20,20)
 BarBackground.BorderSizePixel = 0
 BarBackground.Parent = ScreenGui
