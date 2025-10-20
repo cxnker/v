@@ -71,11 +71,6 @@ local AdminTab = Window:Tab({
     Icon = "crown",
     Locked = false,
 })
-local VipTab = Window:Tab({
-    Title = "VIP",
-    Icon = "sparkles",
-    Locked = false,
-})
 local TeleportTab = Window:Tab({
     Title = "Teleport",
     Icon = "pin",
@@ -105,6 +100,8 @@ PlayerTab:Section({Title = "Player", Icon = "user"})
 local Remotes = ReplicatedStorage.Remotes
 local Wear, ChangeCharacterBody = Remotes.Wear, Remotes.ChangeCharacterBody
 
+AvatarTab:Section({Title = "Copy Avatar", Icon = "tag"})
+
 local PlayerValue
 local Target = nil
 
@@ -119,7 +116,7 @@ local function GetPlayerNames()
 end
 
 local updateList = AvatarTab:Dropdown({
-    Title = "Update list",
+    Title = "Select Player",
     Values = GetPlayerNames(),
     Callback = function(playername)
         PlayerValue = playername
@@ -132,7 +129,7 @@ local function updatePlayers()
 end
 
 AvatarTab:Button({
-    Title = "Update list",
+    Title = "Update List",
     Callback = function()
     updatePlayers()
 end})
@@ -141,7 +138,7 @@ Players.PlayerAdded:Connect(updatePlayers)
 Players.PlayerRemoving:Connect(updatePlayers)
 
 AvatarTab:Button({
-    Title = "Copy avatar",
+    Title = "Copy Avatar",
     Callback = function()
         if not Target then return end
 
@@ -628,12 +625,6 @@ AdminTab:Button({
 })
 
 -- ==============================
--- VIP
--- ==============================
-
-VipTab:Section({Title = "VIP", Icon = "sparkles"})
-
--- ==============================
 -- TELEPORTS
 -- ==============================
 
@@ -662,6 +653,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
