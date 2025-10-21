@@ -225,7 +225,7 @@ end
 
 AvatarTab:Button({
     Title = "Black Arm Bandages 1.0",
-    Desc = "TYPE: Shirt",
+    Desc = "TYPE: Shirt 👕",
     Locked = false,
     Callback = function()
         equipClothes(11458078735, "Black-Arm-Bandages-1-0")
@@ -234,7 +234,7 @@ AvatarTab:Button({
 
 AvatarTab:Button({
     Title = "Black Oversized Warmers",
-    Desc = "TYPE: Sweater",
+    Desc = "TYPE: Sweater 👕",
     Locked = false,
     Callback = function()
         equipClothes(10789914680, "Black-Oversized-Warmers")
@@ -243,7 +243,7 @@ AvatarTab:Button({
 
 AvatarTab:Button({
     Title = "Black Oversized Off Shoulder Hoodie",
-    Desc = "TYPE: Sweater",
+    Desc = "TYPE: Sweater 👕",
     Locked = false,
     Callback = function()
         equipClothes(18396592827, "Black-Oversized-Off-Shoulder-Hoodie")
@@ -252,7 +252,7 @@ AvatarTab:Button({
 
 AvatarTab:Button({
     Title = "White Oversized Off Shoulder Hoodie",
-    Desc = "TYPE: Sweater",
+    Desc = "TYPE: Sweater 👕",
     Locked = false,
     Callback = function()
         equipClothes(18396754379, "White-Oversized-Off-Shoulder-Hoodie")
@@ -261,7 +261,7 @@ AvatarTab:Button({
 
 AvatarTab:Button({
     Title = "Left Leg Spikes",
-    Desc = "TYPE: Pants",
+    Desc = "TYPE: Pants 👖",
     Locked = false,
     Callback = function()
         equipClothes(10814325667, "Left-Leg-Spikes")
@@ -272,7 +272,7 @@ AvatarTab:Section({Title = "Character Editor", Icon = "tag"})
 
 AvatarTab:Button({
     Title = "(Mini Plushie) and Headless",
-    Desc = "TYPE: Body",
+    Desc = "TYPE: Body ✏️",
     Locked = false,
     Callback = function()
 	ChangeCharacterBody:InvokeServer({
@@ -367,14 +367,14 @@ TrollTab:Button({
 
 TrollTab:Button({
     Title = "Bring Parts",
-	Desc = "GAME: Universal Script 📌",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/bringparts"))()
 	end
 })
 
 TrollTab:Button({
-    Title = "[M] Jerk Off R6/R15",
+    Title = "[M] Jerk Off R6/R15, TYPE: Tool",
 	Desc = "GAME: Universal Script 📌",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/jerk"))()
@@ -389,7 +389,7 @@ ScriptsTab:Section({Title = "Scripts", Icon = "scroll"})
 
 ScriptsTab:Button({
     Title = "Shaders RTX",
-	Desc = "GAME: Brookhaven 🏡RP",
+	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/shaders"))()
 	end
@@ -397,7 +397,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "FPS Booster",
-	Desc = "GAME: Universal Script 📌",
+	Desc = "GAME: Universal Script 📌, TYPE: Script",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/boostfps"))()
 	end
@@ -405,7 +405,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "Fly Gui V3",
-	Desc = "GAME: Universal Script 📌",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
 	end
@@ -413,7 +413,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "VFly Gui",
-	Desc = "GAME: Universal Script 📌",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
 	end
@@ -421,7 +421,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "Telekinesis",
-	Desc = "GAME: Universal Script 📌",
+	Desc = "GAME: Universal Script 📌, TYPE: Tool",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/telekinesis"))()
 	end
@@ -1010,6 +1010,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
