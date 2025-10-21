@@ -606,6 +606,7 @@ if not pInv:FindFirstChild(toolName) then
     decal.Parent = handle
 
     tool.Equipped:Connect(function()
+		newNotification("✅ Fling Ball enable", "Added tool, Click on a player to fling")
         toolEquipped = true
     end)
 
@@ -985,6 +986,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
