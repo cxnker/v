@@ -429,6 +429,30 @@ ScriptsTab:Button({
 	end
 })
 
+ScriptsTab:Button({
+    Title = "AFEM Max",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
+    Callback = function()
+	loadstring(game:HttpGet("https://yarhm.mhi.im/scr?channel=afemmax"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "Silly Emotes V5",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
+    Callback = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Gazer-Ha/Gaze-stuff/refs/heads/main/Silly%20emote"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "7yd7 Emotes",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
+    Callback = function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua"))()
+	end
+})
+
 -- ==============================
 -- ADMIN
 -- ==============================
@@ -1013,6 +1037,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
