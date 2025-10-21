@@ -286,6 +286,32 @@ AvatarTab:Button({
 	end
 })
 
+AvatarTab:Section({Title = "Advanced Character Editor", Icon = "tag"})
+
+AvatarTab:Section({Title = "Character Animation", Icon = "tag"})
+
+AvatarTab:Button({
+    Title = "adidas-Sports-Animation-Pack",
+    Desc = "TYPE: Animation ✏️",
+    Locked = false,
+    Callback = function()
+	Wear:InvokeServer(18538170170)
+	task.wait(0.3)
+	Wear:InvokeServer(18538164337)
+	task.wait(0.3)
+	Wear:InvokeServer(18538150608)
+	task.wait(0.3)
+	Wear:InvokeServer(18538153691)
+	task.wait(0.3)
+	Wear:InvokeServer(18538133604)
+	task.wait(0.3)
+	Wear:InvokeServer(18538158932)
+	task.wait(0.3)
+	Wear:InvokeServer(18538146480)
+	task.wait(0.3)
+	end
+})
+
 -- ==============================
 -- PROFILE
 -- ==============================
@@ -1043,6 +1069,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
