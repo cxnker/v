@@ -579,8 +579,6 @@ AdminTab:Button({
     end
 })
 
-
-
 AdminTab:Button({
     Title = "Kill Couch",
     Desc = "TYPE: Tool",
@@ -872,25 +870,3 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
