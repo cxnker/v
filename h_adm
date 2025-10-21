@@ -365,6 +365,22 @@ TrollTab:Button({
     end
 })
 
+TrollTab:Button({
+    Title = "Bring Parts",
+	Desc = "GAME: Universal Script 📌",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/bringparts"))()
+	end
+})
+
+TrollTab:Button({
+    Title = "[M] Jerk Off R6/R15",
+	Desc = "GAME: Universal Script 📌",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/jerk"))()
+	end
+})
+
 -- ==============================
 -- SCRIPTS
 -- ==============================
@@ -372,15 +388,7 @@ TrollTab:Button({
 ScriptsTab:Section({Title = "Scripts", Icon = "scroll"})
 
 ScriptsTab:Button({
-    Title = "FPS Booster",
-	Desc = "GAME: Universal",
-    Callback = function()
-        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/boostfps"))()
-	end
-})
-
-ScriptsTab:Button({
-    Title = "RTX Shaders",
+    Title = "Shaders RTX",
 	Desc = "GAME: Brookhaven 🏡RP",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/shaders"))()
@@ -388,8 +396,16 @@ ScriptsTab:Button({
 })
 
 ScriptsTab:Button({
+    Title = "FPS Booster",
+	Desc = "GAME: Universal Script 📌",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/boostfps"))()
+	end
+})
+
+ScriptsTab:Button({
     Title = "Fly Gui V3",
-	Desc = "GAME: Universal",
+	Desc = "GAME: Universal Script 📌",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
 	end
@@ -397,9 +413,17 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "VFly Gui",
-	Desc = "GAME: Universal",
+	Desc = "GAME: Universal Script 📌",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
+	end
+})
+
+ScriptsTab:Button({
+    Title = "Telekinesis",
+	Desc = "GAME: Universal Script 📌",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/telekinesis"))()
 	end
 })
 
@@ -986,6 +1010,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
