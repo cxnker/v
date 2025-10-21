@@ -486,6 +486,86 @@ task.wait(0.3)
 	end
 })
 
+Tab3:AddButton({
+    Name = "(adidas-Sports-Animation-Pack) Animation",
+    Callback = function()
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18538170170)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18538164337)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18538150608)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18538153691)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18538133604)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18538158932)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18538146480)
+task.wait(0.3)
+	end
+})
+
+Tab3:AddButton({
+    Name = "(Catwalk-Glam-Animation-Pack-by-e.l.f.) Animation",
+    Callback = function()
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(104741822987331)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(72706690305027)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(101279640971758)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(138641066989023)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(75036746190467)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(112231179705221)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(103190462987721)
+task.wait(0.3)
+	end
+})
+
+Tab3:AddButton({
+    Name = "(Bold-Animation-Pack-by-e.l.f.) Animation",
+    Callback = function()
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744204409)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744207822)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744209868)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744212581)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744214662)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744217055)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744219182)
+task.wait(0.3)
+	end
+})
+
+Tab3:AddButton({
+    Name = "(No-Boundaries-Animation-Pack-by-Walmart) Animation",
+    Callback = function()
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755919175)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755922352)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755930927)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755925411)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755933883)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755938274)
+task.wait(0.3)
+	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755942776)
+task.wait(0.3)
+	end
+})
+
 Tab3:AddSection({"》 Custom Body Parts (Experimental)"})
 Tab3:AddParagraph({"Enter the ID of the item you want to use"})
 
@@ -1659,6 +1739,12 @@ Tab7:AddButton({
     Name = "AFEM Emotes/Animations",
     Callback = function()
 		loadstring(game:HttpGet("https://yarhm.mhi.im/scr?channel=afemmax"))()
+	end
+})
+Tab7:AddButton({
+    Name = "7yd7 Emotes/Animations",
+    Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua"))()
 	end
 })
 --------------------------------------------------
