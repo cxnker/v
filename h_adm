@@ -395,7 +395,7 @@ TrollTab:Section({Title = "Admin Tools", Icon = "ghost"})
 
 TrollTab:Button({
     Title = "Admin Sword",
-    Desc = "GAME: Brookhaven 🏡RP, TYPE: Player, T 🛠️",
+    Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
 	Callback = function()        
         local buggedPlayers = {}
         local bugConnections = {}
@@ -565,7 +565,7 @@ TrollTab:Button({
 
 TrollTab:Button({
     Title = "Fling Ball",
-    Desc = "GAME: Brookhaven 🏡RP, TYPE: Player, T 🛠️",
+    Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
     Callback = function()
 local toolName = "Fling Ball"
 local toolEquipped = false
@@ -681,7 +681,7 @@ end)
 
 TrollTab:Button({
     Title = "Kill Couch",
-    Desc = "GAME: Brookhaven 🏡RP, TYPE: Player, T 🛠️",
+    Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
 	Callback = function()
 local toolName = "Kill Couch"
 local toolEquipped = false
@@ -871,7 +871,7 @@ end)
 
 TrollTab:Button({
     Title = "Destroy Server",
-	Desc = "GAME: Brookhaven 🏡RP, TYPE: Game, S 📄",
+	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
 	Callback = function()   
         local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
         local ToolEvent = RE:FindFirstChild("1Too1l")
@@ -968,7 +968,7 @@ ScriptsTab:Section({Title = "Graphics", Icon = "scroll"})
 
 ScriptsTab:Button({
     Title = "Shaders RTX",
-	Desc = "GAME: Brookhaven 🏡RP, TYPE: Game, S 📄",
+	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/shaders"))()
 	end
@@ -976,7 +976,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "FPS Booster",
-	Desc = "GAME: Universal Script 📌, TYPE: Game, S 📄",
+	Desc = "GAME: Universal Script 📌, TYPE: Script 📄",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/boostfps"))()
 	end
@@ -986,7 +986,7 @@ ScriptsTab:Section({Title = "Player", Icon = "scroll"})
 
 ScriptsTab:Button({
     Title = "Fly Gui V3",
-	Desc = "GAME: Universal Script 📌, TYPE: Player, I 🖥️",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/nxvap/source/raw/main/fly"))()
 	end
@@ -994,7 +994,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "VFly Gui",
-	Desc = "GAME: Universal Script 📌, TYPE: Player, I 🖥️",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/vfly"))()
 	end
@@ -1002,7 +1002,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "Telekinesis",
-	Desc = "GAME: Universal Script 📌, TYPE: Player, T 🛠️",
+	Desc = "GAME: Universal Script 📌, TYPE: Tool 🛠️",
     Callback = function()
         loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/telekinesis"))()
 	end
@@ -1012,7 +1012,7 @@ ScriptsTab:Section({Title = "Animation", Icon = "scroll"})
 
 ScriptsTab:Button({
     Title = "AFEM Max",
-	Desc = "GAME: Universal Script 📌, TYPE: Animation, I 🖥️",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
     Callback = function()
 	loadstring(game:HttpGet("https://yarhm.mhi.im/scr?channel=afemmax"))()
 	end
@@ -1020,7 +1020,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "Silly Emotes V5",
-	Desc = "GAME: Universal Script 📌, TYPE: Animation, I 🖥️",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
     Callback = function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/Gazer-Ha/Gaze-stuff/refs/heads/main/Silly%20emote"))()
 	end
@@ -1028,7 +1028,7 @@ ScriptsTab:Button({
 
 ScriptsTab:Button({
     Title = "7yd7 Emotes",
-	Desc = "GAME: Universal Script 📌, TYPE: Animation, I 🖥️",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
     Callback = function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua"))()
 	end
@@ -1069,14 +1069,3 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
-
-
-
-
-
-
-
-
-
-
-
