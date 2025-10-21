@@ -588,38 +588,32 @@ local toolEquipped = false
 
 local pInv = LocalPlayer:WaitForChild("Backpack")
 
-for _, toolExisting in pairs(pInv:GetChildren()) do
-    if toolExisting:IsA("Tool") and toolExisting.Name:lower():find("fling") then
-        toolExisting.Name = "Admin Fling"
-    end
-end
-
 if not pInv:FindFirstChild(toolName) then
-    local ferramenta = Instance.new("Tool")
-    ferramenta.Name = toolName
-    ferramenta.RequiresHandle = true
-    ferramenta.CanBeDropped = false
+    local tool = Instance.new("Tool")
+    tool.Name = toolName
+    tool.RequiresHandle = true
+    tool.CanBeDropped = false
 
     local handle = Instance.new("Part")
     handle.Name = "Handle"
     handle.Size = Vector3.new(1, 1, 1)
     handle.Transparency = 1
-    handle.Parent = ferramenta
+    handle.Parent = tool
 
     local decal = Instance.new("Decal")
     decal.Texture = "rbxassetid://775552544"
     decal.Face = Enum.NormalId.Front
     decal.Parent = handle
 
-    ferramenta.Equipped:Connect(function()
+    tool.Equipped:Connect(function()
         toolEquipped = true
     end)
 
-    ferramenta.Unequipped:Connect(function()
+    tool.Unequipped:Connect(function()
         toolEquipped = false
     end)
 
-    ferramenta.Parent = pInv
+    tool.Parent = pInv
 end
 
 local function FlingBall(target)
@@ -684,16 +678,16 @@ local function FlingBall(target)
     end
 end
 
-UIS.TouchTap:Connect(function(toques, processado)
-    if not toolEquipped or processado then return end
-    local pos = toques[1]
-    local raio = Workspace.CurrentCamera:ScreenPointToRay(pos.X, pos.Y)
-    local hit = Workspace:Raycast(raio.Origin, raio.Direction * 1000)
+UIS.TouchTap:Connect(function(position, processed)
+    if not toolEquipped or processed then return end
+    local pos = position[1]
+    local point = Workspace.CurrentCamera:ScreenPointToRay(pos.X, pos.Y)
+    local hit = Workspace:Raycast(point.Origin, point.Direction * 1000)
     if hit and hit.Instance then
-        local modelo = hit.Instance:FindFirstAncestorOfClass("Model")
-        local jogador = Players:GetPlayerFromCharacter(modelo)
-        if jogador and jogador ~= LocalPlayer then
-            FlingBall(jogador)
+        local model = hit.Instance:FindFirstAncestorOfClass("Model")
+        local plr = Players:GetPlayerFromCharacter(model)
+        if plr and plr ~= LocalPlayer then
+            FlingBall(plr)
         end
     end
 end)
@@ -991,5 +985,6 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
