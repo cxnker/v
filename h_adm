@@ -93,6 +93,36 @@ InfoTab:Section({Title = "Info", Icon = "info"})
 
 PlayerTab:Section({Title = "Player", Icon = "user"})
 
+PlayerTab:Slider({
+    Title = "Gravity",
+	Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = 196,
+    },
+    Callback = function(Value)
+        Workspace.Gravity = Value
+    end
+})
+ 
+local infJumpEnabled = false
+UIS.JumpRequest:Connect(function()
+	if infJumpEnabled then
+      if Character and Character:FindFirstChild("Humanoid") then
+		Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+      end
+   end
+end)
+
+PlayerTab:Toggle({
+	Title = "Infinite Jump",
+    Default = false,
+    Callback = function(Value)
+       infJumpEnabled = Value
+    end
+})
+
 -- ==============================
 -- AVATAR
 -- ==============================
@@ -1069,3 +1099,4 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
