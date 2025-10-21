@@ -365,6 +365,8 @@ TrollTab:Button({
     end
 })
 
+TrollTab:Section({Title = "Troll Scripts", Icon = "ghost"})
+
 TrollTab:Button({
     Title = "Bring Parts",
 	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
@@ -435,7 +437,7 @@ AdminTab:Section({Title = "Admin", Icon = "crown"})
 
 AdminTab:Button({
     Title = "Admin Sword",
-    Desc = "TYPE: Tool",
+    Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
 	Callback = function()        
         local buggedPlayers = {}
         local bugConnections = {}
@@ -605,7 +607,7 @@ AdminTab:Button({
 
 AdminTab:Button({
     Title = "Fling Ball",
-    Desc = "TYPE: Tool",
+    Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
     Callback = function()
 local toolName = "Fling Ball"
 local toolEquipped = false
@@ -721,7 +723,7 @@ end)
 
 AdminTab:Button({
     Title = "Kill Couch",
-    Desc = "TYPE: Tool",
+    Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
 	Callback = function()
 local toolName = "Kill Couch"
 local toolEquipped = false
@@ -911,6 +913,7 @@ end)
 
 AdminTab:Button({
     Title = "Destroy Server",
+	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
 	Callback = function()   
         local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
         local ToolEvent = RE:FindFirstChild("1Too1l")
@@ -1010,6 +1013,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
