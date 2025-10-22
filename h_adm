@@ -1071,7 +1071,6 @@ TrollTab:Button({
     Title = "Destroy Server",
 	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
     Color = Color3.fromHex("#000000"),
-	Transparency = 0.5
     Icon = "rbxassetid://10709791437",
 	Callback = function()   
         local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
@@ -1140,6 +1139,7 @@ TrollTab:Button({
             end
         end)
 		newNotification("✅ Success", "Server successfully destroyed")
+		Highlight()
     end
 })
 
@@ -1327,3 +1327,4 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
