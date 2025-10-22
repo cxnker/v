@@ -125,24 +125,21 @@ Tab2:AddToggle({
     Callback = function(state)
         if state then
             antiSitEnabled = RunService.Heartbeat:Connect(function()
-    		local player = game.Players.LocalPlayer
-    		local character = player.Character or player.CharacterAdded:Wait()
-    		local humanoid = character:FindFirstChildOfClass("Humanoid")
-                if humanoid then
-                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
-                    if humanoid:GetState() == Enum.HumanoidStateType.Seated then
-                        humanoid:ChangeState(Enum.HumanoidStateType.Running)
+                if Humanoid then
+                    Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+                    if Humanoid:GetState() == Enum.HumanoidStateType.Seated then
+                        Humanoid:ChangeState(Enum.HumanoidStateType.Running)
                     end
-                    if humanoid.SeatPart then
-                        humanoid.Sit = false
-                        humanoid.SeatPart = nil
+                    if Humanoid.SeatPart then
+                        Humanoid.Sit = false
+                        Humanoid.SeatPart = nil
                     end
                 end
             end)
         else
             if antiSitEnabled then antiSitEnabled:Disconnect() end
-            if humanoid then
-                humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+            if Humanoid then
+                Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
             end
         end
     end
