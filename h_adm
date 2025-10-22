@@ -183,8 +183,7 @@ local antiSitEnabled = false
 PlayerTab:Toggle({
 	Title = "Anti Sit",
     Default = false,
-    Callback = function(state)
-    	if state then
+    Callback = function(antiSitEnabled)
         	antiSitEnabled = RunService.Heartbeat:Connect(function()
     		local player = game.Players.LocalPlayer
 			local character = player.Character or player.CharacterAdded:Wait()
@@ -205,7 +204,6 @@ PlayerTab:Toggle({
             if humanoid then
                 humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
             end
-        end
     end
 })
 
@@ -1185,6 +1183,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
