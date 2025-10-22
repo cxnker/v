@@ -162,7 +162,7 @@ PlayerTab:Toggle({
     end
 })
 
-PlayerTab:Toggle({
+PlayerTab:Button({
 	Title = "Reset Values",
     Default = false,
     Callback = function()
@@ -175,6 +175,35 @@ PlayerTab:Toggle({
     end
     Workspace.Gravity = 196.2
     infJumpEnabled = false
+    end
+})
+
+PlayerTab:Toggle({
+	Title = "Anti Sit",
+    Default = false,
+    Callback = function(state)
+    	if state then
+        	antiSitEnabled = RunService.Heartbeat:Connect(function()
+    		local player = game.Players.LocalPlayer
+			local character = player.Character or player.CharacterAdded:Wait()
+    		local humanoid = character:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+                    if humanoid:GetState() == Enum.HumanoidStateType.Seated then
+                        humanoid:ChangeState(Enum.HumanoidStateType.Running)
+                    end
+                    if humanoid.SeatPart then
+                        humanoid.Sit = false
+                        humanoid.SeatPart = nil
+                    end
+                end
+            end)
+        else
+            if antiSitEnabled then antiSitEnabled:Disconnect() end
+            if humanoid then
+                humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+            end
+        end
     end
 })
 
@@ -1154,6 +1183,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
