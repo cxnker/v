@@ -178,33 +178,19 @@ PlayerTab:Button({
     end
 })
 
-local antiSitEnabled = false
+local noclip = false
 
 PlayerTab:Toggle({
-	Title = "Anti Sit",
+	Title = "Noclip",
     Default = false,
-    Callback = function(antiSitEnabled)
-        	antiSitEnabled = RunService.Heartbeat:Connect(function()
-    		local player = game.Players.LocalPlayer
-			local character = player.Character or player.CharacterAdded:Wait()
-    		local humanoid = character:FindFirstChildOfClass("Humanoid")
-                if humanoid then
-                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
-                    if humanoid:GetState() == Enum.HumanoidStateType.Seated then
-                        humanoid:ChangeState(Enum.HumanoidStateType.Running)
-                    end
-                    if humanoid.SeatPart then
-                        humanoid.Sit = false
-                        humanoid.SeatPart = nil
-                    end
-                end
-            end)
-        else
-            if antiSitEnabled then antiSitEnabled:Disconnect() end
-            if humanoid then
-                humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
-            end
-    end
+    Callback = function(state)
+	noclip = state
+	for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+		if part:IsA("BasePart") then
+			part.CanCollide = not state
+		end
+	end
+	end
 })
 
 -- ==============================
@@ -1183,6 +1169,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
