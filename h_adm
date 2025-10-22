@@ -209,64 +209,6 @@ ResetValuesTab = PlayerTab:Button({
     end
 })
 
-local antiSitConnection = nil
-local antiSitEnabled = false
-
-PlayerTab:Toggle({
-	Title = "Anti Sit",
-    Default = false,
-    Callback = function(state)
-        antiSitEnabled = state
-        local LocalPlayer = game:GetService("Players").LocalPlayer
-
-        if state then
-            local function applyAntiSit(character)
-                local humanoid = character:FindFirstChild("Humanoid")
-                if humanoid then
-                    humanoid.Sit = false
-                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
-                    if antiSitConnection then
-                        antiSitConnection:Disconnect()
-                    end
-                    antiSitConnection = humanoid.Seated:Connect(function(isSeated)
-                        if isSeated then
-                            humanoid.Sit = false
-                            humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
-                        end
-                    end)
-                end
-            end
-
-            if LocalPlayer.Character then
-                applyAntiSit(LocalPlayer.Character)
-            end
-
-            local characterAddedConnection
-            characterAddedConnection = LocalPlayer.CharacterAdded:Connect(function(character)
-                if not antiSitEnabled then
-                    characterAddedConnection:Disconnect()
-                    return
-                end
-                local humanoid = character:WaitForChild("Humanoid", 5)
-                if humanoid then
-                    applyAntiSit(character)
-                end
-            end)
-        else
-            if antiSitConnection then
-                antiSitConnection:Disconnect()
-                antiSitConnection = nil
-            end
-
-            if LocalPlayer.Character then
-                local humanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
-                if humanoid then
-                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
-                end
-            end
-        end
-    end
-})
 -- ==============================
 -- AVATAR
 -- ==============================
@@ -585,7 +527,8 @@ TrollTab:Button({
 
 TrollTab:Section({Title = "Admin Tools", Icon = "ghost"})
 
-TrollTab:Button({
+local AdminSwordHL
+AdminSwordHL = TrollTab:Button({
     Title = "Admin Sword",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
     Color = Color3.fromHex("#000000"),
@@ -754,10 +697,12 @@ TrollTab:Button({
         
         tool.Parent = LocalPlayer.Backpack
         newNotification("✅ Admin Sword enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
+AdminSwordHL:Highlight()
     end
 })
 
-TrollTab:Button({
+local FlingBallHL
+FlingBallHL = TrollTab:Button({
     Title = "Fling Ball",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
     Color = Color3.fromHex("#000000"),
@@ -872,10 +817,12 @@ UIS.TouchTap:Connect(function(position, processed)
         end
     end
 end)
+FlingBallHL:Highlight()
     end
 })
 
-TrollTab:Button({
+local KillCouchHL
+KillCouchHL = TrollTab:Button({
     Title = "Kill Couch",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
     Color = Color3.fromHex("#000000"),
@@ -1063,11 +1010,13 @@ UIS.TouchTap:Connect(function(position, processed)
 			throwCouch(plr)
 		end
 	end
+KillCouchHL:Highlight()
 end)
     end
 })
 
-TrollTab:Button({
+local DestroyServerHL
+DestroyServerHL = TrollTab:Button({
     Title = "Destroy Server",
 	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
     Color = Color3.fromHex("#000000"),
@@ -1139,7 +1088,7 @@ TrollTab:Button({
             end
         end)
 		newNotification("✅ Success", "Server successfully destroyed")
-		Highlight()
+		DestroyServerHL:Highlight()
     end
 })
 
@@ -1328,3 +1277,61 @@ end
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
 
+local antiSitConnection = nil
+local antiSitEnabled = false
+
+ProtectionTab:Toggle({
+	Title = "Anti Sit",
+    Default = false,
+    Callback = function(state)
+        antiSitEnabled = state
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+
+        if state then
+            local function applyAntiSit(character)
+                local humanoid = character:FindFirstChild("Humanoid")
+                if humanoid then
+                    humanoid.Sit = false
+                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+                    if antiSitConnection then
+                        antiSitConnection:Disconnect()
+                    end
+                    antiSitConnection = humanoid.Seated:Connect(function(isSeated)
+                        if isSeated then
+                            humanoid.Sit = false
+                            humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+                        end
+                    end)
+                end
+            end
+
+            if LocalPlayer.Character then
+                applyAntiSit(LocalPlayer.Character)
+            end
+
+            local characterAddedConnection
+            characterAddedConnection = LocalPlayer.CharacterAdded:Connect(function(character)
+                if not antiSitEnabled then
+                    characterAddedConnection:Disconnect()
+                    return
+                end
+                local humanoid = character:WaitForChild("Humanoid", 5)
+                if humanoid then
+                    applyAntiSit(character)
+                end
+            end)
+        else
+            if antiSitConnection then
+                antiSitConnection:Disconnect()
+                antiSitConnection = nil
+            end
+
+            if LocalPlayer.Character then
+                local humanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
+                if humanoid then
+                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+                end
+            end
+        end
+    end
+})
