@@ -85,7 +85,35 @@ local ProtectionTab = Window:Tab({
 -- INFO
 -- ==============================
 
-InfoTab:Section({Title = "Info", Icon = "info"})
+local AboutSection = InfoTab:Section({Title = "Info", Icon = "info"})
+
+    AboutSection:Image({
+        Image = "https://repository-images.githubusercontent.com/880118829/428bedb1-dcbd-43d5-bc7f-3beb2e9e0177",
+        AspectRatio = "16:9",
+        Radius = 9,
+    })
+    
+    AboutSection:Space({ Columns = 3 })
+    
+    AboutSection:Section({
+        Title = "What is WindUI?",
+        TextSize = 24,
+        FontWeight = Enum.FontWeight.SemiBold,
+    })
+
+    AboutSection:Space()
+    
+    AboutSection:Section({
+        Title = [[WindUI is a stylish, open-source UI (User Interface) library specifically designed for Roblox Script Hubs.
+Developed by Footagesus (.ftgs, Footages).
+It aims to provide developers with a modern, customizable, and easy-to-use toolkit for creating visually appealing interfaces within Roblox.
+The project is primarily written in Lua (Luau), the scripting language used in Roblox.]],
+        TextSize = 18,
+        TextTransparency = .35,
+        FontWeight = Enum.FontWeight.Medium,
+    })
+    
+    InfoTab:Space({ Columns = 4 }) 
 
 -- ==============================
 -- PLAYER
@@ -162,8 +190,10 @@ PlayerTab:Toggle({
     end
 })
 
-PlayerTab:Button({
+local HighlightPTab
+HighlightPTab = PlayerTab:Button({
 	Title = "Reset Values",
+    Icon = "mouse",
     Default = false,
     Callback = function()
     local player = game.Players.LocalPlayer
@@ -175,6 +205,7 @@ PlayerTab:Button({
     end
     Workspace.Gravity = 196.2
     infJumpEnabled = false
+    HighlightPTab:Highlight()
     end
 })
 
@@ -493,6 +524,7 @@ TrollTab:Section({Title = "House", Icon = "ghost"})
 
 TrollTab:Button({
     Title = "Unban all houses",
+    Color = Color3.fromHex("#305dff"),
     Callback = function()
         local successCount = 0
         local failCount = 0
@@ -1181,7 +1213,19 @@ ScriptsTab:Button({
 -- ADMIN
 -- ==============================
 
-AdminTab:Section({Title = "Admin (Coming Soon)", Icon = "crown"})
+AdminTab:Section({Title = "Admin (Staff Only)", Icon = "crown"})
+
+AdminTab:Button({
+    Title = "View",
+    Desc = "View player",
+    Locked = true,
+})
+
+AdminTab:Button({
+    Title = "Kick",
+    Desc = "Kick selected player",
+    Locked = true,
+})
 
 -- ==============================
 -- TELEPORTS
@@ -1215,5 +1259,6 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
