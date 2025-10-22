@@ -178,20 +178,32 @@ PlayerTab:Button({
     end
 })
 
-local noclip = false
-
 PlayerTab:Toggle({
 	Title = "Noclip",
     Default = false,
-    Callback = function(state)
-	noclip = state
-	for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-		if part:IsA("BasePart") then
-			part.CanCollide = not state
-		end
-	end
-	end
+    Callback = function(v)
+        noclipEnabled = v
+    end
 })
+
+RunService.Stepped:Connect(function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    if noclipEnabled and character then
+        for _, part in pairs(character:GetDescendants()) do
+            if part:IsA("BasePart") and part.CanCollide then
+                part.CanCollide = false
+            end
+        end
+	else
+		if noclipEnabled then noclipEnabled:Disconnect() end
+			for _, part in pairs(character:GetDescendants()) do
+				if part:IsA("BasePart") then
+					part.CanCollide = true
+				end
+			end
+		end
+	end)
 
 -- ==============================
 -- AVATAR
@@ -1169,6 +1181,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
