@@ -92,9 +92,6 @@ InfoTab:Section({Title = "Info", Icon = "info"})
 -- ==============================
 
 PlayerTab:Section({Title = "Player", Icon = "user"})
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local humanoid = character:FindFirstChildOfClass("Humanoid")
 
 PlayerTab:Slider({
     Title = "Gravity",
@@ -118,6 +115,10 @@ PlayerTab:Slider({
         Default = 16,
     },
     Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+
         if humanoid then
             humanoid.WalkSpeed = Value
 		end
@@ -125,7 +126,7 @@ PlayerTab:Slider({
 })
 
 PlayerTab:Slider({
-    Title = "JumpP",
+    Title = "JumpPower",
 	Step = 1,
     Value = {
         Min = 1,
@@ -133,6 +134,10 @@ PlayerTab:Slider({
         Default = 50,
     },
     Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+
         if humanoid then
             humanoid.JumpPower = Value
 		end
@@ -142,7 +147,10 @@ PlayerTab:Slider({
 local infJumpEnabled = false
 UIS.JumpRequest:Connect(function()
 	if infJumpEnabled then
-		humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+    	local character = game.Players.LocalPlayer.Character
+		if character and character:FindFirstChild("Humanoid") then
+			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		end
 	end
 end)
 
@@ -1130,6 +1138,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
