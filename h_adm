@@ -85,7 +85,7 @@ local ProtectionTab = Window:Tab({
 -- INFO
 -- ==============================
 
-local AboutSection = InfoTab:Section({Title = "Info", Icon = "info"})
+local AboutSection = InfoTab:Section({Title = "Info", Icon = "info", Opened = true})
 
     AboutSection:Image({
         Image = "https://repository-images.githubusercontent.com/880118829/428bedb1-dcbd-43d5-bc7f-3beb2e9e0177",
@@ -190,8 +190,8 @@ PlayerTab:Toggle({
     end
 })
 
-local HighlightPTab
-HighlightPTab = PlayerTab:Button({
+local ResetValuesTab
+ResetValuesTab = PlayerTab:Button({
 	Title = "Reset Values",
     Icon = "mouse",
     Default = false,
@@ -205,7 +205,7 @@ HighlightPTab = PlayerTab:Button({
     end
     Workspace.Gravity = 196.2
     infJumpEnabled = false
-    HighlightPTab:Highlight()
+    ResetValuesTab:Highlight()
     end
 })
 
@@ -524,7 +524,6 @@ TrollTab:Section({Title = "House", Icon = "ghost"})
 
 TrollTab:Button({
     Title = "Unban all houses",
-    Color = Color3.fromHex("#305dff"),
     Callback = function()
         local successCount = 0
         local failCount = 0
@@ -571,6 +570,8 @@ TrollTab:Section({Title = "Admin Tools", Icon = "ghost"})
 TrollTab:Button({
     Title = "Admin Sword",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
+    Color = Color3.fromHex("#e00000"),
+    Icon = "rbxassetid://10709791437",
 	Callback = function()        
         local buggedPlayers = {}
         local bugConnections = {}
@@ -741,6 +742,8 @@ TrollTab:Button({
 TrollTab:Button({
     Title = "Fling Ball",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
+    Color = Color3.fromHex("#e00000"),
+    Icon = "rbxassetid://10709791437",
     Callback = function()
 local toolName = "Fling Ball"
 local toolEquipped = false
@@ -857,6 +860,8 @@ end)
 TrollTab:Button({
     Title = "Kill Couch",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
+    Color = Color3.fromHex("#e00000"),
+    Icon = "rbxassetid://10709791437",
 	Callback = function()
 local toolName = "Kill Couch"
 local toolEquipped = false
@@ -1047,6 +1052,8 @@ end)
 TrollTab:Button({
     Title = "Destroy Server",
 	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
+    Color = Color3.fromHex("#ff0000"),
+    Icon = "rbxassetid://10709791437",
 	Callback = function()   
         local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
         local ToolEvent = RE:FindFirstChild("1Too1l")
@@ -1259,6 +1266,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
