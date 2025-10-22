@@ -105,14 +105,31 @@ PlayerTab:Slider({
         Workspace.Gravity = Value
     end
 })
- 
+
+PlayerTab:Slider({
+    Title = "Speed",
+	Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = 16,
+    },
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        
+        if humanoid then
+            humanoid.WalkSpeed = Value
+        end
+    end
+ })
+
 local infJumpEnabled = false
 UIS.JumpRequest:Connect(function()
 	if infJumpEnabled then
-      if Character and Character:FindFirstChild("Humanoid") then
 		Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
-      end
-   end
+	end
 end)
 
 PlayerTab:Toggle({
@@ -1099,6 +1116,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
