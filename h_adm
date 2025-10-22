@@ -321,7 +321,7 @@ AvatarTab:Button({
 	end
 })
 
-AvatarTab:Section({Title = "3D Clothes", Icon = "tag"})
+AvatarTab:Section({Title = "Character Clothing", Icon = "tag"})
 
 local function equipClothes(clothesID, clothesName)
     local args = { clothesID }
@@ -383,7 +383,7 @@ AvatarTab:Button({
 AvatarTab:Section({Title = "Character Editor", Icon = "tag"})
 
 AvatarTab:Button({
-    Title = "(Mini Plushie) and Headless",
+    Title = "Mini Plushie and Headless",
     Desc = "TYPE: Body ✏️",
     Locked = false,
     Callback = function()
@@ -403,7 +403,7 @@ AvatarTab:Section({Title = "Advanced Character Editor", Icon = "tag"})
 AvatarTab:Section({Title = "Character Animation", Icon = "tag"})
 
 AvatarTab:Button({
-    Title = "adidas-Sports-Animation-Pack",
+    Title = "adidas Sports Animation Pack",
     Desc = "TYPE: Animation ✏️",
     Locked = false,
     Callback = function()
@@ -1168,10 +1168,12 @@ local sites = {
 }
 
 for _, tp in pairs(sites) do
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
     TeleportTab:Button({
         Title = tp[1],
         Callback = function()
-            RootPart.CFrame = tp[2]
+            character:FindFirstChild("HumanoidRootPart").CFrame = tp[2]
         end
     })
 end
@@ -1181,18 +1183,3 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
