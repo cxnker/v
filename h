@@ -283,10 +283,6 @@ Tab3:AddButton({
                     Remotes.ChangeBodyColor:FireServer(tostring(SkinColor.HeadColor))
                     task.wait(0.3)
                 end
-                if tonumber(PDesc.IdleAnimation) then
-                    Wear:InvokeServer(tonumber(PDesc.IdleAnimation))
-                    task.wait(0.3)
-                end
             end
         end
     end
@@ -488,7 +484,8 @@ Tab3:AddButton({
 Tab3:AddSection({"》 Animations"})
 
 Tab3:AddButton({
-    Name = "(adidas-Community-Animation-Pack) Animation",
+    Name = "adidas-Community-Animation-Pack",
+	Description = "TYPE: Animation ✏️",
     Callback = function()
 	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(123695349157584)
 task.wait(0.3)
@@ -550,19 +547,19 @@ task.wait(0.3)
 Tab3:AddButton({
     Name = "(Bold-Animation-Pack-by-e.l.f.) Animation",
     Callback = function()
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744204409)
+	Wear:InvokeServer(16744204409)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744207822)
+	Wear:InvokeServer(16744207822)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744209868)
+	Wear:InvokeServer(16744209868)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744212581)
+	Wear:InvokeServer(16744212581)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744214662)
+	Wear:InvokeServer(16744214662)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744217055)
+	Wear:InvokeServer(16744217055)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(16744219182)
+	Wear:InvokeServer(16744219182)
 task.wait(0.3)
 	end
 })
@@ -570,19 +567,19 @@ task.wait(0.3)
 Tab3:AddButton({
     Name = "(No-Boundaries-Animation-Pack-by-Walmart) Animation",
     Callback = function()
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755919175)
+	Wear:InvokeServer(18755919175)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755922352)
+	Wear:InvokeServer(18755922352)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755930927)
+	Wear:InvokeServer(18755930927)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755925411)
+	Wear:InvokeServer(18755925411)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755933883)
+	Wear:InvokeServer(18755933883)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755938274)
+	Wear:InvokeServer(18755938274)
 task.wait(0.3)
-	game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(18755942776)
+	Wear:InvokeServer(18755942776)
 task.wait(0.3)
 	end
 })
