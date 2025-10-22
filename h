@@ -48,7 +48,13 @@ Tab2:AddSlider({
     Increase = 1,
     Default = 16,
     Callback = function(Value)
-        Humanoid.WalkSpeed = Value
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+
+        if humanoid then
+            humanoid.WalkSpeed = Value
+		end
     end
 })
 
@@ -59,7 +65,13 @@ Tab2:AddSlider({
     Increase = 1,
     Default = 50,
     Callback = function(Value)
-        Humanoid.JumpPower = Value
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+
+        if humanoid then
+            humanoid.JumpPower = Value
+		end
     end
 })
 
@@ -76,20 +88,26 @@ Tab2:AddSlider({
  
 local infjumpEnabled = false
 game:GetService("UserInputService").JumpRequest:Connect(function()
-	if infjumpEnabled then
-      if Character and Character:FindFirstChild("Humanoid") then
-		Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-      end
-   end
+	if infJumpEnabled then
+    	local character = game.Players.LocalPlayer.Character
+		if character and character:FindFirstChild("Humanoid") then
+			character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		end
+	end
 end)
 
 Tab2:AddButton({
     Name = "Reset Status",
     Callback = function()
-        Workspace.Gravity = 196.2
-        Humanoid.JumpPower = 50
-        Humanoid.WalkSpeed = 16
-        infjumpEnabled = false
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.WalkSpeed = 16
+    	humanoid.JumpPower = 50
+    end
+    Workspace.Gravity = 196.2
+    infJumpEnabled = false
     end
 })
 
@@ -107,21 +125,24 @@ Tab2:AddToggle({
     Callback = function(state)
         if state then
             antiSitEnabled = RunService.Heartbeat:Connect(function()
-                if Humanoid then
-                    Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
-                    if Humanoid:GetState() == Enum.HumanoidStateType.Seated then
-                        Humanoid:ChangeState(Enum.HumanoidStateType.Running)
+    		local player = game.Players.LocalPlayer
+    		local character = player.Character or player.CharacterAdded:Wait()
+    		local humanoid = character:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+                    if humanoid:GetState() == Enum.HumanoidStateType.Seated then
+                        humanoid:ChangeState(Enum.HumanoidStateType.Running)
                     end
-                    if Humanoid.SeatPart then
-                        Humanoid.Sit = false
-                        Humanoid.SeatPart = nil
+                    if humanoid.SeatPart then
+                        humanoid.Sit = false
+                        humanoid.SeatPart = nil
                     end
                 end
             end)
         else
             if antiSitEnabled then antiSitEnabled:Disconnect() end
-            if Humanoid then
-                Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+            if humanoid then
+                humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
             end
         end
     end
