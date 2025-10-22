@@ -115,20 +115,35 @@ PlayerTab:Slider({
         Default = 16,
     },
     Callback = function(Value)
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local humanoid = character:FindFirstChildOfClass("Humanoid")
+        local humanoid = Character:FindFirstChildOfClass("Humanoid")
         
         if humanoid then
             humanoid.WalkSpeed = Value
-        end
-    end
- })
+		end
+	end
+})
+
+PlayerTab:Slider({
+    Title = "JumpPower",
+	Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = 50,
+    },
+    Callback = function(Value)
+        local humanoid = Character:FindFirstChildOfClass("Humanoid")
+        
+        if humanoid then
+            humanoid.JumpPower = Value
+		end
+	end
+})
 
 local infJumpEnabled = false
 UIS.JumpRequest:Connect(function()
 	if infJumpEnabled then
-		Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+		Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
 	end
 end)
 
@@ -1116,6 +1131,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
