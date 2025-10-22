@@ -565,12 +565,30 @@ TrollTab:Button({
     end
 })
 
+TrollTab:Section({Title = "Troll Scripts", Icon = "ghost"})
+
+TrollTab:Button({
+    Title = "Bring Parts",
+	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/bringparts"))()
+	end
+})
+
+TrollTab:Button({
+    Title = "[M] Jerk Off R6/R15",
+	Desc = "GAME: Universal Script 📌, TYPE: Tool 🛠️",
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/jerk"))()
+	end
+})
+
 TrollTab:Section({Title = "Admin Tools", Icon = "ghost"})
 
 TrollTab:Button({
     Title = "Admin Sword",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
-    Color = Color3.fromHex("#e00000"),
+    Color = Color3.fromHex("#000000"),
     Icon = "rbxassetid://10709791437",
 	Callback = function()        
         local buggedPlayers = {}
@@ -742,7 +760,7 @@ TrollTab:Button({
 TrollTab:Button({
     Title = "Fling Ball",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
-    Color = Color3.fromHex("#e00000"),
+    Color = Color3.fromHex("#000000"),
     Icon = "rbxassetid://10709791437",
     Callback = function()
 local toolName = "Fling Ball"
@@ -860,7 +878,7 @@ end)
 TrollTab:Button({
     Title = "Kill Couch",
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
-    Color = Color3.fromHex("#e00000"),
+    Color = Color3.fromHex("#000000"),
     Icon = "rbxassetid://10709791437",
 	Callback = function()
 local toolName = "Kill Couch"
@@ -1052,7 +1070,7 @@ end)
 TrollTab:Button({
     Title = "Destroy Server",
 	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
-    Color = Color3.fromHex("#ff0000"),
+    Color = Color3.fromHex("#c20000"),
     Icon = "rbxassetid://10709791437",
 	Callback = function()   
         local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
@@ -1122,24 +1140,6 @@ TrollTab:Button({
         end)
 		newNotification("✅ Success", "Server successfully destroyed")
     end
-})
-
-TrollTab:Section({Title = "Troll Scripts", Icon = "ghost"})
-
-TrollTab:Button({
-    Title = "Bring Parts",
-	Desc = "GAME: Universal Script 📌, TYPE: Interface 🖥️",
-    Callback = function()
-        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/bringparts"))()
-	end
-})
-
-TrollTab:Button({
-    Title = "[M] Jerk Off R6/R15",
-	Desc = "GAME: Universal Script 📌, TYPE: Tool 🛠️",
-    Callback = function()
-        loadstring(game:HttpGet("https://github.com/cxnker/v/raw/main/main/jerk"))()
-	end
 })
 
 -- ==============================
@@ -1225,12 +1225,56 @@ AdminTab:Section({Title = "Admin (Staff Only)", Icon = "crown"})
 AdminTab:Button({
     Title = "View",
     Desc = "View player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
 AdminTab:Button({
     Title = "Kick",
     Desc = "Kick selected player",
+    Locked = true,
+})
+
+AdminTab:Button({
+    Title = "Kill",
+    Desc = "Kill selected player",
+    Locked = true,
+})
+
+AdminTab:Button({
+    Title = "Fling",
+    Desc = "Fling selected player",
+    Locked = true,
+})
+
+AdminTab:Button({
+    Title = "Bring",
+    Desc = "Bring selected player",
+    Locked = true,
+})
+
+AdminTab:Button({
+    Title = "Freeze",
+    Desc = "Freeze selected player",
+    Locked = true,
+})
+
+AdminTab:Button({
+    Title = "Unfreeze",
+    Desc = "Unfreeze selected player",
+    Locked = true,
+})
+
+AdminTab:Button({
+    Title = "Jail",
+    Desc = "Jail selected player",
+    Locked = true,
+})
+
+AdminTab:Button({
+    Title = "Unjail",
+    Desc = "Unjail selected player",
     Locked = true,
 })
 
@@ -1266,6 +1310,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
