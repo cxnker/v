@@ -178,6 +178,8 @@ PlayerTab:Button({
     end
 })
 
+local antiSitEnabled = false
+
 PlayerTab:Toggle({
 	Title = "Anti Sit",
     Default = false,
@@ -1183,6 +1185,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
