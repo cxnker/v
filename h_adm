@@ -149,7 +149,7 @@ UIS.JumpRequest:Connect(function()
 	if infJumpEnabled then
     	local character = game.Players.LocalPlayer.Character
 		if character and character:FindFirstChild("Humanoid") then
-			humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+			character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 		end
 	end
 end)
@@ -1138,6 +1138,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
