@@ -110,7 +110,7 @@ local infJumpEnabled = false
 UIS.JumpRequest:Connect(function()
 	if infJumpEnabled then
       if Character and Character:FindFirstChild("Humanoid") then
-		Character:FindFirstChildOfClass('Humanoid'):ChangeState(Enum.HumanoidStateType.Jumping)
+		Character:FindFirstChildWhichIsA("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
       end
    end
 end)
@@ -1099,6 +1099,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
