@@ -1070,7 +1070,8 @@ end)
 TrollTab:Button({
     Title = "Destroy Server",
 	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
-    Color = Color3.fromHex("#c20000"),
+    Color = Color3.fromHex("#000000"),
+	Transparency = 0.5
     Icon = "rbxassetid://10709791437",
 	Callback = function()   
         local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
@@ -1233,48 +1234,64 @@ AdminTab:Button({
 AdminTab:Button({
     Title = "Kick",
     Desc = "Kick selected player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
 AdminTab:Button({
     Title = "Kill",
     Desc = "Kill selected player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
 AdminTab:Button({
     Title = "Fling",
     Desc = "Fling selected player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
 AdminTab:Button({
     Title = "Bring",
     Desc = "Bring selected player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
 AdminTab:Button({
     Title = "Freeze",
     Desc = "Freeze selected player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
 AdminTab:Button({
     Title = "Unfreeze",
     Desc = "Unfreeze selected player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
 AdminTab:Button({
     Title = "Jail",
     Desc = "Jail selected player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
 AdminTab:Button({
     Title = "Unjail",
     Desc = "Unjail selected player",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
     Locked = true,
 })
 
@@ -1310,8 +1327,3 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
-
-
-
-
-
