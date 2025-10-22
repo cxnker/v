@@ -94,19 +94,6 @@ InfoTab:Section({Title = "Info", Icon = "info"})
 PlayerTab:Section({Title = "Player", Icon = "user"})
 
 PlayerTab:Slider({
-    Title = "Gravity",
-	Step = 1,
-    Value = {
-        Min = 1,
-        Max = 500,
-        Default = 196,
-    },
-    Callback = function(Value)
-        Workspace.Gravity = Value
-    end
-})
-
-PlayerTab:Slider({
     Title = "Speed",
 	Step = 1,
     Value = {
@@ -144,6 +131,19 @@ PlayerTab:Slider({
 	end
 })
 
+PlayerTab:Slider({
+    Title = "Gravity",
+	Step = 1,
+    Value = {
+        Min = 1,
+        Max = 500,
+        Default = 196,
+    },
+    Callback = function(Value)
+        Workspace.Gravity = Value
+    end
+})
+
 local infJumpEnabled = false
 UIS.JumpRequest:Connect(function()
 	if infJumpEnabled then
@@ -159,6 +159,22 @@ PlayerTab:Toggle({
     Default = false,
     Callback = function(Value)
        infJumpEnabled = Value
+    end
+})
+
+PlayerTab:Toggle({
+	Title = "Reset Values",
+    Default = false,
+    Callback = function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.WalkSpeed = 16
+    	humanoid.JumpPower = 50
+    end
+    Workspace.Gravity = 196.2
+    infJumpEnabled = false
     end
 })
 
@@ -1138,6 +1154,7 @@ end
 -- ==============================
 
 ProtectionTab:Section({Title = "Protection", Icon = "shield"})
+
 
 
 
