@@ -147,7 +147,7 @@ Tab2:AddToggle({
         end
     end
 })
-
+--[
 Tab2:AddToggle({
     Name = "Noclip",
     Default = true,
@@ -172,6 +172,7 @@ RunService.Stepped:Connect(function()
 			end
 		end
 	end)
+]--
 --------------------------------------------------
 			-- === Tab 3: Avatar === --
 --------------------------------------------------
