@@ -445,6 +445,94 @@ AvatarTab:Button({
 	end
 })
 
+AvatarTab:Button({
+    Title = "adidas Community Animation Pack",
+    Desc = "TYPE: Animation ✏️",
+    Locked = false,
+    Callback = function()
+	Wear:InvokeServer(123695349157584)
+	task.wait(0.3)
+	Wear:InvokeServer(93993406355955)
+	task.wait(0.3)
+	Wear:InvokeServer(106810508343012)
+	task.wait(0.3)
+	Wear:InvokeServer(106537993816942)
+	task.wait(0.3)
+	Wear:InvokeServer(126354114956642)
+	task.wait(0.3)
+	Wear:InvokeServer(124765145869332)
+	task.wait(0.3)
+	Wear:InvokeServer(115715495289805)
+	task.wait(0.3)
+	end
+})
+
+AvatarTab:Button({
+    Title = "Catwalk Glam Animation Pack by e.l.f.",
+    Desc = "TYPE: Animation ✏️",
+    Locked = false,
+    Callback = function()
+	Wear:InvokeServer(104741822987331)
+	task.wait(0.3)
+	Wear:InvokeServer(72706690305027)
+	task.wait(0.3)
+	Wear:InvokeServer(101279640971758)
+	task.wait(0.3)
+	Wear:InvokeServer(138641066989023)
+	task.wait(0.3)
+	Wear:InvokeServer(75036746190467)
+	task.wait(0.3)
+	Wear:InvokeServer(112231179705221)
+	task.wait(0.3)
+	Wear:InvokeServer(103190462987721)
+	task.wait(0.3)
+	end
+})
+
+AvatarTab:Button({
+    Title = "Bold Animation Pack by e.l.f.",
+    Desc = "TYPE: Animation ✏️",
+    Locked = false,
+    Callback = function()
+	Wear:InvokeServer(16744204409)
+	task.wait(0.3)
+	Wear:InvokeServer(16744207822)
+	task.wait(0.3)
+	Wear:InvokeServer(16744209868)
+	task.wait(0.3)
+	Wear:InvokeServer(16744212581)
+	task.wait(0.3)
+	Wear:InvokeServer(16744214662)
+	task.wait(0.3)
+	Wear:InvokeServer(16744217055)
+	task.wait(0.3)
+	Wear:InvokeServer(16744219182)
+	task.wait(0.3)
+	end
+})
+
+AvatarTab:Button({
+    Title = "No Boundaries Animation Pack by Walmart",
+    Desc = "TYPE: Animation ✏️",
+    Locked = false,
+    Callback = function()
+	Wear:InvokeServer(18755919175)
+	task.wait(0.3)
+	Wear:InvokeServer(18755922352)
+	task.wait(0.3)
+	Wear:InvokeServer(18755930927)
+	task.wait(0.3)
+	Wear:InvokeServer(18755925411)
+	task.wait(0.3)
+	Wear:InvokeServer(18755933883)
+	task.wait(0.3)
+	Wear:InvokeServer(18755938274)
+	task.wait(0.3)
+	Wear:InvokeServer(18755942776)
+	task.wait(0.3)
+	end
+})
+
 -- ==============================
 -- PROFILE
 -- ==============================
@@ -476,13 +564,12 @@ end
 MusicTab:Section({Title = "Music", Icon = "music"})
 
 local audios = {
-    {Name = "Gemido ultra rápido", ID = 128863565301778},
-    {Name = "dodichan onnn", ID = 134640594695384},
     {Name = "amongus", ID = 6651571134},
     {Name = "Sus", ID = 6701126635},
     {Name = "SUS", ID = 7153419575},
     {Name = "Sonic.Exe", ID = 2496367477},
     {Name = "Mandrake Detected", ID = 9068077052},
+    {Name = "Gemido ultra rápido", ID = 128863565301778},
     {Name = "OH MY GOD", ID = 73349649774476},
     {Name = "CHINABOY", ID = 84403553163931}
 }
@@ -1869,3 +1956,4 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
     end
 })
+
