@@ -100,7 +100,7 @@ local AboutSection = InfoTab:Section({Title = "Info", Icon = "info", Opened = tr
     AboutSection:Space({ Columns = 3 })
     
     AboutSection:Section({
-        Title = "What is WindUI?",
+        Title = "Hexagon Client for Brookhaven 🏡RP",
         TextSize = 24,
         FontWeight = Enum.FontWeight.SemiBold,
     })
@@ -108,10 +108,10 @@ local AboutSection = InfoTab:Section({Title = "Info", Icon = "info", Opened = tr
     AboutSection:Space()
     
     AboutSection:Section({
-        Title = [[WindUI is a stylish, open-source UI (User Interface) library specifically designed for Roblox Script Hubs.
-Developed by Footagesus (.ftgs, Footages).
-It aims to provide developers with a modern, customizable, and easy-to-use toolkit for creating visually appealing interfaces within Roblox.
-The project is primarily written in Lua (Luau), the scripting language used in Roblox.]],
+        Title = [[Hexagon Client seeks to be a reliable and trustworthy option compared to other options.
+Developed by Nova (Owner @Roun95, Co-Owner @Deluxe_Studios).
+Hexagon integrates multilingual for easier use, Best for all, hassle-free, completely free.
+Hexagon offerts what the competition doesn't: variety in options innovative, useful and reliable.]],
         TextSize = 18,
         TextTransparency = .35,
         FontWeight = Enum.FontWeight.Medium,
@@ -1338,3 +1338,4 @@ ProtectionTab:Toggle({
         end
     end
 })
+
