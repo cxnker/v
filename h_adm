@@ -570,6 +570,11 @@ local audios = {
     {Name = "Sonic.Exe", ID = 2496367477},
     {Name = "Mandrake Detected", ID = 9068077052},
     {Name = "Gemido ultra rápido", ID = 128863565301778},
+    {Name = "Hentai wiaaaaan", ID = 88332347208779},
+    {Name = "uwu", ID = 76820720070248},
+    {Name = "amongus", ID = 6651571134},
+    {Name = "amongus", ID = 6651571134},
+    {Name = "amongus", ID = 6651571134},
     {Name = "OH MY GOD", ID = 73349649774476},
     {Name = "CHINABOY", ID = 84403553163931}
 }
@@ -1957,3 +1962,112 @@ end)
     end
 })
 
+local backupTables = {
+    Vehicles = {},
+    Canoes = {},
+    Jets = {},
+    Helis = {},
+    Balls = {}
+}
+
+local TeleportCarro = {}
+function TPC:Notify(msg)
+    print("🔔 "..msg)
+end
+
+local function AntiFlingLoop(name, getFolderFunc)
+    local active = false
+    task.spawn(function()
+        while true do
+            if active and LocalPlayer.Character then
+                local folder = getFolderFunc()
+                if folder then
+                    for _, item in ipairs(folder:GetChildren()) do
+                        local isMine = false
+                        if name == "Vehicles" then
+                            for _, seat in ipairs(item:GetDescendants()) do
+                                if (seat:IsA("VehicleSeat") or seat:IsA("Seat")) and seat.Occupant and seat.Occupant.Parent == LocalPlayer.Character then
+                                    isMine = true
+                                    break
+                                end
+                            end
+                        elseif name == "Canoes" then
+                            local owner = item:FindFirstChild("Owner")
+                            isMine = owner and owner.Value == LocalPlayer
+                        elseif name == "Jets" or name == "Helis" then
+                            isMine = item.Name == LocalPlayer.Name
+                        end
+                        if not isMine then
+                            table.insert(backupTables[name], item:Clone())
+                            item:Destroy()
+                        end
+                    end
+                end
+            end
+            task.wait(0.03)
+        end
+    end)
+    return function(state)
+        active = state
+        TPC:Notify(name.." "..(state and "activated!" or "deactivated!"))
+        if not state then
+            for _, item in ipairs(backupTables[name]) do
+                local parentFolder = getFolderFunc()
+                if parentFolder then item.Parent = parentFolder end
+            end
+            backupTables[name] = {}
+        end
+    end
+end
+
+ProtectionTab:Toggle({
+	Title = "Anti Fling",
+    Desc = "CLASS: Vehicle",
+    Default = false,
+    Callback = AntiFlingLoop("Vehicles", function()
+        return Workspace:FindFirstChild("Vehicles")
+    end)
+})
+
+ProtectionTab:Toggle({
+	Title = "Anti Fling",
+    Desc = "CLASS: Canoe",
+    Default = false,
+    Callback = AntiFlingLoop("Canoes", function()
+        local workspaceCom = Workspace:FindFirstChild("WorkspaceCom")
+        return workspaceCom and workspaceCom:FindFirstChild("001_CanoeStorage")
+    end)
+})
+
+ProtectionTab:Toggle({
+	Title = "Anti Fling",
+    Desc = "CLASS: Jets",
+    Default = false,
+    Callback = AntiFlingLoop("Jets", function()
+        local folder = Workspace:FindFirstChild("WorkspaceCom")
+        if folder and folder:FindFirstChild("001_Airport") then
+            local storage = folder["001_Airport"]:FindFirstChild("AirportHanger")
+            if storage then return storage:FindFirstChild("001_JetStorage") and storage["001_JetStorage"]:FindFirstChild("JetAirport") end
+        end
+    end)
+})
+
+ProtectionTab:Toggle({
+	Title = "Anti Fling",
+    Desc = "CLASS: Helicopter",
+    Default = false,
+    Callback = AntiFlingLoop("Helis", function()
+        local folder = Workspace:FindFirstChild("WorkspaceCom")
+        return folder and folder:FindFirstChild("001_HeliStorage") and folder["001_HeliStorage"]:FindFirstChild("PoliceStationHeli")
+    end)
+})
+
+ProtectionTab:Toggle({
+	Title = "Anti Fling",
+    Desc = "CLASS: Ball",
+    Default = false,
+    Callback = AntiFlingLoop("Balls", function()
+        local folder = Workspace:FindFirstChild("WorkspaceCom")
+        return folder and folder:FindFirstChild("001_SoccerBalls")
+    end)
+})
