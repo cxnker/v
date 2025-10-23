@@ -24,12 +24,12 @@ local function newNotify(title, message, duration, icon)
 	})
 end
 
-local function newNotification(title, message, duration, icon)
+local function newNotification(title, message, icon, duration)
     StarterGui:SetCore("SendNotification",{
         Title = title,
         Text = message,
-        Duration = duration or 5
 		Icon = icon or "",
+        Duration = duration or 5
     })
 end
 
@@ -91,33 +91,33 @@ local ProtectionTab = Window:Tab({
 
 local AboutSection = InfoTab:Section({Title = "Info", Icon = "info", Opened = true})
 
-AboutSection:Image({
-    Image = "https://repository-images.githubusercontent.com/880118829/428bedb1-dcbd-43d5-bc7f-3beb2e9e0177",
-    AspectRatio = "16:9",
-    Radius = 9,
-})
+    AboutSection:Image({
+        Image = "https://repository-images.githubusercontent.com/880118829/428bedb1-dcbd-43d5-bc7f-3beb2e9e0177",
+        AspectRatio = "16:9",
+        Radius = 9,
+    })
     
-AboutSection:Space({ Columns = 3 })
+    AboutSection:Space({ Columns = 3 })
     
-AboutSection:Section({
-    Title = "Hexagon Client for Brookhaven 🏡RP",
-    TextSize = 24,
-    FontWeight = Enum.FontWeight.SemiBold,
-})
+    AboutSection:Section({
+        Title = "What is WindUI?",
+        TextSize = 24,
+        FontWeight = Enum.FontWeight.SemiBold,
+    })
 
-AboutSection:Space()
+    AboutSection:Space()
     
-AboutSection:Section({
-    Title = [[Hexagon Client seeks to be a reliable and trustworthy option compared to other options.
-Developed by Nova (Owner @Roun95, Co-Owner @Deluxe_Studios).
-Hexagon integrates multilingual for easier use, Best for all, hassle-free, completely free.
-Hexagon offerts what the competition doesn't: variety in options innovative, useful and reliable.]],
-    TextSize = 18,
-    TextTransparency = .35,
-    FontWeight = Enum.FontWeight.Medium,
-})
+    AboutSection:Section({
+        Title = [[WindUI is a stylish, open-source UI (User Interface) library specifically designed for Roblox Script Hubs.
+Developed by Footagesus (.ftgs, Footages).
+It aims to provide developers with a modern, customizable, and easy-to-use toolkit for creating visually appealing interfaces within Roblox.
+The project is primarily written in Lua (Luau), the scripting language used in Roblox.]],
+        TextSize = 18,
+        TextTransparency = .35,
+        FontWeight = Enum.FontWeight.Medium,
+    })
     
-InfoTab:Space({ Columns = 4 }) 
+    InfoTab:Space({ Columns = 4 }) 
 
 -- ==============================
 -- PLAYER
@@ -1338,6 +1338,3 @@ ProtectionTab:Toggle({
         end
     end
 })
-
-
-
