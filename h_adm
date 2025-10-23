@@ -75,6 +75,11 @@ local AdminTab = Window:Tab({
     Icon = "crown",
     Locked = false,
 })
+local PremiumTab = Window:Tab({
+    Title = "Premium",
+    Icon = "sparkles",
+    Locked = false,
+})
 local TeleportTab = Window:Tab({
     Title = "Teleport",
     Icon = "pin",
@@ -1248,6 +1253,12 @@ AdminTab:Button({
 })
 
 -- ==============================
+-- PREMIUM
+-- ==============================
+
+TeleportTab:Section({Title = "Gamepass Vehicle Spawner", Icon = "sparkles"})
+
+-- ==============================
 -- TELEPORTS
 -- ==============================
 
@@ -1338,3 +1349,4 @@ ProtectionTab:Toggle({
         end
     end
 })
+
