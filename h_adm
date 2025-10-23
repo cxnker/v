@@ -33,7 +33,7 @@ local function newNotification(title, message, duration, icon)
     })
 end
 
-newNotify("Welcome to Hexagon Client", "Created by @Roun95", 10, Players:GetUserThumbnailAsync(Players:GetUserIdFromNameAsync("Roun95"), Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100))
+newNotify("Welcome to Hexagon Client", "Created by @Roun95")
 
 local InfoTab = Window:Tab({
     Title = "Info",
@@ -1338,5 +1338,6 @@ ProtectionTab:Toggle({
         end
     end
 })
+
 
 
