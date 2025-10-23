@@ -15,12 +15,14 @@ local Window = WindUI:CreateWindow({
     Resizable = true,
 })
 
-WindUI:Notify({
-    Title = "Welcome to Hexagon Client",
-    Content = "Created by @Roun95",
-    Duration = 10,
-    Icon = "rbxassetid://103422693243379",
-})
+local function newNotify(title, message, icon, duration)
+	WindUI:Notify({
+    	Title = title,
+    	Content = message,
+    	Icon = icon or "rbxassetid://103422693243379",
+    	Duration = duration or 10,
+	})
+end
 
 local function newNotification(title, message, icon, duration)
     StarterGui:SetCore("SendNotification",{
@@ -30,6 +32,8 @@ local function newNotification(title, message, icon, duration)
         Duration = duration or 5
     })
 end
+
+newNotify("Welcome to Hexagon Client", "Created by @Roun95")
 
 local InfoTab = Window:Tab({
     Title = "Info",
@@ -1335,3 +1339,4 @@ ProtectionTab:Toggle({
         end
     end
 })
+
