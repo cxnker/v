@@ -1802,9 +1802,70 @@ ProtectionTab:Toggle({
     end
 })
 
+ProtectionTab:Button({
+    Title = "Anti Bug",
+    Desc = "TYPE: Player 👤",
+    Locked = false,
+    Callback = function()
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 
-ProtectionTab:Toggle({
-	Title = "Anti Bring",
-    Desc = "CLASS: Doors 🚪",
-    Default = false,
-    Callback = function(state)
+local blacklist = {
+    {Name = "water", Class = "Part"},
+}
+
+local function neutralize(part)
+    if part and part:IsA("BasePart") then
+        pcall(function()
+            part.Anchored = true
+            part.CanCollide = false
+            part.Massless = true
+            part.Transparency = 1
+            part:ClearAllChildren()
+        end)
+        pcall(function()
+            part:Destroy()
+        end)
+    end
+end
+
+workspace.DescendantAdded:Connect(function(obj)
+    for _, rule in ipairs(blacklist) do
+        if obj.Name == rule.Name and obj.ClassName == rule.Class then
+            neutralize(obj)
+        end
+    end
+end)
+
+for _, obj in ipairs(workspace:GetDescendants()) do
+    for _, rule in ipairs(blacklist) do
+        if obj.Name == rule.Name and obj.ClassName == rule.Class then
+            neutralize(obj)
+        end
+    end
+end
+
+task.spawn(function()
+    while task.wait(0.25) do
+        for _, rule in ipairs(blacklist) do
+            for _, v in next, getnilinstances() do
+                if v.Name == rule.Name and v.ClassName == rule.Class then
+                    neutralize(v)
+                end
+            end
+        end
+    end
+end)
+
+LocalPlayer.CharacterAdded:Connect(function(char)
+    local hum = char:WaitForChild("Humanoid")
+    hum.Touched:Connect(function(hit)
+        for _, rule in ipairs(blacklist) do
+            if hit.Name == rule.Name and hit.ClassName == rule.Class then
+                neutralize(hit)
+            end
+        end
+    end)
+end)
+    end
+})
