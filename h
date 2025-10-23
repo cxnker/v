@@ -170,6 +170,34 @@ RunService.Stepped:Connect(function()
 		end
 	end)
 
+local antiSitActive = false
+Tab2:AddToggle({
+    Name = "Anti Sit 2",
+    Default = false,
+    Callback = function(state)
+        antiSitActive = state
+        newNotification("Anti Sit "..(state and "ativado!" or "desativado!"))
+        task.spawn(function()
+            while antiSitActive and LocalPlayer.Character do
+                local humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+                    if humanoid:GetState() == Enum.HumanoidStateType.Seated then
+                        humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+                    end
+                end
+                task.wait(0.05)
+            end
+            if not antiSitActive then
+                local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+                end
+            end
+        end)
+    end
+})
+	
 --------------------------------------------------
 			-- === Tab 3: Avatar === --
 --------------------------------------------------
