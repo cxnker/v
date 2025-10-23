@@ -1256,7 +1256,20 @@ AdminTab:Button({
 -- PREMIUM
 -- ==============================
 
-TeleportTab:Section({Title = "Gamepass Vehicle Spawner", Icon = "sparkles"})
+PremiumTab:Section({Title = "Gamepass Vehicle Spawner", Icon = "sparkles"})
+
+local function spawnVehicle(name)
+	RE["1Ca1r"]:FireServer("PickingCar", name)
+end
+
+PremiumTab:Button({
+    Title = "CyberTruck",
+    Color = Color3.fromHex("#000000"),
+    Icon = "rbxassetid://10709791437",
+    Callback = function()
+		spawnVehicle("CyberTruck")
+	end
+})
 
 -- ==============================
 -- TELEPORTS
@@ -1349,4 +1362,5 @@ ProtectionTab:Toggle({
         end
     end
 })
+
 
