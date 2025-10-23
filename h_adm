@@ -1316,6 +1316,97 @@ for _, tp in pairs(sites) do
     })
 end
 
+local selectedPlayerName = nil
+local headsitActive = false
+local function headsitOnPlayer(targetPlayer)
+    if not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("Head") then
+        warn("Character has no Head")
+        return false
+    end
+    local targetHead = targetPlayer.Character.Head
+    local localRoot = Character:FindFirstChild("HumanoidRootPart")
+    if not localRoot then
+        warn("Character has no HumanoidRootPart")
+        return false
+    end
+    localRoot.CFrame = targetHead.CFrame * CFrame.new(0, 2.2, 0)
+    for _, v in pairs(localRoot:GetChildren()) do
+        if v:IsA("WeldConstraint") then
+            v:Destroy()
+        end
+    end
+    local weld = Instance.new("WeldConstraint")
+    weld.Part0 = localRoot
+    weld.Part1 = targetHead
+    weld.Parent = localRoot
+    if Humanoid then
+        Humanoid.Sit = true
+    end
+    print("Headsit activated on " .. targetPlayer.Name)
+    return true
+end
+
+local function removeHeadsit()
+    local localRoot = Character:FindFirstChild("HumanoidRootPart")
+    if localRoot then
+        for _, v in pairs(localRoot:GetChildren()) do
+            if v:IsA("WeldConstraint") then
+                v:Destroy()
+            end
+        end
+    end
+    if Humanoid then
+        Humanoid.Sit = false
+    end
+    print("Headsit disabled")
+end
+
+local function findPlayerByPartialName(partial)
+    partial = partial:lower()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= localPlayer and player.Name:lower():sub(1, #partial) == partial then
+            return player
+        end
+    end
+    return nil
+end
+
+local function headsitNotify(player)
+	newNotification("Player selected", player.Name .. " selected", Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100))
+end
+
+PremiumTab:Input({
+    Title = "Input",
+    Desc = "Enter part of the player name",
+    Callback = function(Value)
+    local foundPlayer = findPlayerByPartialName(Value)
+        if foundPlayer then
+            selectedPlayerName = foundPlayer.Name
+            headsitNotify(foundPlayer)
+        else
+            warn("No player found with that name")
+        end
+    end
+})
+
+PremiumTab:Button({
+    Title = "Enable Headsit",
+    Callback = function()
+    if not selectedPlayerName then
+        return
+    end
+    if not headsitActive then
+        local target = Players:FindFirstChild(selectedPlayerName)
+        if target and headsitOnPlayer(target) then
+			headsitActive = true
+        end
+    else
+        removeHeadsit()
+		headsitActive = false
+    end
+end
+})
+
 -- ==============================
 -- PROTECTION
 -- ==============================
@@ -1380,6 +1471,7 @@ ProtectionTab:Toggle({
         end
     end
 })
+
 
 
 
