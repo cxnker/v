@@ -500,13 +500,13 @@ TrollTab:Button({
             end
         end
         if successCount > 0 then
-			newNotification("✅ Success", "Unbanned from " .. successCount .. " houses")
+			newNotify("✅ Success", "Unbanned from " .. successCount .. " houses")
         end
         if failCount > 0 then
-			newNotification("❌ Failed", "Not unbanned from " .. failCount .. " houses")
+			newNotify("❌ Failed", "Not unbanned from " .. failCount .. " houses")
         end
         if successCount == 0 and failCount == 0 then
-			newNotification("⚠️ Warn", "Not banned houses find")
+			newNotify("⚠️ Warn", "Not banned houses find")
         end
     end
 })
@@ -1338,3 +1338,4 @@ ProtectionTab:Toggle({
         end
     end
 })
+
