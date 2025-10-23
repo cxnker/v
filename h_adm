@@ -15,7 +15,7 @@ local Window = WindUI:CreateWindow({
     Resizable = true,
 })
 
-local function newNotify(title, message, icon, duration)
+local function newNotify(title, message, duration, icon)
 	WindUI:Notify({
     	Title = title,
     	Content = message,
@@ -562,12 +562,12 @@ AdminSwordHL = TrollTab:Button({
         
         local function bugPlayer(targetPlayer)
             if not Remote then
-                newNotification("⚠️ Warn", "Remote not found")
+                newNotify("⚠️ Warn", "Remote not found")
                 return
             end
             
             if not targetPlayer or not targetPlayer.Character then
-                newNotification("⚠️ Warn", "Invalid player")
+                newNotify("⚠️ Warn", "Invalid player")
                 return
             end
             
@@ -579,12 +579,12 @@ AdminSwordHL = TrollTab:Button({
                     bugConnections[playerName] = nil
                 end
                 buggedPlayers[playerName] = nil
-                newNotification("🔓 Unapplied Bug", playerName .. " debugged player")
+                newNotify("🔓 Unapplied Bug", playerName .. " debugged player")
                 return
             end
             
             buggedPlayers[playerName] = true
-            newNotification("🔨 Bug Applied", playerName .. " was bugged")
+            newNotify("🔨 Bug Applied", playerName .. " was bugged")
             
             bugConnections[playerName] = RunService.Stepped:Connect(function()
                 local target = Players:FindFirstChild(playerName)
@@ -645,7 +645,6 @@ AdminSwordHL = TrollTab:Button({
         tool.Equipped:Connect(function(mouse)
             local character = tool.Parent
             if character and character:FindFirstChild("Humanoid") and character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
-        
             ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
         
                 mouse.Button1Down:Connect(function()
@@ -662,17 +661,17 @@ AdminSwordHL = TrollTab:Button({
                     if targetPlayer and targetPlayer ~= LocalPlayer then
                         bugPlayer(targetPlayer)
                     else
-                        newNotification("⚠️ Warn", "Click on a player to apply/remove bug")
+                        newNotify("⚠️ Warn", "Click on a player to apply/remove bug")
                     end
                 end)
                 
-                newNotification("📤 Admin Sword equipped", "Click on a player to apply/remove bug")
+                newNotify("📤 Admin Sword equipped", "Click on a player to apply/remove bug")
             end
         end)
         
         tool.Unequipped:Connect(function()
             ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("Wear"):InvokeServer(12928981934) -- Tool Model
-            newNotification("​📥 ​Admin Sword saved", "Unequipped tool")
+            newNotify("​📥 ​Admin Sword saved", "Unequipped tool")
         end)
         
         Players.PlayerRemoving:Connect(function(player)
@@ -691,16 +690,16 @@ AdminSwordHL = TrollTab:Button({
                 end
                 bugConnections = {}
                 buggedPlayers = {}
-                newNotification("🛑 All bugs removed", "All players were debugged")
+                newNotify("🛑 All bugs removed", "All players were debugged")
             elseif message:lower() == "/buggedlist" then
                 local count = 0
                 for _ in pairs(buggedPlayers) do count = count + 1 end
-                newNotification("📋 Player list", count > 0 and (count.." players bugged") or "No bugged players were found")
+                newNotify("📋 Player list", count > 0 and (count.." players bugged") or "No bugged players were found")
             end
         end)
         
         tool.Parent = LocalPlayer.Backpack
-        newNotification("✅ Admin Sword enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
+        newNotify("✅ Admin Sword enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
 AdminSwordHL:Highlight()
     end
 })
@@ -1339,5 +1338,3 @@ ProtectionTab:Toggle({
         end
     end
 })
-
-
