@@ -1269,27 +1269,25 @@ local cars = {
     {"SuperCar"},
     {"Lamboego"},
     {"CopLamborgini"},
+	{"Ferrari"},
+	{"Formula1"},
+    {"Buggy"},
+	{"GoKartVPass"},
+	{"BatMobile"},
     {"HummerLimo"},
-    {"Hummer"}
+    {"Hummer"},
 }
 
 for _, spawnCar in pairs(cars) do
     PremiumTab:Button({
         Title = spawnCar[1],
+    	Color = Color3.fromHex("#000000"),
+    	Icon = "rbxassetid://10709791437",
         Callback = function()
 			spawnVehicle(spawnCar[1])
         end
     })
 end
-
-PremiumTab:Button({
-    Title = "CyberTruck",
-    Color = Color3.fromHex("#000000"),
-    Icon = "rbxassetid://10709791437",
-    Callback = function()
-		spawnVehicle("CyberTruck")
-	end
-})
 
 -- ==============================
 -- TELEPORTS
@@ -1382,6 +1380,7 @@ ProtectionTab:Toggle({
         end
     end
 })
+
 
 
 
