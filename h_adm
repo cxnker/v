@@ -572,9 +572,9 @@ local audios = {
     {Name = "Gemido ultra rápido", ID = 128863565301778},
     {Name = "Hentai wiaaaaan", ID = 88332347208779},
     {Name = "uwu", ID = 76820720070248},
-    {Name = "amongus", ID = 6651571134},
-    {Name = "amongus", ID = 6651571134},
-    {Name = "amongus", ID = 6651571134},
+    {Name = "gemido1", ID = 105263704862377},
+    {Name = " gemido2", ID = 92186909873950},
+    {Name = "ai meu cuzin", ID = 130714479795369},
     {Name = "OH MY GOD", ID = 73349649774476},
     {Name = "CHINABOY", ID = 84403553163931}
 }
@@ -1970,7 +1970,6 @@ local backupTables = {
     Balls = {}
 }
 
-local TeleportCarro = {}
 function TPC:Notify(msg)
     print("🔔 "..msg)
 end
@@ -2071,3 +2070,4 @@ ProtectionTab:Toggle({
         return folder and folder:FindFirstChild("001_SoccerBalls")
     end)
 })
+
