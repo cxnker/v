@@ -1572,6 +1572,7 @@ local antiSitEnabled = false
 
 ProtectionTab:Toggle({
 	Title = "Anti Sit",
+    Desc = "TYPE: Player 👤",
     Default = false,
     Callback = function(state)
         antiSitEnabled = state
@@ -1626,11 +1627,178 @@ ProtectionTab:Toggle({
     end
 })
 
+ProtectionTab:Toggle({
+	Title = "Anti Duplicate",
+    Desc = "TYPE: Tools 🛠️",
+    Default = false,
+    Callback = function(state)
+        local Players = game:GetService("Players")
+        local dedupLock = {}
+        local IGNORED_PLAYER
+
+        if not state then
+            return
+        end
+
+        local function marcarIgnorado(player)
+            IGNORED_PLAYER = player
+        end
+
+        local function isTargetTool(inst)
+            return inst:IsA("Tool")
+        end
+
+        local function gatherTools(player)
+            local found = {}
+            local containers = {}
+
+            if player.Character then table.insert(containers, player.Character) end
+            local backpack = player:FindFirstChildOfClass("Backpack")
+            if backpack then table.insert(containers, backpack) end
+            local sg = player:FindFirstChild("StarterGear")
+            if sg then table.insert(containers, sg) end
+
+            for _, container in ipairs(containers) do
+                for _, child in ipairs(container:GetChildren()) do
+                    if isTargetTool(child) then
+                        table.insert(found, child)
+                    end
+                end
+            end
+
+            return found
+        end
+
+        local function dedupePlayer(player)
+            if player == IGNORED_PLAYER then return end
+            if dedupLock[player] then return end
+            dedupLock[player] = true
+
+            local tools = gatherTools(player)
+            if #tools > 1 then
+                for i = 2, #tools do
+                    pcall(function() tools[i]:Destroy() end)
+                end
+            end
+
+            dedupLock[player] = false
+        end
+
+        local function hookPlayer(player)
+            if not IGNORED_PLAYER then
+                marcarIgnorado(player)
+            end
+
+            task.defer(dedupePlayer, player)
+
+            local function setupChar(char)
+                task.delay(0.5, function() dedupePlayer(player) end)
+                char.ChildAdded:Connect(function(child)
+                    if isTargetTool(child) then
+                        task.delay(0.1, function() dedupePlayer(player) end)
+                    end
+                end)
+            end
+
+            if player.Character then
+                setupChar(player.Character)
+            end
+            player.CharacterAdded:Connect(setupChar)
+
+            local backpack = player:WaitForChild("Backpack", 10)
+            if backpack then
+                backpack.ChildAdded:Connect(function(child)
+                    if isTargetTool(child) then
+                        task.delay(0.1, function() dedupePlayer(player) end)
+                    end
+                end)
+            end
+
+            local sg = player:FindFirstChild("StarterGear") or player:WaitForChild("StarterGear", 10)
+            if sg then
+                sg.ChildAdded:Connect(function(child)
+                    if isTargetTool(child) then
+                        task.delay(0.1, function() dedupePlayer(player) end)
+                    end
+                end)
+            end
+        end
+
+        Players.PlayerAdded:Connect(hookPlayer)
+        for _, plr in ipairs(Players:GetPlayers()) do
+            hookPlayer(plr)
+        end
+
+        task.spawn(function()
+            while state do
+                for _, plr in ipairs(Players:GetPlayers()) do
+                    dedupePlayer(plr)
+                end
+                task.wait(2)
+            end
+        end)
+    end
+})
 
 
-
-
-
-
-
-
+Tab12:AddToggle({
+    Name = "Anti Bring",
+    Desc = "CLASS: Doors 🚪",
+    Default = false,
+    Callback = function(state)
+        if not _G.hiddenDoors then
+            _G.hiddenDoors = {}
+        end
+        
+        if state then
+            _G.hiddenDoors = {}
+            
+            for _, obj in ipairs(workspace:GetDescendants()) do
+                if obj:IsA("BasePart") and obj.Name:lower():find("door") then
+                    local doorData = {
+                        door = obj,
+                        originalTransparency = obj.Transparency,
+                        originalCanCollide = obj.CanCollide,
+                        originalCastShadow = obj.CastShadow
+                    }
+                    
+                    obj.Transparency = 1
+                    obj.CanCollide = false
+                    obj.CastShadow = false
+                    
+                    for _, child in ipairs(obj:GetChildren()) do
+                        if child:IsA("BasePart") then
+                            child.Transparency = 1
+                            child.CanCollide = false
+                        elseif child:IsA("SurfaceGui") or child:IsA("BillboardGui") then
+                            child.Enabled = false
+                        end
+                    end
+                    
+                    table.insert(_G.hiddenDoors, doorData)
+                end
+            end
+            print("🔧 " .. #_G.hiddenDoors .. " Disabled doors!")
+            
+        else
+            for _, doorData in ipairs(_G.hiddenDoors or {}) do
+                if doorData.door and doorData.door.Parent then
+                    doorData.door.Transparency = doorData.originalTransparency
+                    doorData.door.CanCollide = doorData.originalCanCollide
+                    doorData.door.CastShadow = doorData.originalCastShadow
+                    
+                    for _, child in ipairs(doorData.door:GetChildren()) do
+                        if child:IsA("BasePart") then
+                            child.Transparency = 0
+                            child.CanCollide = true
+                        elseif child:IsA("SurfaceGui") or child:IsA("BillboardGui") then
+                            child.Enabled = true
+                        end
+                    end
+                end
+            end
+            print("✅ " .. #(_G.hiddenDoors or {}) .. " Doors enabled!")
+            _G.hiddenDoors = {}
+        end
+    end
+})
