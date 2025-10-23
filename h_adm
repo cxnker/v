@@ -467,6 +467,90 @@ end
 
 MusicTab:Section({Title = "Music", Icon = "music"})
 
+local audios = {
+    {Name = "Gemido ultra rápido", ID = 128863565301778},
+    {Name = "dodichan onnn", ID = 134640594695384},
+    {Name = "amongus", ID = 6651571134},
+    {Name = "Sus", ID = 6701126635},
+    {Name = "SUS", ID = 7153419575},
+    {Name = "Sonic.Exe", ID = 2496367477},
+    {Name = "Mandrake Detected", ID = 9068077052},
+    {Name = "OH MY GOD", ID = 73349649774476},
+    {Name = "CHINABOY", ID = 84403553163931}
+}
+
+local audioNames = {}
+for _, audio in ipairs(audios) do
+    table.insert(audioNames, audio.Name)
+end
+
+MusicTab:Dropdown({
+    Title = "Select Player",
+    Values = audioNames,
+	Value = audioNames[1],
+    Callback = function(value)
+        for _, audio in ipairs(audios) do
+            if audio.Name == value then
+                audioID = audio.ID
+                break
+            end
+        end
+    end
+})
+
+local function fireServer(eventName, args)
+    local event = ReplicatedStorage:FindFirstChild("RE") and ReplicatedStorage.RE:FindFirstChild(eventName)
+    if event then
+        pcall(function()
+            event:FireServer(unpack(args))
+        end)
+    end
+end
+
+local audioLoop = false
+
+local function loopAudio()
+    while audioLoop do
+        if audioID then
+			local args = { Workspace, audioID, 1 }
+            ReplicatedStorage.RE:FindFirstChild("1Gu1nSound1s"):FireServer(unpack(args))
+            local sound = Instance.new("Sound", Workspace)
+            sound.SoundId = "rbxassetid://" .. audioID
+            sound:Play()
+        end
+        task.wait(1)
+    end
+end
+
+local function playAudio()
+    local args = { Workspace, audioID, 1 }
+		ReplicatedStorage.RE:FindFirstChild("1Gu1nSound1s"):FireServer(unpack(args))
+        local sound = Instance.new("Sound", Workspace)
+        sound.SoundId = "rbxassetid://" .. audioID
+        sound:Play()
+        task.wait(3)
+        sound:Destroy()
+end
+
+MusicTab:Button({
+	Title = "Play Audio",
+    Callback = function()
+	    if audioID then
+    	    playAudio(audioID)
+    	end
+    end
+})
+
+MusicTab:Toggle({
+	Title = "Loop Audio",
+    Default = false,
+    Callback = function(value)
+        audioLoop = value
+        if audioLoop then
+            task.spawn(loopAudio)
+        end
+    end
+})
 -- ==============================
 -- TROLL
 -- ==============================
@@ -562,6 +646,65 @@ TrollTab:Button({
 		headsitActive = false
     end
 end
+})
+
+TrollTab:Toggle({
+	Title = "ESP Players",
+    Callback = function(Enabled)
+        local function CreateESP(Player)
+            if not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart") then return end
+
+            local Character = Player.Character
+            local HRP = Character.HumanoidRootPart
+
+            local ESP = Instance.new("BillboardGui")
+            ESP.Name = "ESP_" .. Player.Name
+            ESP.Adornee = HRP
+            ESP.Size = UDim2.new(0, 100, 0, 50)
+            ESP.StudsOffset = Vector3.new(0, 2.5, 0)
+            ESP.AlwaysOnTop = true
+            ESP.Parent = HRP
+
+            local NameLabel = Instance.new("TextLabel")
+            NameLabel.Name = "NameLabel"
+			NameLabel.BackgroundTransparency = 1
+			NameLabel.Text = Player.Name
+			NameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+	        NameLabel.Size = UDim2.new(1, 0, 0, 20)
+            NameLabel.Parent = ESP
+        end
+
+        for _, Player in pairs(Players:GetPlayers()) do
+            if Player ~= LocalPlayer and Player.Character then
+                local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
+                if HRP then
+                    local OldESP = HRP:FindFirstChild("ESP_" .. Player.Name)
+                    if OldESP then
+                        OldESP:Destroy()
+                    end
+                end
+            end
+        end
+
+        if Enabled then
+            for _, Player in pairs(Players:GetPlayers()) do
+                if Player ~= LocalPlayer then
+                    Player.CharacterAdded:Connect(function()
+                        CreateESP(Player)
+                    end)
+                    if Player.Character then
+                        CreateESP(Player)
+                    end
+                end
+            end
+
+            Players.PlayerAdded:Connect(function(Player)
+                Player.CharacterAdded:Connect(function()
+                    CreateESP(Player)
+                end)
+            end)
+        end
+    end
 })
 
 TrollTab:Section({Title = "House", Icon = "ghost"})
@@ -1473,6 +1616,7 @@ ProtectionTab:Toggle({
         end
     end
 })
+
 
 
 
