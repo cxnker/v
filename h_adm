@@ -1740,9 +1740,8 @@ ProtectionTab:Toggle({
     end
 })
 
-
-Tab12:AddToggle({
-    Name = "Anti Bring",
+ProtectionTab:Toggle({
+	Title = "Anti Bring",
     Desc = "CLASS: Doors 🚪",
     Default = false,
     Callback = function(state)
@@ -1802,3 +1801,10 @@ Tab12:AddToggle({
         end
     end
 })
+
+
+ProtectionTab:Toggle({
+	Title = "Anti Bring",
+    Desc = "CLASS: Doors 🚪",
+    Default = false,
+    Callback = function(state)
