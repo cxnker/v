@@ -19,7 +19,7 @@ local function newNotify(title, message, duration, icon)
 	WindUI:Notify({
     	Title = title,
     	Content = message,
-    	Duration = duration or 5,
+    	Duration = duration or 3,
     	Icon = icon or "rbxassetid://103422693243379",
 	})
 end
@@ -500,13 +500,13 @@ TrollTab:Button({
             end
         end
         if successCount > 0 then
-			newNotify("✅ Success", "Unbanned from " .. successCount .. " houses")
+			newNotify("✅ Success", "Unbanned from " .. successCount .. " houses", 5)
         end
         if failCount > 0 then
-			newNotify("❌ Failed", "Not unbanned from " .. failCount .. " houses")
+			newNotify("❌ Failed", "Not unbanned from " .. failCount .. " houses", 5)
         end
         if successCount == 0 and failCount == 0 then
-			newNotify("⚠️ Warn", "Not banned houses find")
+			newNotify("⚠️ Warn", "Not banned houses find", 5)
         end
     end
 })
@@ -579,12 +579,12 @@ AdminSwordHL = TrollTab:Button({
                     bugConnections[playerName] = nil
                 end
                 buggedPlayers[playerName] = nil
-                newNotify("🔓 Unapplied Bug", playerName .. " debugged player")
+                newNotify("🔓 Unapplied Bug", playerName .. " debugged player", 5)
                 return
             end
             
             buggedPlayers[playerName] = true
-            newNotify("🔨 Bug Applied", playerName .. " was bugged")
+            newNotify("🔨 Bug Applied", playerName .. " was bugged", 5)
             
             bugConnections[playerName] = RunService.Stepped:Connect(function()
                 local target = Players:FindFirstChild(playerName)
@@ -690,16 +690,16 @@ AdminSwordHL = TrollTab:Button({
                 end
                 bugConnections = {}
                 buggedPlayers = {}
-                newNotify("🛑 All bugs removed", "All players were debugged")
+                newNotify("🛑 All bugs removed", "All players were debugged", 5)
             elseif message:lower() == "/buggedlist" then
                 local count = 0
                 for _ in pairs(buggedPlayers) do count = count + 1 end
-                newNotify("📋 Player list", count > 0 and (count.." players bugged") or "No bugged players were found")
+                newNotify("📋 Player list", count > 0 and (count.." players bugged") or "No bugged players were found", 10)
             end
         end)
         
         tool.Parent = LocalPlayer.Backpack
-        newNotify("✅ Admin Sword enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players")
+        newNotify("✅ Admin Sword enable", "Added tool, Use /stopallbugs to stop all bugs, and /buggedlist for view listed players", 10)
 AdminSwordHL:Highlight()
     end
 })
@@ -1338,5 +1338,3 @@ ProtectionTab:Toggle({
         end
     end
 })
-
-
