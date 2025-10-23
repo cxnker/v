@@ -1262,6 +1262,26 @@ local function spawnVehicle(name)
 	RE["1Ca1r"]:FireServer("PickingCar", name)
 end
 
+local cars = {
+    {"CyberTruck"},
+    {"Roadster"},
+    {"Bugatti"},
+    {"SuperCar"},
+    {"Lamboego"},
+    {"CopLamborgini"},
+    {"HummerLimo"},
+    {"Hummer"}
+}
+
+for _, spawnCar in pairs(cars) do
+    PremiumTab:Button({
+        Title = spawnCar[1],
+        Callback = function()
+			spawnVehicle(spawnCar[1])
+        end
+    })
+end
+
 PremiumTab:Button({
     Title = "CyberTruck",
     Color = Color3.fromHex("#000000"),
@@ -1362,5 +1382,6 @@ ProtectionTab:Toggle({
         end
     end
 })
+
 
 
