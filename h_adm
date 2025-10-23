@@ -116,7 +116,8 @@ local AboutSection = InfoTab:Section({Title = "Info", Icon = "info", Opened = tr
         Title = [[Hexagon Client seeks to be a reliable and trustworthy option compared to other options.
 Developed by Nova (Owner @Roun95, Co-Owner @Deluxe_Studios).
 Hexagon integrates multilingual for easier use, Best for all, hassle-free, completely free.
-Hexagon offerts what the competition doesn't: variety in options innovative, useful and reliable.]],
+Hexagon offerts what the competition doesn't: variety in options innovative, useful and reliable.
+Join to the official Discord Support: https://discord.gg/Q9R5FDapth]],
         TextSize = 18,
         TextTransparency = .35,
         FontWeight = Enum.FontWeight.Medium,
@@ -778,6 +779,7 @@ AdminSwordHL = TrollTab:Button({
     Desc = "GAME: Brookhaven 🏡RP, TYPE: Tool 🛠️",
     Color = Color3.fromHex("#000000"),
     Icon = "rbxassetid://10709791437",
+    TextTransparency = .50,
 	Callback = function()        
         local buggedPlayers = {}
         local bugConnections = {}
@@ -1616,6 +1618,7 @@ ProtectionTab:Toggle({
         end
     end
 })
+
 
 
 
