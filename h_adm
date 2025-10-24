@@ -477,8 +477,8 @@ AvatarTab:Button({
 		[1] = 115745153758680,
 		[2] = 18839824209,
 		[3] = 18839824132,
-		[4] = 127241951574732,
-		[5] = 118303475394830,
+		[4] = 0,
+		[5] = 0,
 		[6] = 134082579,
 	})
 	end
@@ -635,7 +635,7 @@ end
 -- MUSIC
 -- ==============================
 
-MusicTab:Section({Title = "Music", Icon = "music"})
+MusicTab:Section({Title = "Music All Server", Icon = "music"})
 
 local audios = {
     {Name = "amongus", ID = 6651571134},
@@ -3491,6 +3491,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
     end
 })
+
 
 
 
