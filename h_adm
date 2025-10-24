@@ -97,7 +97,7 @@ local ProtectionTab = Window:Tab({
 local AboutSection = InfoTab:Section({Title = "Info", Icon = "info", Opened = true})
 
     AboutSection:Image({
-        Image = "https://repository-images.githubusercontent.com/880118829/428bedb1-dcbd-43d5-bc7f-3beb2e9e0177",
+        Image = "https://raw.githubusercontent.com/nxvap/Hexagon/refs/heads/main/banner.png",
         AspectRatio = "16:9",
         Radius = 9,
     })
@@ -121,6 +121,7 @@ Hexagon offerts what the competition doesn't: variety in options innovative, use
         TextTransparency = .35,
         FontWeight = Enum.FontWeight.Medium,
     })
+    InfoTab:Space({ Columns = 2 }) 
 
     InfoTab:Button({
     Title = "Join the Discord official",
@@ -130,7 +131,7 @@ Hexagon offerts what the competition doesn't: variety in options innovative, use
 		end
 	})
 
-    InfoTab:Space({ Columns = 4 }) 
+    InfoTab:Space({ Columns = 2 }) 
 
 -- ==============================
 -- PLAYER
@@ -1960,4 +1961,5 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
     end
 })
+
 
