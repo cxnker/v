@@ -573,8 +573,8 @@ local audios = {
     {Name = "Hentai wiaaaaan", ID = 88332347208779},
     {Name = "uwu", ID = 76820720070248},
     {Name = "gemido1", ID = 105263704862377},
-    {Name = " gemido2", ID = 92186909873950},
     {Name = "ai meu cuzin", ID = 130714479795369},
+    {Name = "ai meu cuzin (slowed)", ID = 71895544093312},
     {Name = "OH MY GOD", ID = 73349649774476},
     {Name = "CHINABOY", ID = 84403553163931}
 }
@@ -1960,3 +1960,4 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
     end
 })
+
