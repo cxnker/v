@@ -1478,7 +1478,7 @@ SkyboxHL = TrollTab:Button({
                 end
             end
         end
-local function ApplyBody()
+		local function ApplyBody()
             pcall(function()
                 ChangeCharacterBody:InvokeServer({
                     [1] = tonumber(BodyId),
@@ -1495,7 +1495,6 @@ local function ApplyBody()
             local AnimId = "rbxassetid://101852027997337"
             local newAnim = Instance.new("Animation")
             newAnim.AnimationId = AnimId
-
 
             local newTrack
             pcall(function()
@@ -1526,10 +1525,10 @@ local function ApplyBody()
             ApplyAccessories()
             ApplyBody()
             PlayAnimation()
-            newNotify("​📥 ​Disabled", "Skybox character disabled", 5)
+            newNotify("🔨 Activated", "Skybox character applied", 5)
         else
             StopAnimation()
-            newNotify("🔨 Activated", "Skybox character applied", 5)
+            newNotify("​📥 ​Disabled", "Skybox character disabled", 5)
         end
 	SkyboxHL:Highlight()
     end
@@ -2059,4 +2058,5 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
     end
 })
+
 
