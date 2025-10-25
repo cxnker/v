@@ -1432,13 +1432,14 @@ DestroyServerHL = TrollTab:Button({
                 task.wait(1)
             end
         end)
-		newNotify("✅ Success", "Server successfully destroyed", 5)
+		newNotify("🔨 Success", "Server successfully destroyed", 5)
 		DestroyServerHL:Highlight()
     end
 })
 
-TrollTab:Button({
-    Title = "Skybox Character",
+local SkyboxHL
+SkyboxHL = TrollTab:Button({
+    Title = "Skybox Character (BRUTON HUB)",
 	Desc = "GAME: Brookhaven 🏡RP, TYPE: Script 📄",
     Color = Color3.fromHex("#000000"),
     Icon = "rbxassetid://10709791437",
@@ -1451,7 +1452,7 @@ TrollTab:Button({
         local WearRemote = Remotes:WaitForChild("Wear")
         local ChangeCharacterBody = Remotes:WaitForChild("ChangeCharacterBody")
         local WearShirtRemote = Remotes:WaitForChild("WearShirt")
-local CurrentTrack
+		local CurrentTrack
         local BodyId = "100839513065432"
         local SkyboxActive = false
         local Humanoid, Animator
@@ -1525,11 +1526,12 @@ local function ApplyBody()
             ApplyAccessories()
             ApplyBody()
             PlayAnimation()
-            print("Skybox مفعّل مع الملابس")
+            newNotify("​📥 ​Disabled", "Skybox character disabled", 5)
         else
             StopAnimation()
-            print("تم إيقاف Skybox")
+            newNotify("🔨 Activated", "Skybox character applied", 5)
         end
+	SkyboxHL:Highlight()
     end
 })
 
@@ -2057,3 +2059,4 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
     end
 })
+
