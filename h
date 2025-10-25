@@ -238,6 +238,102 @@ Tab2:AddToggle({
         end
     end
 })
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Player = Players.LocalPlayer
+
+local RE = ReplicatedStorage:WaitForChild("RE")
+local ClearEvent = RE:FindFirstChild("1Clea1rTool1s")
+local ToolEvent = RE:FindFirstChild("1Too1l")
+local FireEvent = RE:FindFirstChild("1Gu1n")
+
+local attackEnabled = false
+
+local function clearAllTools()
+    if ClearEvent then
+        ClearEvent:FireServer("ClearAllTools")
+    end
+end
+
+local function getAssault()
+    if ToolEvent then
+        ToolEvent:InvokeServer("PickingTools", "Assault")
+    end
+end
+
+local function hasAssault()
+    return Player.Backpack:FindFirstChild("Assault") ~= nil
+end
+
+local function fireAtPart(targetPart)
+    local gunScript = Player.Backpack:FindFirstChild("Assault")
+        and Player.Backpack.Assault:FindFirstChild("GunScript_Local")
+
+    if not gunScript or not targetPart then return end
+
+    local args = {
+        targetPart,
+        targetPart,
+        Vector3.new(1e14, 1e14, 1e14),
+        targetPart.Position,
+        gunScript:FindFirstChild("MuzzleEffect"),
+        gunScript:FindFirstChild("HitEffect"),
+        0,
+        0,
+        { false },
+        {
+            25,
+            Vector3.new(100, 100, 100),
+            BrickColor.new(29),
+            0.25,
+            Enum.Material.SmoothPlastic,
+            0.25
+        },
+        true,
+        false
+    }
+
+    FireEvent:FireServer(unpack(args))
+end
+
+local function startAssaultLoop()
+    task.spawn(function()
+        while attackEnabled do
+            clearAllTools()
+            getAssault()
+
+            repeat
+task.wait(0.2)
+            until hasAssault() or not attackEnabled
+
+            for i = 1, 3 do
+                for _, player in ipairs(Players:GetPlayers()) do
+                    if not attackEnabled then return end
+                    if player ~= Player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                        fireAtPart(player.Character.HumanoidRootPart)
+                        task.wait(0.1)
+                    end
+                end
+            end
+
+            task.wait(1)
+        end
+    end)
+end
+
+Tab2:AddToggle({
+    Name = "bug togel ",
+    Description = "دون اي نطاق او مجال",
+    Default = false,
+    Callback = function(state)
+        attackEnabled = state
+
+        if attackEnabled then
+            startAssaultLoop()
+        end
+    end
+})
 	
 --------------------------------------------------
 			-- === Tab 3: Avatar === --
